@@ -1,1 +1,14 @@
-<p>navbar works!</p>
+<nav class="app-navbar">
+	<p>DollyShare</p>
+
+	@if (variant === 'guest') {
+	<div class="guest-buttons">
+		<AppButton>Register</AppButton>
+		<LoginButton></LoginButton>
+	</div>
+	}
+
+	@if (variant === 'user') {
+	<div class="user-buttons"></div>
+	}
+</nav>

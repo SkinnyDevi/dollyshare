@@ -1,0 +1,26 @@
+.app-button {
+	outline: none;
+	border: none;
+	border-radius: 8px;
+	font-weight: bold;
+	margin: 0 0.5rem;
+}
+
+.small {
+	font-size: 0.88rem;
+	padding: 0.9rem 1.25rem;
+}
+
+.medium {
+	padding: 1.5rem 1.75rem;
+	font-size: 0.97rem;
+}
+
+.space-around {
+	padding: 0.9rem 1.75rem;
+}
+
+.app-button:hover {
+	cursor: pointer;
+	background: var(--secondary-light-beige);
+}
