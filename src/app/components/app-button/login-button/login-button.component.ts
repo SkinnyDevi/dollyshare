@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'LoginButton',
+  selector: 'app-login-button',
   standalone: true,
   imports: [RouterLink],
   templateUrl: './login-button.component.html',

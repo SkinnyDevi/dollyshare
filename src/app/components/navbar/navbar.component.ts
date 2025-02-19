@@ -6,25 +6,25 @@ import { ActivatedRoute, NavigationEnd, Router, RouterLink } from '@angular/rout
 import { filter, map } from 'rxjs/operators';
 
 @Component({
-  selector: 'AppNavbar',
+  selector: 'app-navbar',
   standalone: true,
   imports: [RouterLink, AppButtonComponent, LoginButtonComponent],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
-	private DEFAULT_VARIANT = NavbarVariant.GUEST;
+  private DEFAULT_VARIANT = NavbarVariant.GUEST;
 
-	@Input() variant: NavbarVariant = this.DEFAULT_VARIANT;
+  @Input() variant: NavbarVariant = this.DEFAULT_VARIANT;
 
-	constructor(private router: Router, private route: ActivatedRoute) {
-		this.router.events
-		.pipe(
-			filter(event => event instanceof NavigationEnd),
-			map(() => this.route.firstChild?.snapshot.data['navbarVariant'] || this.DEFAULT_VARIANT)
-		)
-		.subscribe(variant => {
-			this.variant = variant;
-		});
-	}
+  constructor(private router: Router, private route: ActivatedRoute) {
+    this.router.events
+      .pipe(
+        filter(event => event instanceof NavigationEnd),
+        map(() => this.route.firstChild?.snapshot.data['navbarVariant'] || this.DEFAULT_VARIANT)
+      )
+      .subscribe(variant => {
+        this.variant = variant;
+      });
+  }
 }
