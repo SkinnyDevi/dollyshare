@@ -23,12 +23,6 @@ body {
 	font-family: 'Inter', sans-serif;
 }
 
-main {
-	height: 100%;
-	width: 100%;
-	padding: 0 10px;
-}
-
 .bg-beige {
 	background: var(--secondary-beige);
 }

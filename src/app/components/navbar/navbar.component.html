@@ -1,9 +1,9 @@
 <nav class="app-navbar">
-	<p>DollyShare</p>
+	<a routerLink="/">DollyShare</a>
 
 	@if (variant === 'guest') {
 	<div class="guest-buttons">
-		<AppButton>Register</AppButton>
+		<AppButton routerLink="/register">Register</AppButton>
 		<LoginButton></LoginButton>
 	</div>
 	}

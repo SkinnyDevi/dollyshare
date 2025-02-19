@@ -1,16 +1,25 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './views/home/home.component';
-import { LayoutComponent } from './layout/layout.component';
 import { LoginComponent } from './views/login/login.component';
+import NavbarVariant from './components/navbar/navbar-variant';
+import { RegisterComponent } from './views/register/register.component';
 
 export const routes: Routes = [
-  {
-    path: '',
-    component: LayoutComponent,
-    children: [
-      { path: '', component: HomeComponent },
-			{ path: 'login', component: LoginComponent },
-      { path: '**', redirectTo: '', pathMatch: 'full' }
-    ]
-  }
+	{ path: '', 
+		component: HomeComponent,
+		title: "DollyShare",
+	},
+	{
+		path: 'login',
+		component: LoginComponent,
+		title: "Login - DollyShare",
+		data: { navbarVariant: NavbarVariant.EMPTY }
+	},
+	{
+		path: 'register',
+		component: RegisterComponent,
+		title: "Register - DollyShare",
+		data: { navbarVariant: NavbarVariant.EMPTY }
+	},
+	{ path: '**', redirectTo: '', pathMatch: 'full' },
 ];
