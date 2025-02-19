@@ -1,15 +1,20 @@
 .app-navbar {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	min-height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 80px;
 }
 
 .app-navbar>a {
-	font-size: 24px;
-	color: white;
-	text-decoration: none;
-	opacity: 40%;
-	font-weight: bold;
-	margin-left: 10px;
+  font-size: 24px;
+  color: white;
+  text-decoration: none;
+  opacity: 40%;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.guest-buttons,
+.user-buttons {
+  margin-right: 10px;
 }

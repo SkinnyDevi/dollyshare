@@ -1,0 +1,10 @@
+<div class="icon-size">
+@switch(type) {
+  @case('user') {
+    <icon-user [fillClass]="getFillClass()"></icon-user>
+  }
+  @case('close') {
+    <icon-close [fillClass]="getFillClass()"></icon-close>
+  }
+}
+</div>

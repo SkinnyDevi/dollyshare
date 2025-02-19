@@ -4,11 +4,12 @@ import { AppButtonComponent } from "../app-button/app-button.component";
 import { LoginButtonComponent } from "../app-button/login-button/login-button.component";
 import { ActivatedRoute, NavigationEnd, Router, RouterLink } from '@angular/router';
 import { filter, map } from 'rxjs/operators';
+import { IconButtonComponent } from '../app-button/icon-button/icon-button.component';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterLink, AppButtonComponent, LoginButtonComponent],
+  imports: [RouterLink, AppButtonComponent, LoginButtonComponent, IconButtonComponent],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })

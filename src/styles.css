@@ -1,32 +1,53 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 :root {
-	--main-dark-blue: #283238;
-	--main-blue-variant: #394750;
-	--main-dark-blue-hover: #4b5e6a;
-	--secondary-beige: #D8C299;
-	--secondary-light-beige: #F8E4BE;
-	--accent-blue: #8DA9C4;
-	--accent-light-blue: #A3DFF2;
+  --main-dark-blue: #283238;
+  --main-blue-variant: #394750;
+  --main-dark-blue-hover: #4b5e6a;
+  --secondary-beige: #D8C299;
+  --secondary-light-beige: #F8E4BE;
+  --accent-blue: #8DA9C4;
+  --accent-light-blue: #A3DFF2;
 }
 
 html,
 body {
-	height: 100%;
-	margin: 0;
-	padding: 0;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-	background: var(--main-dark-blue);
-	color: white;
-	font-family: 'Inter', sans-serif;
+  background: var(--main-dark-blue);
+  color: white;
+  font-family: 'Inter', sans-serif;
 }
 
 .bg-beige {
-	background: var(--secondary-beige);
+  background: var(--secondary-beige);
 }
 
 .bg-main-dark-blue {
-	background: var(--main-dark-blue);
+  background: var(--main-dark-blue);
+}
+
+svg {
+  width: 25px;
+  height: auto;
+}
+
+svg.fill-black>path {
+  stroke: #232323;
+}
+
+svg.fill-semi-transparent>path {
+  fill: rgba(0, 0, 0, 0.5);
+}
+
+svg.fill-beige>path {
+  fill: var(--secondary-beige);
+}
+
+svg.fill-light-beige>path {
+  fill: var(--secondary-light-beige);
 }
