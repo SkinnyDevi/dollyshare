@@ -2,11 +2,12 @@ import { Component, Input } from '@angular/core';
 import IconType, { IconColor } from '../icon-properties';
 import { UserComponent } from "../user/user.component";
 import { CloseComponent } from "../close/close.component";
+import { LockComponent } from "../lock/lock.component";
 
 @Component({
   selector: 'icon-selector',
   standalone: true,
-  imports: [UserComponent, CloseComponent],
+  imports: [UserComponent, CloseComponent, LockComponent],
   templateUrl: './icon-selector.component.html',
   styles: `
     .icon-size {

@@ -1,0 +1,27 @@
+.login-input>input {
+  border: 4px solid var(--secondary-beige);
+  background-color: #50626D;
+  padding: 20px 75px;
+  color: white;
+  border-radius: 50px 8px 8px 50px;
+  font-size: 16px;
+  width: 250px;
+  font-weight: 600;
+  outline: none;
+}
+
+.login-input {
+  margin: 15px 0;
+}
+
+.login-input-icon {
+  position: absolute;
+  width: 75px;
+  height: 75px;
+  background-color: var(--secondary-beige);
+  border-radius: 50px;
+  transform: translate(-5px, -70px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

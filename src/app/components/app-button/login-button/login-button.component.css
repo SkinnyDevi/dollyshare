@@ -1,14 +1,14 @@
 @import "../app-button.component.css";
 
 .login-btn {
-	border-radius: 8px;
-	border: 2px solid var(--secondary-beige);
-	color: white;
-	padding: 0.81rem 1.75rem;
-	font-size: 0.88rem;
-	background: var(--main-blue-variant);
+  border-radius: 8px;
+  border: 2px solid var(--secondary-beige);
+  color: white;
+  padding: 0.81rem 1.75rem;
+  font-size: 0.95rem;
+  background: var(--main-blue-variant);
 }
 
 .login-btn:hover {
-	background: var(--main-dark-blue-hover);
+  background: var(--main-dark-blue-hover);
 }

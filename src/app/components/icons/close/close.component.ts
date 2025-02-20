@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'icon-close',
@@ -9,7 +9,8 @@ import { Component, Input } from '@angular/core';
       <path d="M52 2L2 52M2 2L52 52" stroke="#1E1E1E" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
   `,
-  styles: ``
+  styles: ``,
+  encapsulation: ViewEncapsulation.None
 })
 export class CloseComponent {
   @Input() fillClass = "";

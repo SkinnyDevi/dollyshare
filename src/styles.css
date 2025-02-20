@@ -12,7 +12,6 @@
 
 html,
 body {
-  height: 100%;
   margin: 0;
   padding: 0;
 }
@@ -41,13 +40,13 @@ svg.fill-black>path {
 }
 
 svg.fill-semi-transparent>path {
-  fill: rgba(0, 0, 0, 0.5);
+  stroke: rgba(0, 0, 0, 0.5);
 }
 
 svg.fill-beige>path {
-  fill: var(--secondary-beige);
+  stroke: var(--secondary-beige);
 }
 
 svg.fill-light-beige>path {
-  fill: var(--secondary-light-beige);
+  stroke: var(--secondary-light-beige);
 }
