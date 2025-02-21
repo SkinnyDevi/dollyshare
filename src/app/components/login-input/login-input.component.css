@@ -10,6 +10,11 @@
   outline: none;
 }
 
+::ng-deep svg {
+  width: 35px;
+  height: auto;
+}
+
 .login-input {
   margin: 15px 0;
 }
