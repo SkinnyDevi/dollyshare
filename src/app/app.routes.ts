@@ -5,6 +5,7 @@ import NavbarVariant from './components/navbar/navbar-variant';
 import { RegisterComponent } from './views/register/register.component';
 import { ShareFileComponent } from './views/share-file/share-file.component';
 import { ShareTextComponent } from './views/share-text/share-text.component';
+import {FinishCreationComponent} from './views/finish-creation/finish-creation.component';
 
 export const routes: Routes = [
   {
@@ -33,6 +34,11 @@ export const routes: Routes = [
     path: 'share-text',
     component: ShareTextComponent,
     title: "Share Text - DollyShare"
+  },
+  {
+    path: 'finish',
+    component: FinishCreationComponent,
+    title: "Finish Creation - DollyShare"
   },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];

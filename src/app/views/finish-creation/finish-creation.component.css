@@ -3,7 +3,7 @@ main {
   height: 85vh;
 }
 
-.share-text-container {
+.finish-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -12,8 +12,16 @@ main {
   height: 90%;
 }
 
-.share-text-container>h1 {
+.finish-container>h1 {
   font-size: 48px;
+  margin: 30px 0;
+  text-align: center;
+}
+
+.link-box {
+  background-color: #647A88;
+  padding: 15px;
+  border-radius: 8px;
   margin: 30px 0;
   text-align: center;
 }

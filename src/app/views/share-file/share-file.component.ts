@@ -1,9 +1,14 @@
 import { Component } from '@angular/core';
+import {AppButtonComponent} from "../../components/app-button/app-button.component";
+import {LogoComponent} from "../../components/logo/logo.component";
 
 @Component({
   selector: 'view-share-file',
   standalone: true,
-  imports: [],
+    imports: [
+        AppButtonComponent,
+        LogoComponent
+    ],
   templateUrl: './share-file.component.html',
   styleUrl: './share-file.component.css'
 })
