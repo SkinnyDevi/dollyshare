@@ -20,8 +20,18 @@ main {
 
 .link-box {
   background-color: #647A88;
+  font-size: 20px;
   padding: 15px;
   border-radius: 8px;
   margin: 30px 0;
   text-align: center;
+}
+
+.link-info>a{
+  color: var(--accent-light-blue);
+}
+
+.file-info{
+  font-size: 15px;
+  opacity: 50%;
 }
