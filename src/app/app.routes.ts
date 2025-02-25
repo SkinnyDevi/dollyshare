@@ -6,6 +6,7 @@ import { RegisterComponent } from './views/register/register.component';
 import { ShareFileComponent } from './views/share-file/share-file.component';
 import { ShareTextComponent } from './views/share-text/share-text.component';
 import {FinishCreationComponent} from './views/finish-creation/finish-creation.component';
+import {RegisterSuccessfulComponent} from './views/register-successful/register-successful.component';
 
 export const routes: Routes = [
   {
@@ -39,6 +40,11 @@ export const routes: Routes = [
     path: 'finish',
     component: FinishCreationComponent,
     title: "Finish Creation - DollyShare"
+  },
+  {
+    path: 'register-successful',
+    component: RegisterSuccessfulComponent,
+    title: "Register Successful - DollyShare"
   },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
