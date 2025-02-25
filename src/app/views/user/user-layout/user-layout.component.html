@@ -1,0 +1,18 @@
+<main>
+  <app-logo [width]="120"></app-logo>
+  <app-user-tabs [selectedButton]="getSelectedButton()"></app-user-tabs>
+  <div class="user-view-content">
+    @switch(getRoute()) {
+      @case('account') {
+        <view-user-account></view-user-account>
+      }
+      @case('change-password') {
+        <view-user-change-password></view-user-change-password>
+      }
+      @case('active-links') {
+        <view-user-active-links></view-user-active-links>
+      }
+    }
+  </div>
+
+</main>
