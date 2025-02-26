@@ -14,7 +14,7 @@ main {
   background: #394750;
   height: 80%;
   width: 70%;
-  min-width: 450px;
-  min-height: 500px;
+  max-width: 450px;
+  max-height: 500px;
   border-radius: 10px;
 }

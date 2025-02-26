@@ -11,9 +11,9 @@
 
 button {
   margin: 0 10px;
-  width: 200px;
   padding: 1.5rem 1.75rem;
   font-size: 1.10rem;
+  max-width: 200px;
   outline: none;
   border-radius: 8px;
   border: 2px solid var(--secondary-beige);

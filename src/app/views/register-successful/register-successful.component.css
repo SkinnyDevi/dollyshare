@@ -1,6 +1,6 @@
 main {
   width: 100%;
-  height: 85vh;
+  height: 90%;
 }
 
 .register-successful-container {
@@ -18,6 +18,6 @@ main {
   font-size: 44px;
 }
 
-.start-sharing-buttons{
+.start-sharing-buttons {
   margin-top: 20px;
 }

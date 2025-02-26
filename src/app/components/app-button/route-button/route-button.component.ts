@@ -1,18 +1,17 @@
 import { Component, Input } from '@angular/core';
+import { ButtonSize, ButtonType } from '../app-button.component';
 import { RouterLink } from '@angular/router';
 
-export type ButtonSize = 'small' | 'medium';
-export type ButtonType = 'button' | 'submit' | 'reset';
-
 @Component({
-  selector: 'app-button',
+  selector: 'app-route-button',
   standalone: true,
   imports: [RouterLink],
-  templateUrl: './app-button.component.html',
-  styleUrl: './app-button.component.css'
+  templateUrl: './route-button.component.html',
+  styles: `@import "../app-button.component.css";`
 })
-export class AppButtonComponent {
+export class RouteButtonComponent {
   @Input() size: ButtonSize = 'small';
   @Input() type: ButtonType = 'button';
   @Input() wide: boolean = false;
+  @Input() routerLink: string = '';
 }

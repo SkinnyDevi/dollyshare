@@ -23,6 +23,11 @@ body {
   font-family: 'Inter', sans-serif;
 }
 
+input,
+textarea {
+  font-family: 'Inter', sans-serif;
+}
+
 .bg-beige {
   background: var(--secondary-beige);
 }
