@@ -15,4 +15,5 @@ main {
 .home-container>h1 {
   font-size: 48px;
   margin: 55px 0;
+  text-align: center;
 }
