@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LogoComponent } from "../../../components/logo/logo.component";
 import { SelectedViewButton, UserTabsComponent } from "../../../components/user-tabs/user-tabs.component";
@@ -11,7 +11,8 @@ import { UserChangePasswordComponent } from "../change-password/change-password.
   standalone: true,
   imports: [LogoComponent, UserTabsComponent, UserActiveLinksComponent, UserAccountComponent, UserChangePasswordComponent],
   templateUrl: './user-layout.component.html',
-  styleUrl: './user-layout.component.css'
+  styleUrl: './user-layout.component.css',
+  encapsulation: ViewEncapsulation.None
 })
 export class UserLayoutComponent {
 

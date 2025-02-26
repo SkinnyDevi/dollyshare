@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ButtonSize, ButtonType } from '../app-button.component';
+import { ButtonSize } from '../app-button.component';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -11,7 +11,7 @@ import { RouterLink } from '@angular/router';
 })
 export class RouteButtonComponent {
   @Input() size: ButtonSize = 'small';
-  @Input() type: ButtonType = 'button';
+  @Input() type: HTMLButtonElement['type'] = 'button';
   @Input() wide: boolean = false;
   @Input() routerLink: string = '';
 }
