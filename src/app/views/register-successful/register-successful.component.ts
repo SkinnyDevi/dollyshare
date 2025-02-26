@@ -3,15 +3,15 @@ import {AppButtonComponent} from '../../components/app-button/app-button.compone
 import {LogoComponent} from '../../components/logo/logo.component';
 
 @Component({
-  selector: 'view-register',
+  selector: 'app-register-successful',
   standalone: true,
   imports: [
     AppButtonComponent,
     LogoComponent
   ],
-  templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+  templateUrl: './register-successful.component.html',
+  styleUrl: './register-successful.component.css'
 })
-export class RegisterComponent {
+export class RegisterSuccessfulComponent {
 
 }

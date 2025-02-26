@@ -1,0 +1,48 @@
+main {
+  width: 100%;
+  height: 85vh;
+}
+
+.register-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 90%;
+}
+
+.info-box{
+  background-color: var(--main-blue-variant);
+  padding: 15px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 80%;
+  max-width: 500px;
+}
+
+.info-box>.email,
+.info-box>.username,
+.info-box>.password,
+.info-box>.repeat_password {
+  margin-bottom: 0;
+}
+
+.info-box>.create-account-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.info-box>input{
+  width: 95%;
+  background-color: var(--main-dark-blue-hover);
+  border: 2px solid var(--secondary-beige);
+  padding: 10px;
+  border-radius: 8px;
+  color: white;
+  font-size: 16px;
+  outline: none;
+}

@@ -14,6 +14,7 @@ import { LockComponent } from "../lock/lock.component";
       display: flex;
       justify-content: center;
       align-items: center;
+    }
   `
 })
 export class IconSelectorComponent {

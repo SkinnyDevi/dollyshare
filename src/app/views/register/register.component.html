@@ -1,1 +1,19 @@
-<h1>Register</h1>
+<main>
+   <div class="register-container">
+    <app-logo [width]="120" [useReturnToHome]="true"></app-logo>
+    <h1>Register Account</h1>
+    <form class="info-box">
+      <p class="email">Email</p>
+      <input type="email" placeholder="Introduce your email"/>
+      <p class="username">Username</p>
+      <input placeholder="Introduce your username"/>
+      <p class="password">Password</p>
+      <input type="password" placeholder="Introduce your password"/>
+      <p class="repeat_password">Repeat Password</p>
+      <input type="password" placeholder="Repeat your password"/>
+      <div class="create-account-button">
+        <app-button type="submit" size="small" routerLink="/register-successful">Create Account</app-button>
+      </div>
+    </form>
+  </div>
+</main>

@@ -3,7 +3,7 @@
     <app-logo [width]="150" [useReturnToHome]="true"></app-logo>
     <div class="credentials-container">
       <h2>Login</h2>
-      <form>
+      <form (submit)="onSubmit()">
         <app-login-input type="email"></app-login-input>
         <app-login-input type="password"></app-login-input>
         <div class="login-button-submit">

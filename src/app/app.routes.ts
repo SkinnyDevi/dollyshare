@@ -5,8 +5,9 @@ import NavbarVariant from './components/navbar/navbar-variant';
 import { RegisterComponent } from './views/register/register.component';
 import { ShareFileComponent } from './views/share-file/share-file.component';
 import { ShareTextComponent } from './views/share-text/share-text.component';
-import { FinishCreationComponent } from './views/finish-creation/finish-creation.component';
 import { UserLayoutComponent } from './views/user/user-layout/user-layout.component';
+import { FinishCreationComponent } from './views/finish-creation/finish-creation.component';
+import { RegisterSuccessfulComponent } from './views/register-successful/register-successful.component';
 
 export const routes: Routes = [
   {
@@ -58,6 +59,12 @@ export const routes: Routes = [
     component: UserLayoutComponent,
     title: "Active Links - DollyShare",
     data: { navbarVariant: NavbarVariant.EMPTY }
+  },
+  { path: 'user', redirectTo: 'user/account', pathMatch: 'full' },
+  {
+    path: 'register-successful',
+    component: RegisterSuccessfulComponent,
+    title: "Register Successful - DollyShare"
   },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
