@@ -41,3 +41,21 @@
   justify-content: center;
   align-items: center;
 }
+
+.reveal-password-button {
+  position: absolute;
+  background: transparent;
+  border: none;
+  text-align: right;
+  align-self: self-end;
+  margin-top: 15px;
+  transform: translateX(-60px);
+
+  ::ng-deep svg {
+    opacity: 0.5;
+  }
+}
+
+.reveal-password-button:hover {
+  cursor: pointer;
+}

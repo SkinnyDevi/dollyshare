@@ -3,11 +3,13 @@ import IconType, { IconColor } from '../icon-properties';
 import { UserComponent } from "../user/user.component";
 import { CloseComponent } from "../close/close.component";
 import { LockComponent } from "../lock/lock.component";
+import { HiddenComponent } from "../hidden/hidden.component";
+import { RevealComponent } from "../reveal/reveal.component";
 
 @Component({
   selector: 'icon-selector',
   standalone: true,
-  imports: [UserComponent, CloseComponent, LockComponent],
+  imports: [UserComponent, CloseComponent, LockComponent, HiddenComponent, RevealComponent],
   templateUrl: './icon-selector.component.html',
   styles: `
     .icon-size {

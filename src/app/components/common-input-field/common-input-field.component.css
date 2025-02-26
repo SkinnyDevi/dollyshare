@@ -19,3 +19,21 @@ label {
   font-weight: bold;
   margin-bottom: 5px;
 }
+
+.reveal-password-button {
+  position: absolute;
+  background: transparent;
+  border: none;
+  text-align: right;
+  align-self: self-end;
+  margin-top: 40px;
+  margin-right: 3%;
+}
+
+.reveal-password-button:hover {
+  cursor: pointer;
+}
+
+::ng-deep svg {
+  opacity: 0.5;
+}

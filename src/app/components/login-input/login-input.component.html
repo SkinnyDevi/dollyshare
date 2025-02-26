@@ -1,5 +1,10 @@
 <div class="login-input">
   <input [type]="type" [name]="getInputName()" [placeholder]="getPlaceholder()"/>
+  @if(type === 'password') {
+    <button class="reveal-password-button" type="button" (click)="toggleRevealPassword()">
+      <icon-selector [type]="revealPassword ? 'reveal' : 'hidden'"></icon-selector>
+    </button>
+  }
   <div class="login-input-icon">
     <icon-selector [type]="getIconType()"></icon-selector>
   </div>

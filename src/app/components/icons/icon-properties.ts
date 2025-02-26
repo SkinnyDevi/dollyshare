@@ -1,7 +1,8 @@
 type IconType =
   "user" |
   "close" |
-  "hide" |
+  "hidden" |
+  "reveal" |
   "lock" |
   "folder" |
   "folder-lock" |
