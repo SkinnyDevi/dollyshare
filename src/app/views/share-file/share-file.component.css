@@ -13,7 +13,74 @@ main {
 }
 
 .share-file-container>h1 {
-  font-size: 48px;
-  margin: 30px 0;
+  font-size: 30px;
+  margin-top: 5px;
+  margin-bottom: 30px;
   text-align: center;
+}
+
+.share-file-box {
+  background-color: var(--main-blue-variant);
+  padding: 15px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 80%;
+  max-width: 500px;
+  margin-bottom: 20px;
+}
+
+.share-file-box>h2 {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  font-weight: bold;
+  width: 95%;
+  background-color: var(--main-dark-blue-hover);
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  color: white;
+  font-size: 16px;
+  outline: none;
+  margin-bottom: 10px;
+}
+
+.file-box {
+  display: flex;
+  justify-content: left;
+  width: 95%;
+  background-color: var(--main-dark-blue-hover);
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  color: white;
+  font-size: 16px;
+  outline: none;
+  resize: none;
+}
+
+.file-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-height: 220px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.file-list>li {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.file-list>li>p {
+  margin-left: 10px;
+}
+
+.file-list>hr {
+  width: 100%;
 }
