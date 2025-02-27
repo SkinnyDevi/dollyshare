@@ -5,11 +5,14 @@ import { CloseComponent } from "../close/close.component";
 import { LockComponent } from "../lock/lock.component";
 import { HiddenComponent } from "../hidden/hidden.component";
 import { RevealComponent } from "../reveal/reveal.component";
+import { TrashComponent } from "../trash/trash.component";
+import { FolderLockComponent } from "../folder-lock/folder-lock.component";
+import { FolderComponent } from "../folder/folder.component";
 
 @Component({
   selector: 'icon-selector',
   standalone: true,
-  imports: [UserComponent, CloseComponent, LockComponent, HiddenComponent, RevealComponent],
+  imports: [UserComponent, CloseComponent, LockComponent, HiddenComponent, RevealComponent, TrashComponent, FolderLockComponent, FolderComponent],
   templateUrl: './icon-selector.component.html',
   styles: `
     .icon-size {

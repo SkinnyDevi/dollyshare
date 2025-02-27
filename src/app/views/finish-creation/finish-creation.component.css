@@ -29,10 +29,6 @@ main {
   max-width: 800px;
 }
 
-.link-info>a {
-  color: var(--accent-light-blue);
-}
-
 .file-info {
   font-size: 15px;
   opacity: 50%;

@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { LogoComponent } from "../../../components/logo/logo.component";
-import { UserTabsComponent } from "../../../components/user-tabs/user-tabs.component";
+import { IconSelectorComponent } from "../../../components/icons/icon-selector/icon-selector.component";
 
 @Component({
   selector: 'view-user-active-links',
   standalone: true,
-  imports: [LogoComponent, UserTabsComponent],
+  imports: [IconSelectorComponent],
   templateUrl: './active-links.component.html',
   styleUrl: './active-links.component.css'
 })

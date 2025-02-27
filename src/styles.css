@@ -28,6 +28,14 @@ textarea {
   font-family: 'Inter', sans-serif;
 }
 
+a {
+  color: var(--accent-light-blue);
+}
+
+a:hover {
+  color: var(--accent-blue);
+}
+
 .bg-beige {
   background: var(--secondary-beige);
 }
@@ -71,6 +79,6 @@ svg.fill-light-beige>path {
 }
 
 * {
-  scrollbar-width: thin;
+  scrollbar-width: auto;
   scrollbar-color: rgba(0, 0, 0, 0.5) transparent;
 }
