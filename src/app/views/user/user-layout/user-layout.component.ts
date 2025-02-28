@@ -1,15 +1,16 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { LogoComponent } from "../../../components/logo/logo.component";
 import { SelectedViewButton, UserTabsComponent } from "../../../components/user-tabs/user-tabs.component";
 import { UserActiveLinksComponent } from "../active-links/active-links.component";
 import { UserAccountComponent } from "../account/account.component";
 import { UserChangePasswordComponent } from "../change-password/change-password.component";
+import { ManageActiveLinkComponent } from "../manage-active-link/manage-active-link.component";
 
 @Component({
   selector: 'app-user-layout',
   standalone: true,
-  imports: [LogoComponent, UserTabsComponent, UserActiveLinksComponent, UserAccountComponent, UserChangePasswordComponent],
+  imports: [LogoComponent, UserTabsComponent, UserActiveLinksComponent, UserAccountComponent, UserChangePasswordComponent, ManageActiveLinkComponent],
   templateUrl: './user-layout.component.html',
   styleUrl: './user-layout.component.css',
   encapsulation: ViewEncapsulation.None
@@ -23,6 +24,8 @@ export class UserLayoutComponent {
   }
 
   getSelectedButton(): SelectedViewButton {
+    if (this.getRoute().includes('manage-link')) return 'links';
+
     switch (this.getRoute()) {
       case 'active-links':
         return 'links';

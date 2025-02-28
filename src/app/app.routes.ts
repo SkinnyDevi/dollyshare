@@ -8,6 +8,7 @@ import { ShareTextComponent } from './views/share-text/share-text.component';
 import { UserLayoutComponent } from './views/user/user-layout/user-layout.component';
 import { FinishCreationComponent } from './views/finish-creation/finish-creation.component';
 import { RegisterSuccessfulComponent } from './views/register-successful/register-successful.component';
+import { ManageActiveLinkComponent } from './views/user/manage-active-link/manage-active-link.component';
 
 export const routes: Routes = [
   {
@@ -65,6 +66,11 @@ export const routes: Routes = [
     path: 'register-successful',
     component: RegisterSuccessfulComponent,
     title: "Register Successful - DollyShare"
+  },
+  {
+    path: "user/manage-link/:link_id",
+    component: UserLayoutComponent,
+    title: "Mange Link - DollyShare"
   },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];

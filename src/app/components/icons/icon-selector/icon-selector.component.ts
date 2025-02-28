@@ -8,11 +8,12 @@ import { RevealComponent } from "../reveal/reveal.component";
 import { TrashComponent } from "../trash/trash.component";
 import { FolderLockComponent } from "../folder-lock/folder-lock.component";
 import { FolderComponent } from "../folder/folder.component";
+import { ArrowComponent } from "../arrow/arrow.component";
 
 @Component({
   selector: 'icon-selector',
   standalone: true,
-  imports: [UserComponent, CloseComponent, LockComponent, HiddenComponent, RevealComponent, TrashComponent, FolderLockComponent, FolderComponent],
+  imports: [UserComponent, CloseComponent, LockComponent, HiddenComponent, RevealComponent, TrashComponent, FolderLockComponent, FolderComponent, ArrowComponent],
   templateUrl: './icon-selector.component.html',
   styles: `
     .icon-size {

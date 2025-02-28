@@ -1,0 +1,14 @@
+<div class="link-manager-container">
+  <div class="link-manager-header">
+    <div>
+      <app-icon-button icon="arrow" routerLink="/user/active-links"></app-icon-button>
+    </div>
+    <h1>Active Links</h1>
+  </div>
+  <div class="link-display">
+    <p>Editing contacts for: <a [href]="'/download/'+LINK_ID">dollyshare.com/download/{{ LINK_ID }}</a></p>
+  </div>
+  <div class="link-manager-contacts">
+    <app-contact-list-box></app-contact-list-box>
+  </div>
+</div>

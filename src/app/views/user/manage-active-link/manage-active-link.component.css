@@ -1,0 +1,47 @@
+::ng-deep .user-view-content {
+  padding: 25px 0;
+}
+
+.link-manager-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  flex-direction: column;
+}
+
+.link-manager-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0 30px 0;
+  width: 95%;
+}
+
+.link-manager-header>div {
+  flex-shrink: 0;
+}
+
+.link-manager-header>h1 {
+  flex-grow: 1;
+  text-align: center;
+  margin: 0;
+}
+
+.link-display {
+  color: white;
+  font-weight: 600;
+  padding: 15px;
+  border-radius: 8px;
+  background: #50626D;
+  width: 90%;
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.link-manager-contacts {
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

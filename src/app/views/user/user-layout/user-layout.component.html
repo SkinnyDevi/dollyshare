@@ -1,5 +1,5 @@
 <main>
-  <app-logo [width]="120"></app-logo>
+  <app-logo [width]="120" [useReturnToHome]="true"></app-logo>
   <app-user-tabs [selectedButton]="getSelectedButton()"></app-user-tabs>
   <div class="user-view-content">
     @switch(getRoute()) {
@@ -12,6 +12,9 @@
       @case('active-links') {
         <view-user-active-links></view-user-active-links>
       }
+    }
+    @if(getRoute().includes('manage-link')) {
+      <view-user-manage-active-link></view-user-manage-active-link>
     }
   </div>
 
