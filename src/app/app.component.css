@@ -1,1 +1,10 @@
+.app-container {
+	display: flex;
+	flex-direction: column;
+	height: 91.5dvh;
+}
 
+.app-container> :not(router-outlet) {
+	display: flex;
+	flex-direction: column;
+}

@@ -1,13 +1,11 @@
 footer {
-  display: flex;
-  justify-content: center;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	flex-shrink: 0;
 }
 
 footer>p {
-  font-size: 12px;
-  opacity: 40%;
+	font-size: 12px;
+	opacity: 40%;
 }
