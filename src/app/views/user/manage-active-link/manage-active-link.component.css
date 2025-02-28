@@ -2,6 +2,10 @@
   padding: 25px 0;
 }
 
+::ng-deep main {
+  margin: 0;
+}
+
 .link-manager-container {
   display: flex;
   justify-content: center;
@@ -26,12 +30,13 @@
   flex-grow: 1;
   text-align: center;
   margin: 0;
+  transform: translateX(-5%);
 }
 
 .link-display {
   color: white;
   font-weight: 600;
-  padding: 15px;
+  padding: 0 20px;
   border-radius: 8px;
   background: #50626D;
   width: 90%;
@@ -44,4 +49,5 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 10px;
 }
