@@ -65,12 +65,14 @@ export const routes: Routes = [
   {
     path: 'register-successful',
     component: RegisterSuccessfulComponent,
-    title: "Register Successful - DollyShare"
+    title: "Register Successful - DollyShare",
+    data: { navbarVariant: NavbarVariant.EMPTY }
   },
   {
     path: "user/manage-link/:link_id",
     component: UserLayoutComponent,
-    title: "Mange Link - DollyShare"
+    title: "Manage Link - DollyShare",
+    data: { navbarVariant: NavbarVariant.EMPTY }
   },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
