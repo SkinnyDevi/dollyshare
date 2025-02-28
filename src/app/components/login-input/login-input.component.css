@@ -1,61 +1,61 @@
 .login-input>input {
-  border: 4px solid var(--secondary-beige);
-  background-color: #50626D;
-  padding: 20px 75px;
-  color: white;
-  border-radius: 50px 8px 8px 50px;
-  font-size: 16px;
-  font-weight: 600;
-  outline: none;
+	border: 4px solid var(--secondary-beige);
+	background-color: var(--container-bg);
+	padding: 20px 75px;
+	color: white;
+	border-radius: 50px 8px 8px 50px;
+	font-size: 16px;
+	font-weight: 600;
+	outline: none;
 }
 
 ::ng-deep svg {
-  width: 35px;
-  height: auto;
+	width: 35px;
+	height: auto;
 }
 
 .login-input {
-  margin: 15px 0;
+	margin: 15px 0;
 }
 
 @media only screen and (max-width: 600px) {
-  .login-input {
-    transform: scale(0.85);
-  }
+	.login-input {
+		transform: scale(0.85);
+	}
 }
 
 @media only screen and (max-width: 400px) {
-  .login-input {
-    transform: scale(0.75);
-  }
+	.login-input {
+		transform: scale(0.75);
+	}
 }
 
 .login-input-icon {
-  position: absolute;
-  width: 75px;
-  height: 75px;
-  background-color: var(--secondary-beige);
-  border-radius: 50px;
-  transform: translate(-5px, -70px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	position: absolute;
+	width: 75px;
+	height: 75px;
+	background-color: var(--secondary-beige);
+	border-radius: 50px;
+	transform: translate(-5px, -70px);
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .reveal-password-button {
-  position: absolute;
-  background: transparent;
-  border: none;
-  text-align: right;
-  align-self: self-end;
-  margin-top: 15px;
-  transform: translateX(-60px);
+	position: absolute;
+	background: transparent;
+	border: none;
+	text-align: right;
+	align-self: self-end;
+	margin-top: 15px;
+	transform: translateX(-60px);
 
-  ::ng-deep svg {
-    opacity: 0.5;
-  }
+	::ng-deep svg {
+		opacity: 0.5;
+	}
 }
 
 .reveal-password-button:hover {
-  cursor: pointer;
+	cursor: pointer;
 }

@@ -35,31 +35,34 @@ main {
 	flex-direction: column;
 	justify-content: center;
 	width: 80%;
-	max-width: 500px;
+	max-width: 800px;
 	margin-bottom: 20px;
 }
 
-.share-file-box>h2 {
+.drop-here-zone {
 	display: flex;
 	justify-content: center;
+	align-items: center;
 	text-align: center;
 	font-weight: bold;
-	width: 95%;
-	background-color: var(--main-dark-blue-hover);
+	background-color: var(--container-bg);
 	border: none;
 	padding: 10px;
 	border-radius: 8px;
 	color: white;
 	font-size: 16px;
-	outline: none;
 	margin-bottom: 10px;
+	height: 75px;
+}
+
+.drop-here-zone:hover {
+	cursor: pointer;
 }
 
 .file-box {
 	display: flex;
 	justify-content: left;
-	width: 95%;
-	background-color: var(--main-dark-blue-hover);
+	background-color: var(--container-bg);
 	border: none;
 	padding: 10px;
 	border-radius: 8px;
@@ -74,7 +77,7 @@ main {
 	margin: 0;
 	padding: 0;
 	width: 100%;
-	max-height: 220px;
+	max-height: 300px;
 	overflow-y: scroll;
 	overflow-x: hidden;
 }

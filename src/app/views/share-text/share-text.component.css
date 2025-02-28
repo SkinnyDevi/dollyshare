@@ -35,7 +35,7 @@ main {
 	flex-direction: column;
 	justify-content: center;
 	width: 80%;
-	max-width: 500px;
+	max-width: 800px;
 	margin-bottom: 20px;
 }
 
@@ -50,13 +50,12 @@ main {
 }
 
 .text-box {
-	height: 150px;
-	resize: none;
+	height: 300px;
 }
 
 .title-box input,
 .text-box textarea {
-	width: 95%;
+	width: 100%;
 	background-color: var(--main-dark-blue-hover);
 	border: none;
 	padding: 10px;
@@ -66,7 +65,13 @@ main {
 	outline: none;
 }
 
+.text-box textarea {
+	resize: none;
+}
+
 .title-box input {
 	text-align: center;
 	font-weight: bold;
+	height: 40px;
+	font-size: 18px;
 }
