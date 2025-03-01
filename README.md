@@ -14,6 +14,7 @@
 
 - [Descripcion](#descripcion)
 - [Requisitos de usuario](#requisitos-de-usuario)
+- [Registro de tareas](#registro-de-tareas)
 - [Diseños mockup de vistas y componentes](#diseños-mockup-de-vistas-y-componentes)
 - [Vistas implementadas](#vistas-implementadas)
 - [Estructura del proyecto](#estructura-del-proyecto)
@@ -35,6 +36,10 @@ incluidas.
 ## Requisitos de usuario
 
 Los requisitos de usuario los puede encontrar en el documento `.pdf` haciendo [click aqui](./documents/DollyShare%20Requisitos%20de%20Usuario.pdf).
+
+## Registro de tareas
+
+Todas las tareas las puede seguir con detenimiento en nuestro [Trello](https://trello.com/b/ipuLGPtS/dollyshare)
 
 ## Diseños mockup de vistas y componentes
 
