@@ -1,8 +1,6 @@
 # DollyShare
 
-<div style="text-align: center;">
-	<img src="./src/assets/img/logo.png" alt="DollyShare Logo">
-</div>
+![DollyShare Logo](./src/assets/img/logo.png)
 
 > DollyShare es una aplicación que busca ofrecer una solución sencilla y eficiente para compartir archivos y texto de forma rápida.
 
@@ -40,7 +38,7 @@ Los requisitos de usuario los puede encontrar en el documento `.pdf` haciendo [c
 
 ## Diseños mockup de vistas y componentes
 
-Todos los diseños los puede encontrar en el enlace a [Figma haciendo click aqui](https://www.figma.com/design/4RRhx1bnAfuQd1ohHbTNVa/pwm-archivos?node-id=167-1774&p=f).
+Todos los diseños los puede encontrar en el enlace a [Figma haciendo click aqui](https://www.figma.com/design/4RRhx1bnAfuQd1ohHbTNVa/pwm-archivos).
 
 ## Vistas implementadas
 
