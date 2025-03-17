@@ -7,11 +7,12 @@ import { IconButtonComponent } from '../app-button/icon-button/icon-button.compo
 import { RouteButtonComponent } from '../app-button/route-button/route-button.component';
 import { CookieService } from 'ngx-cookie-service';
 import CookieHandler from '../../services/cookies/cookies.service';
+import { UserButtonHoverComponent } from "../user-button-hover/user-button-hover.component";
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterLink, RouteButtonComponent, LoginButtonComponent, IconButtonComponent],
+  imports: [RouterLink, RouteButtonComponent, LoginButtonComponent, IconButtonComponent, UserButtonHoverComponent],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
@@ -20,6 +21,8 @@ export class NavbarComponent {
   private readonly cookieHandler: CookieHandler;
 
   @Input() variant: NavbarVariant = this.DEFAULT_VARIANT;
+
+  displayOptions = false;
 
   constructor(private router: Router, private route: ActivatedRoute, private cookieService: CookieService) {
     this.cookieHandler = new CookieHandler(cookieService);
@@ -36,5 +39,9 @@ export class NavbarComponent {
   getNavbarVariant() {
     if (this.cookieHandler.userCookiesExist()) return NavbarVariant.USER;
     return NavbarVariant.GUEST;
+  }
+
+  toggleOptions() {
+    this.displayOptions = !this.displayOptions;
   }
 }
