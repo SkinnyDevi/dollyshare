@@ -13,11 +13,24 @@ export default class CookieHandler {
   }
 
   createLoginCookies(user: User) {
-    this.cookieService.set(CookieTagNames.LOGGED_IN_USER, btoa(JSON.stringify(user)), { expires: 1 });
+    this.cookieService.set(
+      CookieTagNames.LOGGED_IN_USER,
+      btoa(JSON.stringify(user)),
+      {
+        expires: 1,
+        secure: true
+      }
+    );
   }
 
+  userCookiesExist() {
+    return this.cookieService.check(CookieTagNames.LOGGED_IN_USER);
+  }
+
+
+
   getUserCookies(): null | User {
-    if (!this.cookieService.check(CookieTagNames.LOGGED_IN_USER)) return null;
+    if (!this.userCookiesExist()) return null;
 
     const rawJson = atob(this.cookieService.get(CookieTagNames.LOGGED_IN_USER));
     const jsonUser = JSON.parse(rawJson);
@@ -29,8 +42,39 @@ export default class CookieHandler {
     };
   }
 
-  deleteLoginCookies() {
-    if (!this.cookieService.check(CookieTagNames.LOGGED_IN_USER)) return;
-    this.cookieService.delete(CookieTagNames.LOGGED_IN_USER);
+  async deleteLoginCookies() {
+    await this.deleteCookies(
+      () => this.cookieService.delete(CookieTagNames.LOGGED_IN_USER),
+      () => this.userCookiesExist(),
+      "User cookies could not be deleted"
+    );
+  }
+
+  deleteCookies(
+    delete_fn: () => void,
+    check_fn: () => boolean,
+    error_msg = "Could not delete cookies.",
+    retries = 3,
+    delayMs = 100
+  ): Promise<void> {
+    return new Promise((resolve, reject) => {
+      delete_fn();
+      const attempt = (remainingRetries: number) => {
+        try {
+          if (check_fn()) throw new Error(error_msg);
+          resolve();
+        } catch (error) {
+          if (remainingRetries > 0) {
+            setTimeout(() => {
+              attempt(remainingRetries - 1);
+            }, delayMs);
+          } else {
+            reject(error);
+          }
+        }
+      };
+
+      attempt(retries);
+    });
   }
 }

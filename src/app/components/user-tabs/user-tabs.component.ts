@@ -22,8 +22,30 @@ export class UserTabsComponent {
   }
 
   async logOut() {
-    this.cookieHandler.deleteLoginCookies();
+    await this.deleteLoginCookies();
     await this.router.navigate(['/']);
+  }
+
+  private deleteLoginCookies(retries = 3, delayMs = 100): Promise<void> {
+    return new Promise((resolve, reject) => {
+      this.cookieHandler.deleteLoginCookies();
+      const attempt = (remainingRetries: number) => {
+        try {
+          if (this.cookieHandler.userCookiesExist()) throw new Error("User cookies could not be deleted.");
+          resolve();
+        } catch (error) {
+          if (remainingRetries > 0) {
+            setTimeout(() => {
+              attempt(remainingRetries - 1);
+            }, delayMs);
+          } else {
+            reject(error);
+          }
+        }
+      };
+
+      attempt(retries);
+    });
   }
 
   getSelected(view: SelectedViewButton) {
