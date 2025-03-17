@@ -2,7 +2,7 @@ import { v4 as uuid } from 'uuid';
 import axios from 'axios';
 import JSON_API_URL from './json_server_endpoint';
 import User from '../../models/user';
-import UserAPI from '../base/base_user.service';
+import UserAPI from '../base-apis/base_user.service';
 
 export default class JsonUserAPI implements UserAPI {
   private readonly ENDPOINT = "/users";

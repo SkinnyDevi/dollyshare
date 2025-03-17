@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from "./components/navbar/navbar.component";
 import { FooterComponent } from "./components/footer/footer.component";
-import ShareFilesAPI from './services/base/base_share_files.service';
-import ShareTextAPI from './services/base/base_share_text.service';
-import UserAPI from './services/base/base_user.service';
+import ShareFilesAPI from './services/base-apis/base_share_files.service';
+import ShareTextAPI from './services/base-apis/base_share_text.service';
+import UserAPI from './services/base-apis/base_user.service';
 import JsonUserAPI from './services/jsonserver/json_user_api.service';
 
 export const BACKEND_USER_API: UserAPI = new JsonUserAPI();
