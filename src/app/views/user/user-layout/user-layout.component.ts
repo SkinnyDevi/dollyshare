@@ -8,13 +8,15 @@ import { UserChangePasswordComponent } from "../change-password/change-password.
 import { ManageActiveLinkComponent } from "../manage-active-link/manage-active-link.component";
 import { CookieService } from 'ngx-cookie-service';
 import CookieHandler from '../../../services/cookies/cookies.service';
+import { LoginValidatorHookComponent } from "../../../components/login-validator-hook/login-validator-hook.component";
 
 @Component({
   selector: 'view-user-layout',
   standalone: true,
-  imports: [LogoComponent, UserTabsComponent, UserActiveLinksComponent, UserAccountComponent, UserChangePasswordComponent, ManageActiveLinkComponent],
+  imports: [LogoComponent, UserTabsComponent, UserActiveLinksComponent, UserAccountComponent, UserChangePasswordComponent, ManageActiveLinkComponent, LoginValidatorHookComponent],
   templateUrl: './user-layout.component.html',
   styleUrl: './user-layout.component.css',
+  providers: [CookieService]
 })
 export class UserLayoutComponent {
   private readonly cookieHandler: CookieHandler;

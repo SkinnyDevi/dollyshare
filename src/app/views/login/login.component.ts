@@ -7,11 +7,12 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { CookieService } from 'ngx-cookie-service';
 import { BACKEND_USER_API } from '../../app.component';
 import CookieHandler from '../../services/cookies/cookies.service';
+import { LoginValidatorHookComponent } from "../../components/login-validator-hook/login-validator-hook.component";
 
 @Component({
   selector: 'view-login',
   standalone: true,
-  imports: [LogoComponent, LoginInputComponent, AppButtonComponent, ReactiveFormsModule],
+  imports: [LogoComponent, LoginInputComponent, AppButtonComponent, ReactiveFormsModule, LoginValidatorHookComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
   providers: [CookieService]

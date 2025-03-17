@@ -14,7 +14,8 @@ import { UserButtonHoverComponent } from "../user-button-hover/user-button-hover
   standalone: true,
   imports: [RouterLink, RouteButtonComponent, LoginButtonComponent, IconButtonComponent, UserButtonHoverComponent],
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css'
+  styleUrl: './navbar.component.css',
+  providers: [CookieService]
 })
 export class NavbarComponent {
   private readonly DEFAULT_VARIANT = NavbarVariant.GUEST;
@@ -33,6 +34,7 @@ export class NavbarComponent {
       )
       .subscribe(variant => {
         this.variant = variant || this.getNavbarVariant();
+        this.displayOptions = false;
       });
   }
 

@@ -50,7 +50,6 @@ export default class JsonUserAPI implements UserAPI {
     let baseUrl = JSON_API_URL + this.ENDPOINT;
     baseUrl += `?email=${email}`
     const response = await axios.get(baseUrl);
-    console.log(response);
     if (response.status !== 200 || response.data.length < 1) throw new Error("No login found for " + email);
     const retrievedUser: User = response.data[0];
     if (password !== retrievedUser.password) throw new Error("Incorrect password");
