@@ -27,8 +27,6 @@ export default class CookieHandler {
     return this.cookieService.check(CookieTagNames.LOGGED_IN_USER);
   }
 
-
-
   getUserCookies(): null | User {
     if (!this.userCookiesExist()) return null;
 
@@ -50,7 +48,7 @@ export default class CookieHandler {
     );
   }
 
-  deleteCookies(
+  private deleteCookies(
     delete_fn: () => void,
     check_fn: () => boolean,
     error_msg = "Could not delete cookies.",

@@ -34,7 +34,6 @@ export class NavbarComponent {
   }
 
   getNavbarVariant() {
-    console.log(this.cookieHandler.userCookiesExist())
     if (this.cookieHandler.userCookiesExist()) return NavbarVariant.USER;
     return NavbarVariant.GUEST;
   }

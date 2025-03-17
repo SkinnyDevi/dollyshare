@@ -21,7 +21,6 @@ export class UserLayoutComponent {
 
   constructor(private route: ActivatedRoute, private cookieService: CookieService) {
     this.cookieHandler = new CookieHandler(cookieService);
-    console.log(this.cookieHandler.getUserCookies());
   }
 
   getRoute(): string {
