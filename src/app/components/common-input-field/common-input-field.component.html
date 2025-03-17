@@ -1,6 +1,15 @@
 <div class="common-input-field">
   <label [htmlFor]="labelToInputName()">{{ label }}</label>
-  <input [type]="type" [name]="labelToInputName()" [placeholder]="placeholder" />
+  <input
+    [type]="type"
+    [required]="required"
+    [name]="labelToInputName()"
+    [placeholder]="placeholder"
+    [value]="value"
+    (input)="onInput($event)"
+    [disabled]="disabled"
+  />
+
   @if(type === 'password') {
     <button class="reveal-password-button" type="button" (click)="toggleRevealPassword()">
       <icon-selector [type]="revealPassword ? 'reveal' : 'hidden'"></icon-selector>
