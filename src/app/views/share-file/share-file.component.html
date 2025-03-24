@@ -2,43 +2,35 @@
 	<div class="share-file-container">
 		<app-logo [width]="120" [useReturnToHome]="true"></app-logo>
 		<h1>What will you share today?</h1>
-		<div class="share-file-box">
-			<button class="drop-here-zone">
-				Drop your files here
-			</button>
-			<div class="file-box">
-				<ul class="file-list">
-					<li>
-						<img Src="assets/img/pdf_file.png" alt="docx icons" width="40" height="auto">
-						<p>prueba.pdf</p>
-					</li>
-					<hr>
-					<li>
-						<img Src="assets/img/xlsx_file.png" alt="docx icons" width="40" height="auto">
-						<p>prueba.xlsx</p>
-					</li>
-					<hr>
-					<li>
-						<img Src="assets/img/mp4_file.png" alt="docx icons" width="40" height="auto">
-						<p>prueba.mp4</p>
-					</li>
-					<hr>
-					<li>
-						<img Src="assets/img/png_file.png" alt="docx icons" width="40" height="auto">
-						<p>prueba.png</p>
-					</li>
-					<hr>
-					<li>
-						<img Src="assets/img/docx_file.png" alt="docx icons" width="40" height="auto">
-						<p>prueba.docx</p>
-					</li>
-					<hr>
-				</ul>
-			</div>
-		</div>
-		<div class="file-options-buttons">
-			<app-route-button routerLink="/">Go Back</app-route-button>
-			<app-route-button routerLink="/finish">Create URL</app-route-button>
-		</div>
+    <div class="share-file-box">
+      <input id="file-drop-input" type="file" (change)="onFilePicked($event)" multiple style="display: none;" />
+      <button class="drop-here-zone" type="button" (click)="openFilePicker()">
+        Click to upload your files
+      </button>
+      <div class="file-box">
+        <ul class="file-list">
+          @for(file of this.uploadedFiles; track file.name) {
+            <li>
+              <img src="assets/img/{{getFileExtensionIcon(file)}}.png" alt="{{getFileExtensionIcon(file)}} icon" width="40" height="auto">
+              <p>{{file.name}}</p>
+            </li>
+            <hr>
+          } @empty {
+            <li class="empty-filebox-placeholder">
+              <p>Your files will appear here</p>
+            </li>
+          }
+        </ul>
+        @if(this.uploadedFiles.length > 0) {
+          <div class="clear-button-container">
+            <app-button (click)="clearFileList()">Clear files</app-button>
+          </div>
+        }
+      </div>
+    </div>
+    <div class="file-options-buttons">
+      <app-route-button routerLink="/">Go Back</app-route-button>
+      <app-button type="submit" [disabled]="fileValidator()" (click)="submitFiles()">Create URL</app-button>
+    </div>
 	</div>
 </main>

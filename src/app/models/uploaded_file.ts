@@ -1,4 +1,8 @@
 export default interface UploadedFile {
   id: string;
-  file: "File";
+  name: string;
+  type: string;
+  size: number;
+  content: string;
+  createdAt: Date;
 }
