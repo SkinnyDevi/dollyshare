@@ -87,11 +87,16 @@ main {
 .file-list>li {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   width: 100%;
 }
 
-.file-list>li>p {
+.file-properties>p {
   margin-left: 10px;
+  max-width: 32vw;
+  overflow-x: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .file-list>hr {
@@ -108,4 +113,17 @@ main {
 .clear-button-container {
   align-self: center;
   margin: 10px 0;
+}
+
+.file-properties {
+  display: flex;
+  align-items: center;
+}
+
+.file-details {
+  margin-right: 30px;
+}
+
+.file-details>p {
+  opacity: 45%;
 }

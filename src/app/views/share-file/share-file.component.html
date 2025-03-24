@@ -11,8 +11,13 @@
         <ul class="file-list">
           @for(file of this.uploadedFiles; track file.name) {
             <li>
-              <img src="assets/img/{{getFileExtensionIcon(file)}}.png" alt="{{getFileExtensionIcon(file)}} icon" width="40" height="auto">
-              <p>{{file.name}}</p>
+              <div class="file-properties">
+                <img src="assets/img/{{getFileExtensionIcon(file)}}.png" alt="{{getFileExtensionIcon(file)}} icon" width="40" height="auto">
+                <p>{{file.name}}</p>
+              </div>
+              <div class="file-details">
+                <p>{{formatFileSize(file.size)}}</p>
+              </div>
             </li>
             <hr>
           } @empty {
