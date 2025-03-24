@@ -1,3 +1,4 @@
+import UploadedFile from "./uploaded_file";
 import User from "./user";
 
 export default interface SharedFiles {
@@ -6,5 +7,5 @@ export default interface SharedFiles {
   size: number;
   expires: number;
   sharedWith: User['id'][];
-  files: "File"[];
+  files: UploadedFile["id"][];
 }

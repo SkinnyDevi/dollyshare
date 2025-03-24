@@ -2,7 +2,7 @@ import { v4 as uuid } from 'uuid';
 import axios from 'axios';
 import JSON_API_URL from './json_server_endpoint';
 import User from '../../models/user';
-import UserAPI from '../base/base_user.service';
+import UserAPI from '../base-apis/base_user.service';
 
 export default class JsonUserAPI implements UserAPI {
   private readonly ENDPOINT = "/users";
@@ -50,7 +50,6 @@ export default class JsonUserAPI implements UserAPI {
     let baseUrl = JSON_API_URL + this.ENDPOINT;
     baseUrl += `?email=${email}`
     const response = await axios.get(baseUrl);
-    console.log(response);
     if (response.status !== 200 || response.data.length < 1) throw new Error("No login found for " + email);
     const retrievedUser: User = response.data[0];
     if (password !== retrievedUser.password) throw new Error("Incorrect password");

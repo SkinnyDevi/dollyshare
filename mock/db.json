@@ -25,6 +25,16 @@
       "email": "mengfei@gmail.com"
     }
   ],
+  "file_storage": [
+    {
+      "id": "a6ae2d38-6bbf-4b52-a175-9f20c270272a",
+      "name": "example.txt",
+      "type": "text/plain",
+      "size": 1234,
+      "content": "data:text/plain;base64,SGVsbG8gV29ybGQ=",
+      "createdAt": "2025-03-20T10:00:00.000Z"
+    }
+  ],
   "file_uploads": [
     {
       "id": "a9b5928c-410d-4447-ad3d-d9c7e8ed9369",
@@ -35,7 +45,7 @@
         "9f2cf5bb-3d1d-49f6-8945-ace61cab55f6"
       ],
       "files": [
-        "htmlfiles"
+        "a6ae2d38-6bbf-4b52-a175-9f20c270272a"
       ]
     },
     {

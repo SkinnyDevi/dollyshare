@@ -5,6 +5,7 @@ import { CommonInputFieldComponent } from "../../components/common-input-field/c
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BACKEND_USER_API } from '../../app.component';
+import { LoginValidatorHookComponent } from "../../components/login-validator-hook/login-validator-hook.component";
 
 @Component({
   selector: 'view-register',
@@ -13,7 +14,8 @@ import { BACKEND_USER_API } from '../../app.component';
     AppButtonComponent,
     LogoComponent,
     CommonInputFieldComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    LoginValidatorHookComponent
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
