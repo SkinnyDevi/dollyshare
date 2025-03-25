@@ -9,6 +9,8 @@ import { UserLayoutComponent } from './views/user/user-layout/user-layout.compon
 import { FinishCreationComponent } from './views/finish-creation/finish-creation.component';
 import { RegisterSuccessfulComponent } from './views/register-successful/register-successful.component';
 import { ManageActiveLinkComponent } from './views/user/manage-active-link/manage-active-link.component';
+import { DownloadTextComponent } from './views/download-text/download-text.component';
+import { DownloadFileComponent } from './views/download-file/download-file.component';
 
 export const routes: Routes = [
   {
@@ -73,6 +75,16 @@ export const routes: Routes = [
     component: UserLayoutComponent,
     title: "Manage Link - DollyShare",
     data: { navbarVariant: NavbarVariant.EMPTY }
+  },
+  {
+    path: "download/text/:link_id",
+    component: DownloadTextComponent,
+    title: "Download - DollyShare"
+  },
+  {
+    path: "download/files/:link_id",
+    component: DownloadFileComponent,
+    title: "Download - DollyShare"
   },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
