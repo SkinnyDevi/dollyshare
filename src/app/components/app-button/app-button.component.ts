@@ -13,4 +13,5 @@ export class AppButtonComponent {
   @Input() size: ButtonSize = 'small';
   @Input() type: HTMLButtonElement['type'] = 'button';
   @Input() wide: boolean = false;
+  @Input() disabled = false;
 }

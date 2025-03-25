@@ -1,14 +1,15 @@
 <main>
+  <login-validator-hook [reverseCheck]="true"></login-validator-hook>
    <div class="register-container">
     <app-logo [width]="120"></app-logo>
     <h1>Register Account</h1>
-    <form class="info-box" (submit)="onSubmit()">
-      <app-common-input-field type="email" label="Email" placeholder="Email"></app-common-input-field>
-      <app-common-input-field label="Username" placeholder="Username"></app-common-input-field>
-      <app-common-input-field type="password" label="Password" placeholder="********"></app-common-input-field>
-      <app-common-input-field type="password" label="Repeat Password" placeholder="********"></app-common-input-field>
+    <form class="info-box" [formGroup]="registerForm" (submit)="onSubmit()">
+      <app-common-input-field [required]="true" formControlName="email" type="email" label="Email" placeholder="Email"></app-common-input-field>
+      <app-common-input-field [required]="true" formControlName="username" label="Username" placeholder="Username"></app-common-input-field>
+      <app-common-input-field [required]="true" formControlName="password" type="password" label="Password" placeholder="********"></app-common-input-field>
+      <app-common-input-field [required]="true" formControlName="repeat_password" type="password" label="Repeat Password" placeholder="********"></app-common-input-field>
       <div class="create-account-button">
-        <app-button type="submit">Create Account</app-button>
+        <app-button type="submit" [disabled]="registerForm.invalid">Create Account</app-button>
       </div>
     </form>
   </div>

@@ -8,7 +8,6 @@ import { ShareTextComponent } from './views/share-text/share-text.component';
 import { UserLayoutComponent } from './views/user/user-layout/user-layout.component';
 import { FinishCreationComponent } from './views/finish-creation/finish-creation.component';
 import { RegisterSuccessfulComponent } from './views/register-successful/register-successful.component';
-import { ManageActiveLinkComponent } from './views/user/manage-active-link/manage-active-link.component';
 import { DownloadTextComponent } from './views/download-text/download-text.component';
 import { DownloadFileComponent } from './views/download-file/download-file.component';
 
@@ -16,7 +15,7 @@ export const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    title: "DollyShare",
+    title: "DollyShare"
   },
   {
     path: 'login',
@@ -67,8 +66,7 @@ export const routes: Routes = [
   {
     path: 'register-successful',
     component: RegisterSuccessfulComponent,
-    title: "Register Successful - DollyShare",
-    data: { navbarVariant: NavbarVariant.EMPTY }
+    title: "Register Successful - DollyShare"
   },
   {
     path: "user/manage-link/:link_id",

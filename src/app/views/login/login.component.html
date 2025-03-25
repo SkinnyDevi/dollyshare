@@ -1,13 +1,14 @@
 <main>
+  <login-validator-hook [reverseCheck]="true"></login-validator-hook>
   <div class="login-container">
     <app-logo [width]="150" [useReturnToHome]="true"></app-logo>
     <div class="credentials-container">
       <h2>Login</h2>
-      <form (submit)="onSubmit()">
-        <app-login-input type="email"></app-login-input>
-        <app-login-input type="password"></app-login-input>
+      <form [formGroup]="loginForm" (submit)="onSubmit()">
+        <app-login-input type="email" formControlName="email"></app-login-input>
+        <app-login-input type="password" formControlName="password"></app-login-input>
         <div class="login-button-submit">
-          <app-button type="submit">Login</app-button>
+          <app-button type="submit" [disabled]="loginForm.invalid">Login</app-button>
         </div>
       </form>
     </div>

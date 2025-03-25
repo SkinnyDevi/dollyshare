@@ -10,7 +10,10 @@
 
 	@if (variant === 'user') {
 	<div class="user-buttons">
-    <app-icon-button icon="user" routerLink="/login"></app-icon-button>
+    <app-icon-button icon="user" (click)="toggleOptions()"></app-icon-button>
+    @if (displayOptions) {
+      <app-user-button-hover (closeCallback)="toggleOptions()"></app-user-button-hover>
+    }
   </div>
 	}
 </nav>

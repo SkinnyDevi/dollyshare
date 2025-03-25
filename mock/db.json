@@ -1,0 +1,72 @@
+{
+  "users": [
+    {
+      "id": "027caef4-b2a4-4a88-9e63-8be202517493",
+      "username": "new_user",
+      "email": "new.user@dollyshare.com",
+      "password": "unsafe"
+    },
+    {
+      "id": "9f2cf5bb-3d1d-49f6-8945-ace61cab55f6",
+      "username": "grok",
+      "email": "grok@twitter.com",
+      "password": "complex"
+    },
+    {
+      "id": "7d3ace66-7859-4cfe-a7da-0e6b05556779",
+      "username": "tester1",
+      "password": "12345678",
+      "email": "tester@email.com"
+    },
+    {
+      "id": "20eeeafe-b4ed-4fd9-b3a5-b63c2426f5f5",
+      "username": "mengfei",
+      "password": "12345678",
+      "email": "mengfei@gmail.com"
+    }
+  ],
+  "file_storage": [
+    {
+      "id": "a6ae2d38-6bbf-4b52-a175-9f20c270272a",
+      "name": "example.txt",
+      "type": "text/plain",
+      "size": 1234,
+      "content": "data:text/plain;base64,SGVsbG8gV29ybGQ=",
+      "createdAt": "2025-03-20T10:00:00.000Z"
+    }
+  ],
+  "file_uploads": [
+    {
+      "id": "a9b5928c-410d-4447-ad3d-d9c7e8ed9369",
+      "owner": "027caef4-b2a4-4a88-9e63-8be202517493",
+      "size": 2,
+      "expires": 192381274814811,
+      "sharedWith": [
+        "9f2cf5bb-3d1d-49f6-8945-ace61cab55f6"
+      ],
+      "files": [
+        "a6ae2d38-6bbf-4b52-a175-9f20c270272a"
+      ]
+    },
+    {
+      "id": "3b2a9159-25cf-414a-afaa-26775a993ca6",
+      "owner": null,
+      "size": 3,
+      "expires": 2301839184091,
+      "sharedWith": [],
+      "files": []
+    }
+  ],
+  "text_uploads": [
+    {
+      "id": "4b4455b4-3b0b-4d0b-8cd0-cd624ea7503e",
+      "owner": "027caef4-b2a4-4a88-9e63-8be202517493",
+      "expires": 12893542151,
+      "sharedWith": [
+        "9f2cf5bb-3d1d-49f6-8945-ace61cab55f6"
+      ],
+      "title": "MY wondeful text",
+      "body": "some big ass giant text"
+    }
+  ]
+}
