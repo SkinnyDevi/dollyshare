@@ -3,8 +3,10 @@
     <h1>Thank you for using<br> DollyShare</h1>
     <app-logo [width]="150" [useReturnToHome]="true"></app-logo>
     <div class="link-box">
-      <p class="link-info">Your link: <a href="#">https://dollyshare.com/download/a4093c893MX798d</a></p>
-      <p class="file-info">5 items, 168 KB in total - Expires in 16 October, 2025</p>
+      <p class="link-info">Your link: <a href="#">https://dollyshare.com/download/{{getUploadLinkExtension()}}</a></p>
+      @if(uploadedFile !== null) {
+      <p class="file-info">{{getItemString()}}, {{formatTotalFileSize(uploadedFile.size)}} in total - Expires in {{getExpiryDate(uploadedFile.expires)}}</p>
+      }
     </div>
     <div class="new-upload-buttons">
       <app-route-button size="small" routerLink="/">New Upload</app-route-button>

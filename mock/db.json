@@ -38,23 +38,13 @@
   "file_uploads": [
     {
       "id": "a9b5928c-410d-4447-ad3d-d9c7e8ed9369",
-      "owner": "027caef4-b2a4-4a88-9e63-8be202517493",
+      "owner": null,
       "size": 2,
       "expires": 192381274814811,
-      "sharedWith": [
-        "9f2cf5bb-3d1d-49f6-8945-ace61cab55f6"
-      ],
+      "sharedWith": [],
       "files": [
         "a6ae2d38-6bbf-4b52-a175-9f20c270272a"
       ]
-    },
-    {
-      "id": "3b2a9159-25cf-414a-afaa-26775a993ca6",
-      "owner": null,
-      "size": 3,
-      "expires": 2301839184091,
-      "sharedWith": [],
-      "files": []
     }
   ],
   "text_uploads": [

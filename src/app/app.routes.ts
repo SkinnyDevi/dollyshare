@@ -38,7 +38,7 @@ export const routes: Routes = [
     title: "Share Text - DollyShare"
   },
   {
-    path: 'finish',
+    path: 'finish/:link_id',
     component: FinishCreationComponent,
     title: "Finish Creation - DollyShare"
   },

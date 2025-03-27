@@ -64,7 +64,7 @@ export default class JsonUserAPI implements UserAPI {
 
   private async checkExistingEmail(email: string) {
     let baseUrl = JSON_API_URL + this.ENDPOINT;
-    baseUrl += `?email${email}`
+    baseUrl += `?email=${email}`
     const response = await axios.get(baseUrl);
     if (response.status !== 200) throw new Error("Server error when checking email");
     return response.data.length == 1;

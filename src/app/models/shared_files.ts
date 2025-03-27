@@ -3,7 +3,7 @@ import User from "./user";
 
 export default interface SharedFiles {
   id: string;
-  owner?: User['id'];
+  owner: User['id'] | null;
   size: number;
   expires: number;
   sharedWith: User['id'][];
