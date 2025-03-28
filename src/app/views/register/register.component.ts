@@ -54,4 +54,12 @@ export class RegisterComponent {
   getValueFromForm(name: string) {
     return this.registerForm.get(name)?.value;
   }
+
+  isTouched(name: string) {
+    return this.registerForm.get(name)?.touched!
+  }
+
+  isInvalid(name: string) {
+    return this.registerForm.get(name)?.invalid || false
+  }
 }
