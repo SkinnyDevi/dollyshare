@@ -6,10 +6,15 @@ import ShareFilesAPI from './services/base-apis/base_share_files.service';
 import ShareTextAPI from './services/base-apis/base_share_text.service';
 import UserAPI from './services/base-apis/base_user.service';
 import JsonUserAPI from './services/jsonserver/json_user_api.service';
+import FileUploadAPI from './services/base-apis/base_file_upload.service';
+import JsonFileUploadAPI from './services/jsonserver/json_file_upload_api.service';
+import JsonShareFilesAPI from './services/jsonserver/json_share_files_api.service';
+import JsonShareTextAPI from './services/jsonserver/json_share_text_api.service';
 
 export const BACKEND_USER_API: UserAPI = new JsonUserAPI();
-export const BACKEND_SHARE_FILES_API: ShareFilesAPI = {} as ShareFilesAPI;
-export const BACKEND_SHARE_TEXT_API: ShareTextAPI = {} as ShareTextAPI;
+export const BACKEND_SHARE_FILES_API: ShareFilesAPI = new JsonShareFilesAPI();
+export const BACKEND_SHARE_TEXT_API: ShareTextAPI = new JsonShareTextAPI();
+export const BACKEND_FILE_UPLOAD_API: FileUploadAPI = new JsonFileUploadAPI();
 
 @Component({
   selector: 'app-root',

@@ -8,7 +8,8 @@ import CookieHandler from '../../services/cookies/cookies.service';
   standalone: true,
   imports: [RouterLink],
   templateUrl: './user-button-hover.component.html',
-  styleUrl: './user-button-hover.component.css'
+  styleUrl: './user-button-hover.component.css',
+  providers: [CookieService]
 })
 export class UserButtonHoverComponent {
   @Output() closeCallback = new EventEmitter<null>();

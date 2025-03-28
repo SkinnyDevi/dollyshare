@@ -18,7 +18,7 @@ export default class CookieHandler {
       btoa(JSON.stringify(user)),
       {
         expires: 1,
-        secure: true
+        path: "/"
       }
     );
   }
@@ -67,12 +67,30 @@ export default class CookieHandler {
               attempt(remainingRetries - 1);
             }, delayMs);
           } else {
-            reject(error);
+            try {
+              this.fallbackDeleteLoggedUserCookie();
+              console.warn("Logged out by fallback method.");
+              resolve();
+            } catch (error) {
+              reject(error);
+            }
           }
         }
       };
 
       attempt(retries);
     });
+  }
+
+  private fallbackDeleteLoggedUserCookie(): void {
+    const cookies = document.cookie.split(';');
+
+    for (let cookie of cookies) {
+      const [name] = cookie.split('=').map(part => part.trim());
+      if (name === 'logged-user') {
+        document.cookie = 'logged-user=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
+        break;
+      }
+    }
   }
 }

@@ -43,7 +43,6 @@ export default class JsonUserAPI implements UserAPI {
 
   async deleteUser(userId: User["id"]): Promise<void> {
     const response = await axios.delete(JSON_API_URL + this.ENDPOINT + "/" + userId);
-    console.log(response.status);
   }
 
   async login(email: string, password: string): Promise<User> {
@@ -64,7 +63,7 @@ export default class JsonUserAPI implements UserAPI {
 
   private async checkExistingEmail(email: string) {
     let baseUrl = JSON_API_URL + this.ENDPOINT;
-    baseUrl += `?email${email}`
+    baseUrl += `?email=${email}`
     const response = await axios.get(baseUrl);
     if (response.status !== 200) throw new Error("Server error when checking email");
     return response.data.length == 1;

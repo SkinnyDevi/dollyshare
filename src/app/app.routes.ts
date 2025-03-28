@@ -40,7 +40,7 @@ export const routes: Routes = [
     title: "Share Text - DollyShare"
   },
   {
-    path: 'finish',
+    path: 'finish/:link_id',
     component: FinishCreationComponent,
     title: "Finish Creation - DollyShare"
   },
@@ -69,7 +69,13 @@ export const routes: Routes = [
     title: "Register Successful - DollyShare"
   },
   {
-    path: "user/manage-link/:link_id",
+    path: "user/manage-link/files/:link_id",
+    component: UserLayoutComponent,
+    title: "Manage Link - DollyShare",
+    data: { navbarVariant: NavbarVariant.EMPTY }
+  },
+  {
+    path: "user/manage-link/text/:link_id",
     component: UserLayoutComponent,
     title: "Manage Link - DollyShare",
     data: { navbarVariant: NavbarVariant.EMPTY }

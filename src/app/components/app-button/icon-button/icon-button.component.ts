@@ -11,7 +11,6 @@ import { IconSelectorComponent } from "../../icons/icon-selector/icon-selector.c
   styleUrl: './icon-button.component.css'
 })
 export class IconButtonComponent {
-  @Input() routerLink = "";
   @Input() icon: IconType = "user";
 
   getIconSource() {

@@ -6,7 +6,7 @@
     <h1>Active Links</h1>
   </div>
   <div class="link-display">
-    <p>Editing contacts for: <a [href]="'/download/'+LINK_ID">dollyshare.com/download/{{ LINK_ID }}</a></p>
+    <p>Editing contacts for: <a [href]="'/download/' + UPLOAD_TYPE + '/' + LINK_ID">/download/{{UPLOAD_TYPE}}/{{LINK_ID}}</a></p>
   </div>
   <div class="link-manager-contacts">
     <app-contact-list-box></app-contact-list-box>
