@@ -5,11 +5,9 @@ import { CookieService } from 'ngx-cookie-service';
 import CookieHandler from '../../../services/cookies/cookies.service';
 import User from '../../../models/user';
 import { BACKEND_SHARE_FILES_API, BACKEND_SHARE_TEXT_API } from '../../../app.component';
-import SharedText from '../../../models/shared_text';
-import SharedFiles from '../../../models/shared_files';
 
 interface UploadLink {
-  id: SharedText['id'] | SharedFiles['id'];
+  id: string;
   isPrivate: boolean;
 }
 
@@ -45,5 +43,6 @@ export class UserActiveLinksComponent implements OnInit {
       id: "text/" + upload.id,
       isPrivate: upload.sharedWith.length > 0
     });
+
   }
 }

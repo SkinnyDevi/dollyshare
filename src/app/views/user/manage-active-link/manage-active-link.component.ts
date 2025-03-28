@@ -20,21 +20,18 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class ManageActiveLinkComponent implements OnInit {
   readonly LINK_ID: string;
-  UPLOAD_TYPE: "files" | "text" = "files";
+  readonly UPLOAD_TYPE: "files" | "text" | null = null;
 
   private readonly cookieHandler: CookieHandler;
 
   constructor(private router: Router, private route: ActivatedRoute, private cookieService: CookieService) {
     this.LINK_ID = this.route.snapshot.paramMap.get('link_id')!;
     this.cookieHandler = new CookieHandler(cookieService);
-    this.router.events
-      .pipe(
-        filter(event => event instanceof NavigationEnd),
-        map(() => this.route.firstChild?.snapshot.data['uploadType'])
-      )
-      .subscribe(uploadType => {
-        this.UPLOAD_TYPE = uploadType;
-      });
+
+    const windowPathname = window.location.pathname;
+    if (windowPathname.includes("files") || windowPathname.includes('text')) {
+      this.UPLOAD_TYPE = windowPathname.includes('files') ? "files" : "text";
+    }
   }
 
   async ngOnInit(): Promise<void> {

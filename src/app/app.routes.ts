@@ -70,13 +70,13 @@ export const routes: Routes = [
     path: "user/manage-link/files/:link_id",
     component: UserLayoutComponent,
     title: "Manage Link - DollyShare",
-    data: { navbarVariant: NavbarVariant.EMPTY, uploadType: "files" }
+    data: { navbarVariant: NavbarVariant.EMPTY }
   },
   {
     path: "user/manage-link/text/:link_id",
     component: UserLayoutComponent,
     title: "Manage Link - DollyShare",
-    data: { navbarVariant: NavbarVariant.EMPTY, uploadType: "text" }
+    data: { navbarVariant: NavbarVariant.EMPTY }
   },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];

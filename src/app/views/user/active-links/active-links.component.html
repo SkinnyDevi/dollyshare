@@ -1,7 +1,7 @@
 <h1>Active Links</h1>
 <div class="active-links-container">
   <ul>
-    @for(link of userActiveLinks; track link) {
+    @for(link of userActiveLinks; track link.id) {
       <app-active-link-entry [linkId]="link.id" [isPrivate]="link.isPrivate"></app-active-link-entry>
     } @empty {
       <p style="text-align: center;">You dont have any active links yet.</p>

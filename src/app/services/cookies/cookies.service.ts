@@ -18,7 +18,7 @@ export default class CookieHandler {
       btoa(JSON.stringify(user)),
       {
         expires: 1,
-        secure: true
+        path: "/"
       }
     );
   }
@@ -52,8 +52,8 @@ export default class CookieHandler {
     delete_fn: () => void,
     check_fn: () => boolean,
     error_msg = "Could not delete cookies.",
-    retries = 10,
-    delayMs = 250
+    retries = 3,
+    delayMs = 100
   ): Promise<void> {
     return new Promise((resolve, reject) => {
       delete_fn();
@@ -69,6 +69,8 @@ export default class CookieHandler {
           } else {
             try {
               this.fallbackDeleteLoggedUserCookie();
+              console.warn("Logged out by fallback method.");
+              resolve();
             } catch (error) {
               reject(error);
             }
