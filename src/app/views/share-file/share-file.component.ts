@@ -9,6 +9,7 @@ import formatFileSize from '../../components/fileSizeFormatter';
 import User from '../../models/user';
 import { CookieService } from 'ngx-cookie-service';
 import CookieHandler from '../../services/cookies/cookies.service';
+import { ScreenDetectorService } from '../../services/screenDetector/screenDetector.service';
 
 @Component({
   selector: 'view-share-file',
@@ -25,6 +26,7 @@ import CookieHandler from '../../services/cookies/cookies.service';
 })
 export class ShareFileComponent {
   uploadedFiles: File[] = [];
+  screenIsPhone = false;
 
   private readonly COMPRESSED_EXTS = ['zip', 'rar', '7z'];
   private readonly IMAGE_EXTS = ['jpeg', 'png', 'tiff', 'bmp', 'webp', 'gif'];
@@ -35,8 +37,12 @@ export class ShareFileComponent {
 
   private readonly cookieHandler: CookieHandler;
 
-  constructor(private router: Router, private cookieService: CookieService) {
+  constructor(private router: Router, private cookieService: CookieService, private sd: ScreenDetectorService) {
     this.cookieHandler = new CookieHandler(cookieService);
+    this.screenIsPhone = this.sd.isPhoneScreen();
+    this.sd.checkOnResize((isphone) => {
+      this.screenIsPhone = isphone;
+    });
   }
 
   fileValidator() {

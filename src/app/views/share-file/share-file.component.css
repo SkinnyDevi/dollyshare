@@ -20,6 +20,10 @@ main {
   height: 90%;
 }
 
+.share-file-container-start {
+  justify-content: flex-start !important;
+}
+
 .share-file-container>h1 {
   font-size: 30px;
   margin-top: 5px;
@@ -123,4 +127,10 @@ main {
 
 .file-details>p {
   opacity: 45%;
+}
+
+@media only screen and (max-width: 400px) {
+  .file-details {
+    margin-right: 10px;
+  }
 }
