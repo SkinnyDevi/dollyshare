@@ -5,12 +5,13 @@ export default interface ShareTextAPI {
   createUpload(
     title: string,
     body: string,
-    owner?: User,
+    owner?: User | null,
     shareWith?: User[],
   ): Promise<SharedText>;
   getUploadsFromUser(user: User): Promise<SharedText[]>;
-  deleteUpload(sharedFiles: SharedText): Promise<void>;
-  deleteUpload(uploadId: SharedText['id']): Promise<void>;
+  getUploadById(uploadId: SharedText['id']): Promise<SharedText>;
+  deleteUpload(sharedText: SharedText): Promise<void>;
+  deleteUploadById(uploadId: SharedText['id']): Promise<void>;
   shareUploadWith(user: User, upload: SharedText): Promise<SharedText>;
   stopSharingUploadWith(user: User, upload: SharedText): Promise<SharedText>;
 }

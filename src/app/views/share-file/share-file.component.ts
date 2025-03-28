@@ -58,7 +58,7 @@ export class ShareFileComponent {
       const uploaded = await BACKEND_FILE_UPLOAD_API.uploadFiles(this.uploadedFiles);
 
       const sharedFilesEntry = await BACKEND_SHARE_FILES_API.createUpload(uploaded);
-      this.router.navigate(['/finish', sharedFilesEntry.id], {
+      await this.router.navigate(['/finish', sharedFilesEntry.id], {
         queryParams: { uploadType: 'files' }
       });
     } catch (e) {

@@ -30,7 +30,7 @@
       "id": "a6ae2d38-6bbf-4b52-a175-9f20c270272a",
       "name": "example.txt",
       "type": "text/plain",
-      "size": 1234,
+      "size": 40,
       "content": "data:text/plain;base64,SGVsbG8gV29ybGQ=",
       "createdAt": "2025-03-20T10:00:00.000Z"
     }
@@ -51,12 +51,10 @@
     {
       "id": "4b4455b4-3b0b-4d0b-8cd0-cd624ea7503e",
       "owner": "027caef4-b2a4-4a88-9e63-8be202517493",
-      "expires": 12893542151,
-      "sharedWith": [
-        "9f2cf5bb-3d1d-49f6-8945-ace61cab55f6"
-      ],
-      "title": "MY wondeful text",
-      "body": "some big ass giant text"
+      "expires": 12893542151123,
+      "sharedWith": [],
+      "title": "this text should be in base64",
+      "body": "body text should be in base64"
     }
   ]
 }
