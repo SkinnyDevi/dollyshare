@@ -1,18 +1,6 @@
 {
   "users": [
     {
-      "id": "027caef4-b2a4-4a88-9e63-8be202517493",
-      "username": "new_user",
-      "email": "new.user@dollyshare.com",
-      "password": "unsafe"
-    },
-    {
-      "id": "9f2cf5bb-3d1d-49f6-8945-ace61cab55f6",
-      "username": "grok",
-      "email": "grok@twitter.com",
-      "password": "complex"
-    },
-    {
       "id": "7d3ace66-7859-4cfe-a7da-0e6b05556779",
       "username": "tester1",
       "password": "12345678",

@@ -67,10 +67,16 @@ export const routes: Routes = [
     title: "Register Successful - DollyShare"
   },
   {
-    path: "user/manage-link/:link_id",
+    path: "user/manage-link/files/:link_id",
     component: UserLayoutComponent,
     title: "Manage Link - DollyShare",
-    data: { navbarVariant: NavbarVariant.EMPTY }
+    data: { navbarVariant: NavbarVariant.EMPTY, uploadType: "files" }
+  },
+  {
+    path: "user/manage-link/text/:link_id",
+    component: UserLayoutComponent,
+    title: "Manage Link - DollyShare",
+    data: { navbarVariant: NavbarVariant.EMPTY, uploadType: "text" }
   },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];

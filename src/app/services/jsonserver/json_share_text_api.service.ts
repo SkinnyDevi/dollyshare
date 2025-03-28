@@ -40,8 +40,20 @@ export default class JsonShareTextAPI implements ShareTextAPI {
     return parsedResponse;
   }
 
-  getUploadsFromUser(user: User): Promise<SharedText[]> {
-    throw new Error("Method not implemented.");
+  async getUploadsFromUser(user: User): Promise<SharedText[]> {
+    let baseUrl = JSON_API_URL + this.ENDPOINT;
+    // This should be queried with owner parameter,
+    // but json-server has a bug where if the field is null,
+    // the field still appears when querying with value.
+    //
+    // baseUrl += "?owner=" + user.id;
+
+    const response = await axios.get(baseUrl);
+    if (response.status !== 201 && response.status !== 200) throw new Error("Could not retrieve shared files for user: " + response.statusText);
+
+    // Temporary fix for the bug above
+    const allUploads = response.data as SharedText[];
+    return allUploads.filter(fu => fu.owner === user.id);
   }
 
   deleteUpload(sharedText: SharedText): Promise<void> {
