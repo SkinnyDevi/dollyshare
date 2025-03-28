@@ -31,6 +31,12 @@ main {
   text-align: center;
 }
 
+@media only screen and (max-width: 400px) {
+  .share-file-container>h1 {
+    width: 90%;
+  }
+}
+
 .share-file-box {
   background-color: var(--main-blue-variant);
   padding: 15px;
