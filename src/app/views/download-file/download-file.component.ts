@@ -3,8 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { AppButtonComponent } from "../../components/app-button/app-button.component";
 import { LogoComponent } from "../../components/logo/logo.component";
 import { ShareFileComponent } from "../share-file/share-file.component";
-import db from "../../../../mock/db.json"
 import { RouteButtonComponent } from "../../components/app-button/route-button/route-button.component";
+import formatFileSize from '../../components/fileSizeFormatter';
+import UploadedFile from '../../models/uploaded_file';
+import { BACKEND_FILE_UPLOAD_API, BACKEND_SHARE_FILES_API } from '../../app.component';
+import SharedFiles from '../../models/shared_files';
 
 @Component({
   selector: 'app-download-file',
@@ -16,66 +19,29 @@ import { RouteButtonComponent } from "../../components/app-button/route-button/r
 export class DownloadFileComponent implements OnInit {
 
   @ViewChild(ShareFileComponent) ShareComponent!: ShareFileComponent;
-  jsonUrl = "../../../../mock/db.json";
   constructor(private route: ActivatedRoute) {}
-  uploadedFiles: File[] = [];
-
-  getFileExtensionIcon(arg0: File) {
-    return this.ShareComponent.getFileExtensionIcon(arg0);
+  uploadedFiles: UploadedFile[] = [];
+  property:SharedFiles | undefined;
+  getFileExtensionIcon(arg0: UploadedFile) {
+    return this.ShareComponent.getFileExtensionIcon(arg0 as unknown as File);
   }
 
   formatFileSize(arg0: number) {
-    return this.ShareComponent.formatFileSize(arg0);
+    return formatFileSize(arg0);
   }
-  
-  ngOnInit(): void {
+
+  async ngOnInit():Promise <void> {
     const idParam = this.route.snapshot.paramMap.get('link_id');
     console.log(idParam);
     if (idParam) {
-      const id = Number(idParam);
-      this.buscarLinkPorId(id)
-        .then(link => console.log(link))
-        .catch(error => console.error('Error al buscar el link:', error));
+      this.property=await BACKEND_SHARE_FILES_API.getUpload(idParam);
+      for(let file of this.property.files){
+        this.uploadedFiles.push(await BACKEND_FILE_UPLOAD_API.getFileFrom(file));
+      }
     } else {
       console.error("No se encontró el id en la URL");
     }
   }
-
-  async buscarLinkPorId(id: number): Promise<Link | null> {
-    try {
-      const data = db;
-      console.log(data);
-      const linkEncontrado = data.links.find((link: any) => link.id === id);
-      if (linkEncontrado){
-        const mediaIds=linkEncontrado.media;
-        for (let fileId of mediaIds) {
-          const file = data.file_storage.find((file: any) => file.id === fileId);
-          if (file) {
-            this.uploadedFiles.push(file);
-          }
-        }
-
-      }else{
-        return null;
-      }
-      return linkEncontrado
-        ? {
-            id: linkEncontrado.id,
-            url: linkEncontrado.url,
-            mediaIds: linkEncontrado.media || []
-          }
-        : null;
-    } catch (error) {
-      console.error('Error en la carga del JSON:', error);
-      return null;
-    }
-  }
-}
-
-export interface Link {
-  id: number;
-  url: string;
-  mediaIds: string[];
 }
 
 
