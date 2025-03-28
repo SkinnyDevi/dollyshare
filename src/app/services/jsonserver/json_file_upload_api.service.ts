@@ -21,12 +21,19 @@ export default class JsonFileUploadAPI implements FileUploadAPI {
     return uploadedFiles;
   }
 
-  getFileFrom(id: UploadedFile["id"]): Promise<UploadedFile> {
-    throw new Error("Method not implemented.");
+  async getFileFrom(id: UploadedFile["id"]): Promise<UploadedFile> {
+    const response = await axios.get(JSON_API_URL + this.ENDPOINT + "/" + id);
+    if (response.status === 404) throw new Error(`There is no file with id '${id}' (Error: 404)`);
+    if (response.status !== 201 && response.status !== 200) throw new Error("Could not retrieve file upload: " + response.statusText);
+    return response.data;
   }
 
-  getFilesFrom(ids: UploadedFile["id"][]): Promise<UploadedFile[]> {
-    throw new Error("Method not implemented.");
+  async getFilesFrom(ids: UploadedFile["id"][]): Promise<UploadedFile[]> {
+    const files: UploadedFile[] = [];
+    for (let id of ids)
+      files.push(await this.getFileFrom(id));
+
+    return files;
   }
 
   deleteFile(file: UploadedFile): Promise<void> {
