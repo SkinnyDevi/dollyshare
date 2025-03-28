@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LogoComponent } from '../../components/logo/logo.component';
 import { RouteButtonComponent } from "../../components/app-button/route-button/route-button.component";
 import { ActivatedRoute, Router } from '@angular/router';
-import { BACKEND_SHARE_FILES_API } from '../../app.component';
+import { BACKEND_SHARE_FILES_API, BACKEND_SHARE_TEXT_API } from '../../app.component';
 import SharedFiles from '../../models/shared_files';
 import SharedText from '../../models/shared_text';
 import formatFileSize from '../../components/fileSizeFormatter';
@@ -41,9 +41,20 @@ export class FinishCreationComponent implements OnInit {
         const upload = await BACKEND_SHARE_FILES_API.getUpload(this.LINK_ID);
         this.uploadedFile = upload;
       } catch (e: any) {
-        if (e.status === 404) this.router.navigate(['/']);
-        console.warn("Upload ID not found, redirecting " + `(${this.LINK_ID}).`);
+        if (e.status === 404) await this.router.navigate(['/']);
+        console.warn("File upload ID not found, redirecting " + `(${this.LINK_ID}).`);
       }
+    } else if (this.uploadType === "text") {
+      try {
+        const upload = await BACKEND_SHARE_TEXT_API.getUploadById(this.LINK_ID);
+        this.uploadedText = upload;
+      } catch (e: any) {
+        if (e.status === 404) await this.router.navigate(['/']);
+        console.warn("Text upload ID not found, redirecting " + `(${this.LINK_ID}).`);
+      }
+    } else {
+      await this.router.navigate(['/'])
+      console.error("Unknown upload type, redirecting to home.");
     }
   }
 
@@ -65,8 +76,9 @@ export class FinishCreationComponent implements OnInit {
     return formatFileSize(bytes);
   }
 
-  getExpiryDate(timestamp: number) {
-    return new Date(timestamp).toLocaleDateString() + ` (${BACKEND_SHARE_FILES_API.SHARED_FILES_LIFETIME_DAYS} days)`;
+  getExpiryDate(timestamp: number, type: UploadType) {
+    const length = type === "files" ? BACKEND_SHARE_FILES_API.SHARED_FILES_LIFETIME_DAYS : BACKEND_SHARE_TEXT_API.SHARED_TEXT_LIFETIME_DAYS;
+    return `${length} days (${new Date(timestamp).toLocaleDateString()})`;
   }
 
 

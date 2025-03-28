@@ -2,6 +2,8 @@ import SharedText from "../../models/shared_text";
 import User from "../../models/user";
 
 export default interface ShareTextAPI {
+  readonly SHARED_TEXT_LIFETIME_DAYS: number;
+
   createUpload(
     title: string,
     body: string,
