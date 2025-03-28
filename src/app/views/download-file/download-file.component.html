@@ -3,18 +3,45 @@
         <app-logo [width]="120" [useReturnToHome]="true"></app-logo>
         <h1>Components of the sheep</h1>
         <div class="download-files-box">
-            <div class="download-files-tittle-box">
-                <h2>The sheep is composed by" and the weight of the unit is "
-                <br>Expires the  of , </h2>
-            </div>
-            <div class="download-files-body">
-                <h3>ji</h3>
-            </div>
-        </div> 
-        <div class="dowload-files-buttom-container">
-            <a href="/">
-                <app-button size="medium">Download all</app-button>
-            </a>
+                @if (this.uploadedFiles.length > 0){
+                        <div class="download-files-tittle-box">
+                    <h2>The sheep is composed by" and the weight of the unit is "
+                    <br>Expires the  of , </h2>
+                    </div>
+                    <div class="download-files-body">
+                                <ul class="file-list">
+                                @for(file of this.uploadedFiles;track file.name){
+                                    <li>
+                                        <div class="file-properties">
+                                            <img src="assets/img/{{getFileExtensionIcon(file)}}.png" alt="{{getFileExtensionIcon(file)}} icon" width="40" height="auto">
+                                            <p>{{file.name}}</p>
+                                        </div>
+                                        <div class="file-size">
+                                            <p>{{formatFileSize(file.size)}}</p>
+                                        </div>
+                                    </li>
+                                    <hr>
+                                }
+                            </ul>
+                        </div>
+                } @else {
+                    <div class="download-files-tittle-box">
+                            <p class="empty-message">No files are vinculated or the link has expired</p>
+                    </div>        
+                }
         </div>
+        @if (this.uploadedFiles.length > 0){
+            <div class="dowload-files-buttom-container">
+                <a href="/">
+                    <app-button size="medium">Download all</app-button>
+                    <app-route-button routerLink="/">Go home</app-route-button>
+                </a>
+            </div>
+        }@else{
+            <div class="dowload-files-buttom-container">
+                <app-route-button routerLink="/">Go home</app-route-button>
+            </div>
+        }
+        
     </div>
 </main>
