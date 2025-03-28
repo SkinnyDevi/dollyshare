@@ -41,4 +41,8 @@ export class UserLayoutComponent {
         return 'account';
     }
   }
+
+  getUsername() {
+    return this.cookieHandler.getUserCookies()!.username;
+  }
 }

@@ -2,10 +2,13 @@ import { Component } from '@angular/core';
 import { LogoComponent } from "../../components/logo/logo.component";
 import { RouteButtonComponent } from "../../components/app-button/route-button/route-button.component";
 import { AppButtonComponent } from "../../components/app-button/app-button.component";
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BACKEND_FILE_UPLOAD_API, BACKEND_SHARE_FILES_API } from '../../app.component';
 import formatFileSize from '../../components/fileSizeFormatter';
+import User from '../../models/user';
+import { CookieService } from 'ngx-cookie-service';
+import CookieHandler from '../../services/cookies/cookies.service';
 
 @Component({
   selector: 'view-share-file',
@@ -17,7 +20,8 @@ import formatFileSize from '../../components/fileSizeFormatter';
     ReactiveFormsModule
   ],
   templateUrl: './share-file.component.html',
-  styleUrl: './share-file.component.css'
+  styleUrl: './share-file.component.css',
+  providers: [CookieService]
 })
 export class ShareFileComponent {
   uploadedFiles: File[] = [];
@@ -29,7 +33,11 @@ export class ShareFileComponent {
   private readonly EXCEL_EXTS = ['xlsx'];
   private readonly DOCUMENT_EXTS = ['pdf'];
 
-  constructor(private router: Router) { }
+  private readonly cookieHandler: CookieHandler;
+
+  constructor(private router: Router, private cookieService: CookieService) {
+    this.cookieHandler = new CookieHandler(cookieService);
+  }
 
   fileValidator() {
     return !(this.uploadedFiles.length > 0);
@@ -57,13 +65,17 @@ export class ShareFileComponent {
     try {
       const uploaded = await BACKEND_FILE_UPLOAD_API.uploadFiles(this.uploadedFiles);
 
-      const sharedFilesEntry = await BACKEND_SHARE_FILES_API.createUpload(uploaded);
+      const sharedFilesEntry = await BACKEND_SHARE_FILES_API.createUpload(uploaded, this.getUserIfLoggedIn());
       await this.router.navigate(['/finish', sharedFilesEntry.id], {
         queryParams: { uploadType: 'files' }
       });
     } catch (e) {
       console.error("Error when uploading files to server:", e);
     }
+  }
+
+  getUserIfLoggedIn(): User | null {
+    return this.cookieHandler.getUserCookies();
   }
 
   getFileExtensionIcon(file: File) {

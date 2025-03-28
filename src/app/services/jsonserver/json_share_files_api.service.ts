@@ -10,7 +10,7 @@ export default class JsonShareFilesAPI implements ShareFilesAPI {
   private readonly ENDPOINT = "/file_uploads";
   public readonly SHARED_FILES_LIFETIME_DAYS = 5;
 
-  async createUpload(files: UploadedFile[], owner?: User, shareWith: User[] = []): Promise<SharedFiles> {
+  async createUpload(files: UploadedFile[], owner: User | null = null, shareWith: User[] = []): Promise<SharedFiles> {
     const mappedFileIds = files.map(f => f.id);
     const totalSize = files.map(f => f.size).reduce((f1, f2) => f1 + f2);
     const sharedWithIds: string[] = shareWith.map(u => u.id);
@@ -19,7 +19,7 @@ export default class JsonShareFilesAPI implements ShareFilesAPI {
 
     const upload: SharedFiles = {
       id: uuid(),
-      owner: owner ? owner.id : null,
+      owner: owner !== null ? owner.id : null,
       size: totalSize,
       expires: expiryDate.getTime(),
       sharedWith: sharedWithIds,
@@ -33,6 +33,7 @@ export default class JsonShareFilesAPI implements ShareFilesAPI {
 
   async getUpload(uploadId: SharedFiles["id"]): Promise<SharedFiles> {
     const response = await axios.get(JSON_API_URL + this.ENDPOINT + "/" + uploadId);
+    if (response.status === 404) throw new Error(`There is no upload with id '${uploadId}' (Error: 404)`);
     if (response.status !== 201 && response.status !== 200) throw new Error("Could not retrieve shared file upload: " + response.statusText);
     return response.data;
   }
@@ -41,11 +42,9 @@ export default class JsonShareFilesAPI implements ShareFilesAPI {
     throw new Error("Method not implemented.");
   }
 
-  deleteUpload(sharedFiles: SharedFiles): Promise<void>;
-  deleteUpload(uploadId: SharedFiles["id"]): Promise<void>;
-  deleteUpload(uploadId: unknown): Promise<void> {
-    throw new Error("Method not implemented.");
-  }
+  async deleteUpload(sharedFiles: SharedFiles): Promise<void> { }
+
+  async deleteUploadById(uploadId: SharedFiles["id"]): Promise<void> { }
 
   shareUploadWith(user: User, upload: SharedFiles): Promise<SharedFiles> {
     throw new Error("Method not implemented.");

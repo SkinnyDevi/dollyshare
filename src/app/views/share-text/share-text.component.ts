@@ -5,6 +5,9 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { BACKEND_SHARE_TEXT_API } from '../../app.component';
 import { Router } from '@angular/router';
 import { AppButtonComponent } from "../../components/app-button/app-button.component";
+import { CookieService } from 'ngx-cookie-service';
+import CookieHandler from '../../services/cookies/cookies.service';
+import User from '../../models/user';
 
 @Component({
   selector: 'view-share-text',
@@ -16,7 +19,8 @@ import { AppButtonComponent } from "../../components/app-button/app-button.compo
     AppButtonComponent
   ],
   templateUrl: './share-text.component.html',
-  styleUrl: './share-text.component.css'
+  styleUrl: './share-text.component.css',
+  providers: [CookieService]
 })
 export class ShareTextComponent {
   readonly TITLE_MAXLEN = 30;
@@ -24,18 +28,22 @@ export class ShareTextComponent {
 
   textUploadForm: FormGroup;
 
-  constructor(private router: Router) {
+  private readonly cookieHandler: CookieHandler;
+
+  constructor(private router: Router, private cookieService: CookieService) {
     this.textUploadForm = new FormBuilder().group({
       title: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(this.TITLE_MAXLEN)]],
       body: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(this.BODY_MAXLEN)]]
-    })
+    });
+    this.cookieHandler = new CookieHandler(cookieService);
   }
 
   async onSubmit() {
     try {
       const upload = await BACKEND_SHARE_TEXT_API.createUpload(
         this.getValueFromForm('title'),
-        this.getValueFromForm('body')
+        this.getValueFromForm('body'),
+        this.getUserIfLoggedIn()
       );
 
       await this.router.navigate(['/finish', upload.id], {
@@ -52,5 +60,9 @@ export class ShareTextComponent {
 
   isInvalid(name: string) {
     return this.textUploadForm.get(name)?.invalid || false;
+  }
+
+  getUserIfLoggedIn(): User | null {
+    return this.cookieHandler.getUserCookies();
   }
 }

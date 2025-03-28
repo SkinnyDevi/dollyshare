@@ -10,7 +10,8 @@ export type SelectedViewButton = "account" | "password" | "links";
   standalone: true,
   imports: [RouterLink],
   templateUrl: './user-tabs.component.html',
-  styleUrl: './user-tabs.component.css'
+  styleUrl: './user-tabs.component.css',
+  providers: [CookieService]
 })
 export class UserTabsComponent {
   @Input() selectedButton: SelectedViewButton = "account";

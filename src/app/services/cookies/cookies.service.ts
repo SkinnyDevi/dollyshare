@@ -52,8 +52,8 @@ export default class CookieHandler {
     delete_fn: () => void,
     check_fn: () => boolean,
     error_msg = "Could not delete cookies.",
-    retries = 3,
-    delayMs = 100
+    retries = 10,
+    delayMs = 250
   ): Promise<void> {
     return new Promise((resolve, reject) => {
       delete_fn();

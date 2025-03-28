@@ -43,7 +43,6 @@ export default class JsonUserAPI implements UserAPI {
 
   async deleteUser(userId: User["id"]): Promise<void> {
     const response = await axios.delete(JSON_API_URL + this.ENDPOINT + "/" + userId);
-    console.log(response.status);
   }
 
   async login(email: string, password: string): Promise<User> {

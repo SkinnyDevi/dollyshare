@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BACKEND_USER_API } from '../../app.component';
 import { LoginValidatorHookComponent } from "../../components/login-validator-hook/login-validator-hook.component";
+import { CookieService } from 'ngx-cookie-service';
+import CookieHandler from '../../services/cookies/cookies.service';
 
 @Component({
   selector: 'view-register',
@@ -18,18 +20,23 @@ import { LoginValidatorHookComponent } from "../../components/login-validator-ho
     LoginValidatorHookComponent
   ],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+  styleUrl: './register.component.css',
+  providers: [CookieService]
 })
 export class RegisterComponent {
   registerForm: FormGroup;
 
-  constructor(private router: Router, private fb: FormBuilder) {
-    this.registerForm = this.fb.group({
+  private readonly cookieHandler: CookieHandler;
+
+  constructor(private router: Router, private cookieService: CookieService) {
+    this.registerForm = new FormBuilder().group({
       username: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
       repeat_password: ['', Validators.required]
     }, { validator: this.passwordMatchValidator });
+
+    this.cookieHandler = new CookieHandler(cookieService);
   }
 
   passwordMatchValidator(form: FormGroup) {
@@ -41,14 +48,20 @@ export class RegisterComponent {
   async onSubmit() {
     if (this.registerForm.invalid) return;
 
-    await BACKEND_USER_API.createUser({
-      username: this.getValueFromForm('username') as string,
-      email: this.getValueFromForm('email') as string,
-      password: this.getValueFromForm('password') as string,
-      id: ''
-    })
+    try {
+      const createdUser = await BACKEND_USER_API.createUser({
+        username: this.getValueFromForm('username') as string,
+        email: this.getValueFromForm('email') as string,
+        password: this.getValueFromForm('password') as string,
+        id: ''
+      });
 
-    this.router.navigate(['/register-successful'])
+      this.cookieHandler.createLoginCookies(createdUser);
+
+      await this.router.navigate(['/register-successful'])
+    } catch (e) {
+      console.error("Could not create user: " + e);
+    }
   }
 
   getValueFromForm(name: string) {

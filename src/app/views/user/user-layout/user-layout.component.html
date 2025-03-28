@@ -1,6 +1,7 @@
 <main>
   <login-validator-hook></login-validator-hook>
   <app-logo [width]="120" [useReturnToHome]="true"></app-logo>
+  <h3>Welcome, {{getUsername()}}</h3>
   <app-user-tabs [selectedButton]="getSelectedButton()"></app-user-tabs>
   <div class="user-view-content">
     @switch(getRoute()) {
