@@ -5,7 +5,7 @@
         <div class="download-files-box">
                 @if (this.uploadedFiles.length > 0){
                         <div class="download-files-tittle-box">
-                    <h2>The sheep is composed by  and the weight of the unit is "
+                    <h2>The sheep is composed by {{this.property?.files?.length}} item and the weight of the unit is {{formatFileSize(this.property!.size)}}
                     <br>Expires in {{getExpiryDate(this.property!.expires)}},</h2>
                     </div>
                     <div class="download-files-body">
