@@ -1,6 +1,18 @@
 {
   "users": [
     {
+      "id": "027caef4-b2a4-4a88-9e63-8be202517493",
+      "username": "new_user",
+      "email": "new.user@dollyshare.com",
+      "password": "unsafe"
+    },
+    {
+      "id": "9f2cf5bb-3d1d-49f6-8945-ace61cab55f6",
+      "username": "grok",
+      "email": "grok@twitter.com",
+      "password": "complex"
+    },
+    {
       "id": "7d3ace66-7859-4cfe-a7da-0e6b05556779",
       "username": "tester1",
       "password": "12345678",
@@ -13,10 +25,10 @@
       "email": "mengfei@gmail.com"
     },
     {
-      "id": "0e8fd48b-cac3-444b-bd52-b81a49321078",
-      "username": "felix",
-      "password": "felix123",
-      "email": "felix@gmail.com"
+      "id": "0dc37f69-2439-4cbf-83a0-492deea99d88",
+      "username": "meng",
+      "password": "123456789",
+      "email": "meng@gmail.com"
     }
   ],
   "file_storage": [
@@ -24,7 +36,7 @@
       "id": "a6ae2d38-6bbf-4b52-a175-9f20c270272a",
       "name": "example.txt",
       "type": "text/plain",
-      "size": 40,
+      "size": 1234,
       "content": "data:text/plain;base64,SGVsbG8gV29ybGQ=",
       "createdAt": "2025-03-20T10:00:00.000Z"
     }
@@ -32,31 +44,35 @@
   "file_uploads": [
     {
       "id": "a9b5928c-410d-4447-ad3d-d9c7e8ed9369",
-      "owner": null,
+      "owner": "027caef4-b2a4-4a88-9e63-8be202517493",
       "size": 2,
       "expires": 192381274814811,
-      "sharedWith": [],
+      "sharedWith": [
+        "9f2cf5bb-3d1d-49f6-8945-ace61cab55f6"
+      ],
       "files": [
         "a6ae2d38-6bbf-4b52-a175-9f20c270272a"
       ]
+    },
+    {
+      "id": "3b2a9159-25cf-414a-afaa-26775a993ca6",
+      "owner": null,
+      "size": 3,
+      "expires": 2301839184091,
+      "sharedWith": [],
+      "files": []
     }
   ],
   "text_uploads": [
     {
       "id": "4b4455b4-3b0b-4d0b-8cd0-cd624ea7503e",
       "owner": "027caef4-b2a4-4a88-9e63-8be202517493",
-      "expires": 12893542151123,
-      "sharedWith": [],
-      "title": "this text should be in base64",
-      "body": "body text should be in base64"
-    },
-    {
-      "id": "9cbdab0b-af7c-48d4-b59d-4f247265cbbf",
-      "title": "YXNsa2RqYWxza2RqbA==",
-      "body": "amxqbGRza2FqZGxhc2tqZGxhc2tkamxha2RqbGFz",
-      "owner": "0e8fd48b-cac3-444b-bd52-b81a49321078",
-      "sharedWith": [],
-      "expires": 1743607055193
+      "expires": 12893542151,
+      "sharedWith": [
+        "9f2cf5bb-3d1d-49f6-8945-ace61cab55f6"
+      ],
+      "title": "MY wondeful text",
+      "body": "some big ass giant text"
     }
   ]
 }

@@ -7,6 +7,7 @@
       <form [formGroup]="loginForm" (submit)="onSubmit()">
         <app-login-input type="email" formControlName="email"></app-login-input>
         <app-login-input type="password" formControlName="password"></app-login-input>
+        <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
         <div class="login-button-submit">
           <app-button type="submit" [disabled]="loginForm.invalid">Login</app-button>
         </div>

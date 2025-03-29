@@ -36,3 +36,15 @@ main {
 	justify-content: center;
 	margin-top: 20px;
 }
+
+.info-box>.input {
+  margin-top: 10px;
+  margin-bottom: -10px;
+}
+
+.validation-label {
+  font-size: 12px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
