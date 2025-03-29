@@ -54,9 +54,15 @@ export default class JsonShareFilesAPI implements ShareFilesAPI {
     return allUploads.filter(fu => fu.owner === user.id);
   }
 
-  async deleteUpload(sharedFiles: SharedFiles): Promise<void> { }
+  async deleteUpload(sharedFiles: SharedFiles): Promise<void> {
+    await this.deleteUploadById(sharedFiles.id);
+  }
 
-  async deleteUploadById(uploadId: SharedFiles["id"]): Promise<void> { }
+  async deleteUploadById(uploadId: SharedFiles["id"]): Promise<void> {
+    const response = await axios.delete(JSON_API_URL + this.ENDPOINT + "/" + uploadId);
+    if (response.status === 404) throw new Error(`There is no upload with id '${uploadId}' (Error: 404)`);
+    if (response.status !== 201 && response.status !== 200) throw new Error("Could not delete shared file upload: " + response.statusText);
+  }
 
   shareUploadWith(user: User, upload: SharedFiles): Promise<SharedFiles> {
     throw new Error("Method not implemented.");

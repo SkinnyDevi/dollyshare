@@ -5,7 +5,7 @@
     <button type="button" class="shared-users-button" [routerLink]="'/user/manage-link/'+linkId">
       <icon-selector type="user" color="semi-transparent"></icon-selector>
     </button>
-    <button type="button">
+    <button type="button" (click)="onDelete()">
       <icon-selector type="trash" color="semi-transparent"></icon-selector>
     </button>
   </div>

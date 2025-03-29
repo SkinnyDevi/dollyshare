@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IconSelectorComponent } from "../icons/icon-selector/icon-selector.component";
 import { RouterLink } from '@angular/router';
 
@@ -12,4 +12,9 @@ import { RouterLink } from '@angular/router';
 export class ActiveLinkEntryComponent {
   @Input() isPrivate = false;
   @Input() linkId = "";
+  @Output() deleteCallback = new EventEmitter<string>();
+
+  onDelete() {
+    this.deleteCallback.emit(this.linkId);
+  }
 }

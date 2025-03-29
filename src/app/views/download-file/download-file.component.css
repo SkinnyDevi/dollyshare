@@ -75,7 +75,6 @@ main {
 
 .dowload-files-buttom-container {
   display: flex;
-
   border: none;
   border-radius: 4px;
   justify-content: center;
@@ -90,6 +89,10 @@ main {
 
 .dowload-files-buttom-container a app-route-button {
   margin: 1rem;
+}
+
+.file-size {
+  opacity: 0.45;
 }
 
 @media only screen and (max-height: 765px) {

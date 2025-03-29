@@ -6,4 +6,5 @@ export default interface FileUploadAPI {
   getFilesFrom(ids: UploadedFile["id"][]): Promise<UploadedFile[]>;
   deleteFile(file: UploadedFile): Promise<void>;
   deleteFiles(files: UploadedFile[]): Promise<void>;
+  deleteFileById(fileId: UploadedFile["id"]): Promise<void>;
 }

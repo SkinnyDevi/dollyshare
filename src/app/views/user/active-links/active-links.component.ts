@@ -4,7 +4,7 @@ import { AppButtonComponent } from "../../../components/app-button/app-button.co
 import { CookieService } from 'ngx-cookie-service';
 import CookieHandler from '../../../services/cookies/cookies.service';
 import User from '../../../models/user';
-import { BACKEND_SHARE_FILES_API, BACKEND_SHARE_TEXT_API } from '../../../app.component';
+import { BACKEND_FILE_UPLOAD_API, BACKEND_SHARE_FILES_API, BACKEND_SHARE_TEXT_API } from '../../../app.component';
 
 interface UploadLink {
   id: string;
@@ -43,6 +43,41 @@ export class UserActiveLinksComponent implements OnInit {
       id: "text/" + upload.id,
       isPrivate: upload.sharedWith.length > 0
     });
+  }
 
+  async onEntryDelete(linkId: string) {
+    const entry = this.userActiveLinks.find(ual => ual.id === linkId)
+    if (entry === undefined) {
+      console.error("Could not find entry", linkId, "to delete");
+      return;
+    }
+
+    const splitId = entry.id.split('/');
+    const uploadType = splitId[0];
+    const uploadId = splitId[1];
+
+    if (uploadType === "files") await this.deleteSharedFiles(uploadId);
+    else if (uploadType === "text") await this.deleteSharedText(uploadId);
+    else console.error("Unknown upload type:", uploadType);
+
+    const entryIndex = this.userActiveLinks.indexOf(entry);
+    if (entryIndex > -1) this.userActiveLinks.splice(entryIndex, 1);
+  }
+
+  async deleteSharedFiles(uploadId: string) {
+    const sharedFile = await BACKEND_SHARE_FILES_API.getUpload(uploadId);
+    for (let file of sharedFile.files) {
+      try {
+        await BACKEND_FILE_UPLOAD_API.deleteFileById(file);
+      } catch (e) {
+        console.error("Could not delete file", file, "associated with", sharedFile.id);
+      }
+    }
+
+    await BACKEND_SHARE_FILES_API.deleteUpload(sharedFile);
+  }
+
+  async deleteSharedText(uploadId: string) {
+    await BACKEND_SHARE_TEXT_API.deleteUploadById(uploadId);
   }
 }

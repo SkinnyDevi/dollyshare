@@ -56,12 +56,15 @@ export default class JsonShareTextAPI implements ShareTextAPI {
     return allUploads.filter(fu => fu.owner === user.id);
   }
 
-  deleteUpload(sharedText: SharedText): Promise<void> {
-    throw new Error("Method not implemented.");
+  async deleteUpload(sharedText: SharedText): Promise<void> {
+    await this.deleteUploadById(sharedText.id);
   }
 
-  deleteUploadById(uploadId: SharedText["id"]): Promise<void> {
-    throw new Error("Method not implemented.");
+  async deleteUploadById(uploadId: SharedText["id"]): Promise<void> {
+    let baseRequestUrl = JSON_API_URL + this.ENDPOINT + "/" + uploadId;
+    const response = await axios.delete(baseRequestUrl);
+    if (response.status === 404) throw new Error("Text upload not found.");
+    if (response.status !== 201 && response.status !== 200) throw new Error("Could not request text upload: " + response.statusText);
   }
 
   shareUploadWith(user: User, upload: SharedText): Promise<SharedText> {

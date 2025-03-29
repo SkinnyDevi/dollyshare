@@ -36,12 +36,18 @@ export default class JsonFileUploadAPI implements FileUploadAPI {
     return files;
   }
 
-  deleteFile(file: UploadedFile): Promise<void> {
-    throw new Error("Method not implemented.");
+  async deleteFiles(files: UploadedFile[]): Promise<void> {
+    for (let file of files) await this.deleteFile(file);
   }
 
-  deleteFiles(files: UploadedFile[]): Promise<void> {
-    throw new Error("Method not implemented.");
+  async deleteFile(file: UploadedFile): Promise<void> {
+    await this.deleteFileById(file.id);
+  }
+
+  async deleteFileById(fileId: UploadedFile["id"]): Promise<void> {
+    const response = await axios.delete(JSON_API_URL + this.ENDPOINT + "/" + fileId);
+    if (response.status === 404) throw new Error(`There is no file with id '${fileId}' (Error: 404)`);
+    if (response.status !== 201 && response.status !== 200) throw new Error("Could not delete file upload: " + response.statusText);
   }
 
   private getFileType(file: UploadedFile) {
