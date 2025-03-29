@@ -50,3 +50,10 @@ main {
 .login-button-submit {
 	margin: 30px 0;
 }
+
+.error-message {
+  color: #CB4154;
+  margin-top: 5px;
+  margin-bottom: -12px;
+  font-size: 18px;
+}

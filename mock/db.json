@@ -23,6 +23,12 @@
       "username": "mengfei",
       "password": "12345678",
       "email": "mengfei@gmail.com"
+    },
+    {
+      "id": "0dc37f69-2439-4cbf-83a0-492deea99d88",
+      "username": "meng",
+      "password": "123456789",
+      "email": "meng@gmail.com"
     }
   ],
   "file_storage": [
