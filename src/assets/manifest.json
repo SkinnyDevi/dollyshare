@@ -1,21 +1,23 @@
 {
-	"name": "DollyShare",
-	"short_name": "DollyShare",
-	"lang": "en",
-	"orientation": "landscape",
-	"icons": [
-		{
-			"src": "/assets/android-chrome-192x192.png",
-			"sizes": "192x192",
-			"type": "image/png"
-		},
-		{
-			"src": "/assets/android-chrome-512x512.png",
-			"sizes": "512x512",
-			"type": "image/png"
-		}
-	],
-	"theme_color": "#D8C299",
-	"background_color": "#283238",
-	"display": "standalone"
+  "name": "DollyShare",
+  "short_name": "DollyShare",
+  "manifest_version": 2,
+  "lang": "en",
+  "orientation": "landscape",
+  "version": "1.0.0",
+  "icons": [
+    {
+      "src": "/assets/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#283238",
+  "background_color": "#283238",
+  "display": "standalone"
 }

@@ -1,12 +1,11 @@
 import { Component, Input } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import IconType from '../../icons/icon-properties';
 import { IconSelectorComponent } from "../../icons/icon-selector/icon-selector.component";
 
 @Component({
   selector: 'app-icon-button',
   standalone: true,
-  imports: [RouterLink, IconSelectorComponent],
+  imports: [IconSelectorComponent],
   templateUrl: './icon-button.component.html',
   styleUrl: './icon-button.component.css'
 })

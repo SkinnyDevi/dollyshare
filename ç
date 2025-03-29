@@ -5,6 +5,7 @@
   font-size: 18px;
 }
 
+
 .active-link-entry>a {
   margin-left: 20px;
   text-decoration: none;
@@ -21,6 +22,21 @@
 ::ng-deep svg {
   width: 40px;
   height: auto;
+}
+
+@media only screen and (max-width: 500px) {
+  .active-link-entry>a {
+    font-size: 15px;
+    max-width: 150px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  ::ng-deep svg {
+    width: 40px;
+    height: auto;
+  }
 }
 
 .active-link-options>button {
@@ -53,43 +69,6 @@
 
 hr {
   width: 100%;
+  opacity: 75%;
   margin-bottom: 30px;
-  border: 0.5px solid rgba(255, 255, 255, 0.2);
-}
-
-@media only screen and (max-width: 500px) {
-  .active-link-entry>a {
-    font-size: 15px;
-    max-width: 150px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-  }
-
-  ::ng-deep svg {
-    width: 25px;
-  }
-
-  .active-link-options {
-    ::ng-deep svg {
-      width: 23px;
-      height: auto;
-    }
-  }
-
-  .shared-users-button {
-    ::ng-deep svg {
-      width: 20px;
-      height: auto;
-    }
-  }
-
-  .active-link-options {
-    margin-right: 0px;
-  }
-
-
-  .active-link-options>button {
-    margin-left: 0px;
-  }
 }
