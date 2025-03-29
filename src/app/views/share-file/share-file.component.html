@@ -1,5 +1,5 @@
 <main>
-	<div class="share-file-container">
+	<div class="share-file-container" [class.share-file-container-start]="this.uploadedFiles.length > 1 && screenIsPhone">
 		<app-logo [width]="120" [useReturnToHome]="true"></app-logo>
 		<h1>What will you share today?</h1>
     <div class="share-file-box">
@@ -16,7 +16,7 @@
                 <p>{{file.name}}</p>
               </div>
               <div class="file-details">
-                <p>{{formatFileSize(file.size)}}</p>
+                <p>{{formatUploadedFileSize(file.size)}}</p>
               </div>
             </li>
             <hr>

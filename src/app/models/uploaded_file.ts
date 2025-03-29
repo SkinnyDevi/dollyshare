@@ -4,5 +4,5 @@ export default interface UploadedFile {
   type: string;
   size: number;
   content: string;
-  createdAt: Date;
+  createdAt: number;
 }

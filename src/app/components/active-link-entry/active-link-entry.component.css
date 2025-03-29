@@ -11,6 +11,12 @@
   text-decoration: none;
 }
 
+@media only screen and (max-width: 500px) {
+  .active-link-entry>a {
+    font-size: 15px;
+  }
+}
+
 .active-link-options {
   display: flex;
   justify-content: center;

@@ -1,18 +1,30 @@
 <main>
-  <div class="share-text-container">
+  <form [formGroup]="textUploadForm" class="share-text-container" (submit)="onSubmit()">
     <app-logo [width]="120" [useReturnToHome]="true"></app-logo>
     <h1>What will you share today?</h1>
     <div class="share-text-box">
       <div class="title-box">
-        <input placeholder="Enter Title"/>
+        <input
+          [required]="true"
+          formControlName="title"
+          placeholder="Title of my text"
+          [minlength]="1"
+          [maxLength]="TITLE_MAXLEN"
+        />
       </div>
       <div class="text-box">
-        <textarea placeholder="Enter Text"></textarea>
+        <textarea
+          [required]="true"
+          formControlName="body"
+          placeholder="I love tacos!"
+          [minlength]="1"
+          [maxlength]="BODY_MAXLEN"
+        ></textarea>
       </div>
     </div>
     <div class="text-options-buttons">
       <app-route-button routerLink="/">Go Back</app-route-button>
-      <app-route-button routerLink="/finish">Create URL</app-route-button>
+      <app-button type="submit" [disabled]="textUploadForm.invalid">Create URL</app-button>
     </div>
-  </div>
+  </form>
 </main>

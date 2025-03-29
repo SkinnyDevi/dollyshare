@@ -20,11 +20,21 @@ main {
   height: 90%;
 }
 
+.share-file-container-start {
+  justify-content: flex-start !important;
+}
+
 .share-file-container>h1 {
   font-size: 30px;
   margin-top: 5px;
   margin-bottom: 30px;
   text-align: center;
+}
+
+@media only screen and (max-width: 400px) {
+  .share-file-container>h1 {
+    width: 90%;
+  }
 }
 
 .share-file-box {
@@ -104,10 +114,7 @@ main {
 }
 
 .empty-filebox-placeholder {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  justify-content: center !important;
 }
 
 .clear-button-container {
@@ -126,4 +133,10 @@ main {
 
 .file-details>p {
   opacity: 45%;
+}
+
+@media only screen and (max-width: 400px) {
+  .file-details {
+    margin-right: 10px;
+  }
 }

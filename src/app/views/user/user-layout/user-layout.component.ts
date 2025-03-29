@@ -41,4 +41,10 @@ export class UserLayoutComponent {
         return 'account';
     }
   }
+
+  getUsername() {
+    const user = this.cookieHandler.getUserCookies();
+    if (user === null) return "user";
+    return user.username;
+  }
 }
