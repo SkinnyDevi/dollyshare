@@ -64,7 +64,6 @@ main{
 
 
 .dowload-buttom-container{
-    background-color: #D8C299;
     border: none;
     border-radius: 4px;
     justify-content: center;
@@ -75,4 +74,3 @@ main{
 	margin-top: 0.5rem;
 }
 
-.dowload-buttom-container:hover{background-color:#F0E5C9;}

@@ -10,7 +10,7 @@ import User from '../../models/user';
 import { CookieService } from 'ngx-cookie-service';
 import CookieHandler from '../../services/cookies/cookies.service';
 import { ScreenDetectorService } from '../../services/screenDetector/screenDetector.service';
-
+import getFileExtensionIcon from '../../components/file-extension-helper';
 @Component({
   selector: 'view-share-file',
   standalone: true,
@@ -28,12 +28,9 @@ export class ShareFileComponent {
   uploadedFiles: File[] = [];
   screenIsPhone = false;
 
-  private readonly COMPRESSED_EXTS = ['zip', 'rar', '7z'];
-  private readonly IMAGE_EXTS = ['jpeg', 'png', 'tiff', 'bmp', 'webp', 'gif'];
-  private readonly VIDEO_EXTS = ['mp4'];
-  private readonly EDITABLE_DOC_EXTS = ['doc', 'docs', 'docx'];
-  private readonly EXCEL_EXTS = ['xlsx'];
-  private readonly DOCUMENT_EXTS = ['pdf'];
+  fileExtensionIcon(file:File){
+    return getFileExtensionIcon(file);
+  }
 
   private readonly cookieHandler: CookieHandler;
 
@@ -84,18 +81,7 @@ export class ShareFileComponent {
     return this.cookieHandler.getUserCookies();
   }
 
-  getFileExtensionIcon(file: File) {
-    const extension = file.name.substring(file.name.lastIndexOf('.') + 1);
-
-    if (this.COMPRESSED_EXTS.includes(extension)) return "compressed_file";
-    if (this.IMAGE_EXTS.includes(extension)) return "png_file";
-    if (this.VIDEO_EXTS.includes(extension)) return "mp4_file";
-    if (this.EDITABLE_DOC_EXTS.includes(extension)) return "docx_file";
-    if (this.EXCEL_EXTS.includes(extension)) return "xlsx_file";
-    if (this.DOCUMENT_EXTS.includes(extension)) return "pdf_file";
-
-    return "generic_file";
-  }
+  
 
   onFilePicked(event: Event) {
     const inputElement = event.target as HTMLInputElement;
