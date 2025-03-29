@@ -30,9 +30,11 @@ main {
   ::ng-deep .home-container>*>img {
     width: 150px;
   }
+}
 
+@media only screen and (max-width: 450px) {
   .home-container>h1 {
     margin: 35px 0;
-    font-size: 38px;
+    font-size: 32px;
   }
 }

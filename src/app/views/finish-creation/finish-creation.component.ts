@@ -68,10 +68,6 @@ export class FinishCreationComponent implements OnInit {
     return this.uploadedFile?.files.length + items;
   }
 
-  getUploadLinkExtension() {
-    return this.uploadType + "/" + this.LINK_ID;
-  }
-
   formatTotalFileSize(bytes: number) {
     return formatFileSize(bytes);
   }
@@ -81,5 +77,14 @@ export class FinishCreationComponent implements OnInit {
     return `${length} days (${new Date(timestamp).toLocaleDateString()})`;
   }
 
+  getResultingLink() {
+    const host = window.location.host;
+    const protocol = window.location.protocol;
 
+    return `${protocol}//${host}/download/${this.uploadType}/${this.LINK_ID}`
+  }
+
+  getRedirectLink() {
+    return `/download/${this.uploadType}/${this.LINK_ID}`;
+  }
 }

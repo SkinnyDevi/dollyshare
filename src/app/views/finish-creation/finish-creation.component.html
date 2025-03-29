@@ -3,7 +3,8 @@
     <h1>Thank you for using<br> DollyShare</h1>
     <app-logo [width]="150" [useReturnToHome]="true"></app-logo>
     <div class="link-box">
-      <p class="link-info">Your link: <a href="#">https://dollyshare.com/download/{{getUploadLinkExtension()}}</a></p>
+      <p class="link-info">Your link:</p>
+      <a class="link-redirect" [href]="getRedirectLink()">{{getResultingLink()}}</a>
       @if (uploadedFile !== null) {
         <p class="file-info">{{getItemString()}}, {{formatTotalFileSize(uploadedFile.size)}} in total - Expires in {{getExpiryDate(uploadedFile.expires, "files")}}</p>
       }

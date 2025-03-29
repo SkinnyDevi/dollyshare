@@ -18,33 +18,38 @@ import getFileExtensionIcon from '../../components/file-extension-helper';
 })
 export class DownloadFileComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute) { }
   uploadedFiles: UploadedFile[] = [];
-  property:SharedFiles | undefined;
-  fileExtensionIcon(file:UploadedFile){
-      return getFileExtensionIcon(file as unknown as File);
+  property: SharedFiles | undefined;
+
+  fileExtensionIcon(file: UploadedFile) {
+    return getFileExtensionIcon(file as unknown as File);
   }
 
   formatFileSize(arg0: number) {
     return formatFileSize(arg0);
   }
 
-  async ngOnInit():Promise <void> {
+  async ngOnInit(): Promise<void> {
     const idParam = this.route.snapshot.paramMap.get('link_id');
 
     if (idParam) {
-      this.property=await BACKEND_SHARE_FILES_API.getUpload(idParam);
-      for(let file of this.property.files){
+      this.property = await BACKEND_SHARE_FILES_API.getUpload(idParam);
+      for (let file of this.property.files) {
         this.uploadedFiles.push(await BACKEND_FILE_UPLOAD_API.getFileFrom(file));
       }
-      console.log(this.uploadedFiles)
     } else {
       console.error("No se encontró el id en la URL");
     }
   }
-  getExpiryDate(timestamp: number) {
-      const length = BACKEND_SHARE_FILES_API.SHARED_FILES_LIFETIME_DAYS;
-      return `${length} days (${new Date(timestamp).toLocaleDateString()})`;
+
+  getExpiryDate(arg0: number) {
+    const expiryDate = new Date(arg0);
+    const now = new Date();
+    const timeDiff = expiryDate.getTime() - now.getTime();
+    const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+
+    return `${daysLeft} days (${new Date(arg0).toLocaleDateString()})`;
   }
 }
 

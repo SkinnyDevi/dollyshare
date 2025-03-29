@@ -56,4 +56,8 @@
   .link-display {
     width: 80%;
   }
+
+  .link-manager-header>h1 {
+    transform: none;
+  }
 }

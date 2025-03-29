@@ -42,17 +42,25 @@ main {
   opacity: 50%;
 }
 
-@media only screen and (max-width: 400px) {
-  .finish-container>h1 {
-    font-size: 36px;
-  }
+.link-info {
+  margin: 10px 0;
+}
 
+.link-redirect {
+  overflow-wrap: break-word;
+}
+
+@media only screen and (max-width: 400px) {
   .link-info {
     font-size: 17px;
   }
 }
 
 @media only screen and (max-width: 500px) {
+  .finish-container>h1 {
+    font-size: 36px;
+  }
+
   .link-box {
     width: 80%;
   }
