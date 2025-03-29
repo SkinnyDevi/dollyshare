@@ -28,3 +28,7 @@
   cursor: pointer;
   background: var(--secondary-light-beige);
 }
+
+.app-button:disabled {
+  color: rgba(35, 35, 35, 0.35);
+}

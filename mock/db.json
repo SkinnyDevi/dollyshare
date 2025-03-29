@@ -1,24 +1,6 @@
 {
   "users": [
     {
-      "id": "027caef4-b2a4-4a88-9e63-8be202517493",
-      "username": "new_user",
-      "email": "new.user@dollyshare.com",
-      "password": "unsafe"
-    },
-    {
-      "id": "9f2cf5bb-3d1d-49f6-8945-ace61cab55f6",
-      "username": "grok",
-      "email": "grok@twitter.com",
-      "password": "complex"
-    },
-    {
-      "id": "7d3ace66-7859-4cfe-a7da-0e6b05556779",
-      "username": "tester1",
-      "password": "12345678",
-      "email": "tester@email.com"
-    },
-    {
       "id": "20eeeafe-b4ed-4fd9-b3a5-b63c2426f5f5",
       "username": "mengfei",
       "password": "12345678",
@@ -29,6 +11,12 @@
       "username": "meng",
       "password": "123456789",
       "email": "meng@gmail.com"
+    },
+    {
+      "id": "1dbf8f79-af98-4996-b96e-3c4674413d79",
+      "username": "felix",
+      "password": "felix123",
+      "email": "felix@gmail.com"
     }
   ],
   "file_storage": [
@@ -71,6 +59,14 @@
       "sharedWith": [],
       "title": "this text should be in base64",
       "body": "body text should be in base64"
+    },
+    {
+      "id": "ae7951c0-2c30-4ebd-94ba-d36a0bdcfc31",
+      "title": "SmRoZmhkaGQ=",
+      "body": "8J+HtfCfh63wn4e18J+HrfCfjonwn5ii8J+HtfCfh63wn46J8J+YovCfj4jwn4+I",
+      "owner": "1dbf8f79-af98-4996-b96e-3c4674413d79",
+      "sharedWith": [],
+      "expires": 1743684526173
     }
   ]
 }

@@ -14,11 +14,12 @@
       >
       </app-common-input-field>
       @if(isTouched('email') && getValueFromForm("email").length < 1) {
-        <p class="validation-label">*This field is required*</p>
+        <p class="validation-label">*This field is required</p>
       }
       @if(isTouched('email') && isInvalid('email')) {
         <p class="validation-label">Invalid email format</p>
       }
+
       <app-common-input-field class="input"
         [required]="true"
         formControlName="username"
@@ -29,8 +30,9 @@
       >
       </app-common-input-field>
       @if(isTouched('username') && getValueFromForm("username").length < 1) {
-        <p class="validation-label">*This field is required*</p>
+        <p class="validation-label">*This field is required</p>
       }
+
       <app-common-input-field class="input"
         [required]="true"
         formControlName="password"
@@ -41,11 +43,12 @@
       >
       </app-common-input-field>
       @if(isTouched('password') && getValueFromForm("password").length  < 1) {
-        <p class="validation-label">*This field is required*</p>
+        <p class="validation-label">*This field is required</p>
       }
       @if(isTouched('password') && registerForm.get("password")?.errors?.['minlength'] !== null) {
         <p class="validation-label">Must be at least 8 characters</p>
       }
+
       <app-common-input-field class="input"
         [required]="true"
         formControlName="repeat_password"
@@ -56,11 +59,12 @@
       >
       </app-common-input-field>
       @if(isTouched('repeat_password') && getValueFromForm("repeat_password").length < 1) {
-        <p class="validation-label">*This field is required*</p>
+        <p class="validation-label">*This field is required</p>
       }
       @if(isTouched('repeat_password') && passwordMatchValidator(registerForm) !== null) {
         <p class="validation-label">Passwords do not match</p>
       }
+
       <div class="create-account-button">
         <app-button type="submit" [disabled]="registerForm.invalid">Create Account</app-button>
       </div>

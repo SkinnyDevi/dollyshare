@@ -5,7 +5,7 @@
         <div class="download-files-box">
                 @if (this.uploadedFiles.length > 0){
                         <div class="download-files-tittle-box">
-                    <h2>The sheep is composed by  and the weight of the unit is "
+        <h2>The sheep is composed by  items and the weight of the unit is "
                     <br>Expires in {{getExpiryDate(this.property!.expires)}},</h2>
                     </div>
                     <div class="download-files-body">
@@ -26,15 +26,15 @@
                         </div>
                 } @else {
                     <div class="download-files-tittle-box">
-                            <p class="empty-message">No files are vinculated or the link has expired</p>
-                    </div>        
+                            <p class="empty-message">No upload was found or the link has expired</p>
+                    </div>
                 }
         </div>
         <div class="dowload-files-buttom-container">
             @if (this.uploadedFiles.length > 0){
                     <a href="/">
                         <app-button size="small">Download all</app-button>
-                    </a>      
+                    </a>
             }
             <app-route-button routerLink="/">Go home</app-route-button>
         </div>

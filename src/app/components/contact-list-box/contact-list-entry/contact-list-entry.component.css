@@ -49,6 +49,34 @@
 
 hr {
   width: 100%;
-  opacity: 75%;
-  margin-bottom: 15px;
+  margin-bottom: 30px;
+  border: 0.5px solid rgba(255, 255, 255, 0.3);
+}
+
+@media only screen and (max-width: 500px) {
+  .contact-list-entry {
+    font-size: 14px;
+
+    ::ng-deep svg {
+      width: 25px;
+    }
+  }
+
+  .contact-list-entry>p {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 170px;
+    margin-left: 10px;
+  }
+
+  .contact-list-entry-options {
+    ::ng-deep svg {
+      width: 20px;
+    }
+  }
+
+  .contact-list-entry-options {
+    margin-right: 0px;
+  }
 }

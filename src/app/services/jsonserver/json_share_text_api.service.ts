@@ -15,8 +15,8 @@ export default class JsonShareTextAPI implements ShareTextAPI {
 
     const upload: SharedText = {
       id: uuid(),
-      title: btoa(title),
-      body: btoa(body),
+      title: btoa(unescape(encodeURIComponent(title))),
+      body: btoa(unescape(encodeURIComponent(body))),
       owner: owner !== null ? owner.id : null,
       sharedWith: shareWith.map(u => u.id),
       expires: expiryDate.getTime()
@@ -35,8 +35,8 @@ export default class JsonShareTextAPI implements ShareTextAPI {
     if (response.status !== 201 && response.status !== 200) throw new Error("Could not request text upload: " + response.statusText);
 
     let parsedResponse = response.data as SharedText;
-    parsedResponse.title = atob(parsedResponse.title);
-    parsedResponse.body = atob(parsedResponse.body);
+    parsedResponse.title = decodeURIComponent(escape(atob(parsedResponse.title)));
+    parsedResponse.body = decodeURIComponent(escape(atob(parsedResponse.body)));
     return parsedResponse;
   }
 
