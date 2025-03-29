@@ -22,6 +22,7 @@ export class CommonInputFieldComponent implements ControlValueAccessor {
   @Input() label = "Common Input Label";
   @Input() required = false;
   @Input() disabled = false;
+  @Input() hasError = false;
 
   revealPassword = false;
   value = ""
