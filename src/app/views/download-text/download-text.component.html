@@ -1,29 +1,30 @@
 <main>
-  <div class="download-text-container">
-    <app-logo [width]="120" [useReturnToHome]="true"></app-logo>
-    <h1>Components of the sheep</h1>
-    <div class="download-text-box">
-      @if(this.property){
-        <div class="download-title-box">
-            <h2>The name of the sheep is "{{this.property!.body}}"
-            <br>Expires in {{getExpiryDate(this.property!.expires)}}</h2>
-        </div>
-        <div class="download-text-body">
-            <h3>{{this.property!.body}}</h3>
-        </div>
-      } @else{
-        <div class="download-title-box">
-            <p class="empty-message">No upload was found or the link has expired</p>
-        </div>
-      }
-    </div>
-    <div class="dowload-buttom-container">
-      <app-route-button routerLink="/">Go home</app-route-button>
-      @if(this.property){
-        <a href="/">
-            <app-button size="small">Download</app-button>
-        </a>
-      }
-    </div>
-  </div>
+	<div class="download-text-container">
+		<app-logo [width]="120" [useReturnToHome]="true"></app-logo>
+		<h1>Components of the sheep</h1>
+		<div class="download-text-box">
+			@if(this.property){
+			<div class="download-title-box">
+				<h2>The name of the sheep is "{{this.property!.title}}"
+					<br>Expires in {{getExpiryDate(this.property!.expires)}}
+				</h2>
+			</div>
+			<div class="download-text-body">
+				<h3>{{this.property!.body}}</h3>
+			</div>
+			}@else{
+			<div class="download-title-box">
+				<p class="empty-message">No upload was found or the link has expired</p>
+			</div>
+			}
+		</div>
+		<div class="dowload-buttom-container">
+			<app-route-button routerLink="/">Go home</app-route-button>
+			@if(this.property){
+			<a href="/">
+				<app-button size="small">Download</app-button>
+			</a>
+			}
+		</div>
+	</div>
 </main>
