@@ -4,8 +4,8 @@
 
 > DollyShare es una aplicación que busca ofrecer una solución sencilla y eficiente para compartir archivos y texto de forma rápida.
 
-
 ## Integrantes del grupo
+
 - Meng Fei Dai
 - Félix Miguel Velásquez
 - Daniel Gutiérrez Recio
@@ -43,7 +43,7 @@ Todas las tareas las puede seguir con detenimiento en nuestro [Trello](https://t
 
 ## Diseños mockup de vistas y componentes
 
-Todos los diseños los puede encontrar en el enlace a [Figma haciendo click aqui](https://www.figma.com/design/4RRhx1bnAfuQd1ohHbTNVa/pwm-archivos).
+Todos los diseños los puede encontrar en el enlace a [Figma haciendo click aqui](https://www.figma.com/design/uBDR50u0AMh0upnVUBthlj/pwm-mockups-sprint-2?node-id=167-1774&p=f).
 
 ## Vistas implementadas
 
@@ -55,7 +55,6 @@ Todos los diseños los puede encontrar en el enlace a [Figma haciendo click aqui
 - Registro: [codigo de la página Register](./src/app/views/register)
 - Registro exitoso: [codigo de la página Register Successful](./src/app/views/register-successful)
 - Todas las vistas del panel de usuario: [codigo de la pagina My Account, Change Password y Active Links con Link manager](./src/app/views/user/)
-
 
 ## Estructura del proyecto
 
@@ -71,12 +70,13 @@ El proyecto esta basado en el framework de Angular 18 (LTS), y sigue la siguient
 ## Probar el proyecto
 
 Para probar el proyecto localmente:
+
 1. Instale git
 2. Instale NodeJS
 3. Clone este repositorio
 4. Dentro de la carpeta clonada, ejecute `npm install`
-5. Para abrir la web en el navegador, use `npm start` 
-
+5. Para abrir la base de datos, use `npm run server`
+6. Para abrir la web en el navegador, use `npm start`
 
 ## Capturas de la web
 
@@ -93,3 +93,4 @@ Todas las capturas han sido sacadas desde un navegador, siendo esta la version f
 ![change password view](./documents/screenshots/change%20password%20view.png)
 ![active links view](./documents/screenshots/active%20links%20view.png)
 ![link manager view](./documents/screenshots/link%20manager%20view.png)
+
