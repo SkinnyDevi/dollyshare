@@ -36,9 +36,7 @@
 		<div class="dowload-files-buttom-container">
 			<app-route-button routerLink="/">Go home</app-route-button>
 			@if (this.uploadedFiles.length > 0){
-			<a href="/">
-				<app-button size="small">Download all</app-button>
-			</a>
+				<app-button size="small" (click)="createZipFromUploadedFiles()">Download all</app-button>
 			}
 		</div>
 	</div>
