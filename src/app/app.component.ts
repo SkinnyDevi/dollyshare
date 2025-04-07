@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from "./components/navbar/navbar.component";
 import { FooterComponent } from "./components/footer/footer.component";
@@ -11,6 +11,7 @@ import JsonFileUploadAPI from './services/jsonserver/json_file_upload_api.servic
 import JsonShareFilesAPI from './services/jsonserver/json_share_files_api.service';
 import JsonShareTextAPI from './services/jsonserver/json_share_text_api.service';
 
+
 export const BACKEND_USER_API: UserAPI = new JsonUserAPI();
 export const BACKEND_SHARE_FILES_API: ShareFilesAPI = new JsonShareFilesAPI();
 export const BACKEND_SHARE_TEXT_API: ShareTextAPI = new JsonShareTextAPI();
@@ -19,9 +20,13 @@ export const BACKEND_FILE_UPLOAD_API: FileUploadAPI = new JsonFileUploadAPI();
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavbarComponent, FooterComponent],
+  imports: [
+    RouterOutlet,
+    NavbarComponent,
+    FooterComponent,
+  ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
 export class AppComponent {
   title = 'dollyshare';
