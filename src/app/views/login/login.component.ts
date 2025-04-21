@@ -5,10 +5,10 @@ import { Router } from '@angular/router';
 import { AppButtonComponent } from "../../components/app-button/app-button.component";
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
-import { BACKEND_USER_API } from '../../app.component';
 import CookieHandler from '../../services/cookies/cookies.service';
 import { LoginValidatorHookComponent } from "../../components/login-validator-hook/login-validator-hook.component";
 import { NgIf } from '@angular/common';
+import { FirebaseUserApiService } from '../../services/firebase/firebase-user-api.service';
 
 @Component({
   selector: 'view-login',
@@ -24,6 +24,7 @@ export class LoginComponent {
 
   private readonly router = inject(Router);
   private readonly cookieHandler = inject(CookieHandler);
+  private readonly BACKEND_USER_API = inject(FirebaseUserApiService);
 
   constructor() {
     this.loginForm = new FormBuilder().group({
@@ -37,7 +38,7 @@ export class LoginComponent {
     if (this.loginForm.invalid) return;
 
     try {
-      const user = await BACKEND_USER_API.login(
+      const user = await this.BACKEND_USER_API.login(
         this.getValueFromForm('email'),
         this.getValueFromForm('password')
       );

@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import UserAPI from '../base-apis/base_user.service';
 import User, { CredentialUser } from '../../models/user';
 import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from '@angular/fire/auth';
-import { collection, doc, Firestore, getDoc, setDoc } from '@angular/fire/firestore';
+import { doc, Firestore, getDoc, setDoc } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
