@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { LogoComponent } from "../../components/logo/logo.component";
 import { RouteButtonComponent } from "../../components/app-button/route-button/route-button.component";
 import { AppButtonComponent } from "../../components/app-button/app-button.component";
@@ -11,6 +11,7 @@ import { CookieService } from 'ngx-cookie-service';
 import CookieHandler from '../../services/cookies/cookies.service';
 import { ScreenDetectorService } from '../../services/screenDetector/screenDetector.service';
 import getFileExtensionIcon from '../../components/file-extension-helper';
+
 @Component({
   selector: 'view-share-file',
   standalone: true,
@@ -28,18 +29,19 @@ export class ShareFileComponent {
   uploadedFiles: File[] = [];
   screenIsPhone = false;
 
-  fileExtensionIcon(file:File){
-    return getFileExtensionIcon(file);
-  }
+  private readonly router = inject(Router);
+  private readonly sd = inject(ScreenDetectorService)
+  private readonly cookieHandler = inject(CookieHandler);
 
-  private readonly cookieHandler: CookieHandler;
-
-  constructor(private router: Router, private cookieService: CookieService, private sd: ScreenDetectorService) {
-    this.cookieHandler = new CookieHandler(cookieService);
+  constructor() {
     this.screenIsPhone = this.sd.isPhoneScreen();
     this.sd.checkOnResize((isphone) => {
       this.screenIsPhone = isphone;
     });
+  }
+
+  fileExtensionIcon(file: File) {
+    return getFileExtensionIcon(file);
   }
 
   fileValidator() {
@@ -81,7 +83,7 @@ export class ShareFileComponent {
     return this.cookieHandler.getUserCookies();
   }
 
-  
+
 
   onFilePicked(event: Event) {
     const inputElement = event.target as HTMLInputElement;

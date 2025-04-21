@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { LogoComponent } from "../../components/logo/logo.component";
 import { LoginInputComponent } from "../../components/login-input/login-input.component";
 import { Router } from '@angular/router';
@@ -8,7 +8,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { BACKEND_USER_API } from '../../app.component';
 import CookieHandler from '../../services/cookies/cookies.service';
 import { LoginValidatorHookComponent } from "../../components/login-validator-hook/login-validator-hook.component";
-import {NgIf} from '@angular/common';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'view-login',
@@ -19,13 +19,14 @@ import {NgIf} from '@angular/common';
   providers: [CookieService]
 })
 export class LoginComponent {
-  loginForm: FormGroup;
-  private readonly cookieHandler: CookieHandler;
   errorMessage: string = '';
+  loginForm: FormGroup;
 
-  constructor(private router: Router, private fb: FormBuilder, private cookieService: CookieService) {
-    this.cookieHandler = new CookieHandler(cookieService);
-    this.loginForm = this.fb.group({
+  private readonly router = inject(Router);
+  private readonly cookieHandler = inject(CookieHandler);
+
+  constructor() {
+    this.loginForm = new FormBuilder().group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]]
     })

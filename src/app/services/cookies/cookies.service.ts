@@ -1,16 +1,16 @@
 import { CookieService } from "ngx-cookie-service";
 import User from "../../models/user";
+import { inject, Injectable } from "@angular/core";
 
 enum CookieTagNames {
   LOGGED_IN_USER = "logged-user"
 }
 
+@Injectable({
+  providedIn: 'root'
+})
 export default class CookieHandler {
-  private readonly cookieService: CookieService;
-
-  constructor(cookieService: CookieService) {
-    this.cookieService = cookieService;
-  }
+  private readonly cookieService = inject(CookieService);
 
   createLoginCookies(user: User) {
     this.cookieService.set(
@@ -34,7 +34,6 @@ export default class CookieHandler {
     const jsonUser = JSON.parse(rawJson);
     return {
       username: jsonUser.username,
-      password: jsonUser.password,
       email: jsonUser.email,
       id: jsonUser.id
     };

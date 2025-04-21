@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActiveLinkEntryComponent } from "../../../components/active-link-entry/active-link-entry.component";
 import { AppButtonComponent } from "../../../components/app-button/app-button.component";
 import { CookieService } from 'ngx-cookie-service';
@@ -20,13 +20,12 @@ interface UploadLink {
   providers: [CookieService]
 })
 export class UserActiveLinksComponent implements OnInit {
-  private readonly cookieHandler: CookieHandler;
+  private readonly cookieHandler = inject(CookieHandler);
   private readonly loggedInUser: User;
 
   userActiveLinks: UploadLink[] = [];
 
-  constructor(private cookieService: CookieService) {
-    this.cookieHandler = new CookieHandler(cookieService);
+  constructor() {
     this.loggedInUser = this.cookieHandler.getUserCookies()!;
   }
 

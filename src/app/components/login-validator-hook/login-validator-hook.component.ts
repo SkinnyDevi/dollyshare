@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import CookieHandler from '../../services/cookies/cookies.service';
@@ -12,14 +12,11 @@ import CookieHandler from '../../services/cookies/cookies.service';
   providers: [CookieService]
 })
 export class LoginValidatorHookComponent implements OnInit {
-  private readonly cookieHandler: CookieHandler;
+  private readonly cookieHandler = inject(CookieHandler);
+  private readonly router = inject(Router);
 
   @Input() disable = false;
   @Input() reverseCheck = false;
-
-  constructor(private router: Router, private cookieService: CookieService) {
-    this.cookieHandler = new CookieHandler(cookieService);
-  }
 
   ngOnInit(): void {
     if (this.disable) return;

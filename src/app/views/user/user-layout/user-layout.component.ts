@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, inject, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { LogoComponent } from "../../../components/logo/logo.component";
 import { SelectedViewButton, UserTabsComponent } from "../../../components/user-tabs/user-tabs.component";
@@ -19,11 +19,8 @@ import { LoginValidatorHookComponent } from "../../../components/login-validator
   providers: [CookieService]
 })
 export class UserLayoutComponent {
-  private readonly cookieHandler: CookieHandler;
-
-  constructor(private route: ActivatedRoute, private cookieService: CookieService) {
-    this.cookieHandler = new CookieHandler(cookieService);
-  }
+  private readonly route = inject(ActivatedRoute);
+  private readonly cookieHandler = inject(CookieHandler);
 
   getRoute(): string {
     return this.route.snapshot.url[1].path;

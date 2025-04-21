@@ -10,6 +10,7 @@ import FileUploadAPI from './services/base-apis/base_file_upload.service';
 import JsonFileUploadAPI from './services/jsonserver/json_file_upload_api.service';
 import JsonShareFilesAPI from './services/jsonserver/json_share_files_api.service';
 import JsonShareTextAPI from './services/jsonserver/json_share_text_api.service';
+import { Firestore } from '@angular/fire/firestore';
 
 
 export const BACKEND_USER_API: UserAPI = new JsonUserAPI();
@@ -29,5 +30,7 @@ export const BACKEND_FILE_UPLOAD_API: FileUploadAPI = new JsonFileUploadAPI();
   styleUrl: './app.component.css',
 })
 export class AppComponent {
+  private firestore = inject(Firestore);
+
   title = 'dollyshare';
 }
