@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import UserAPI from '../base-apis/base_user.service';
 import User, { CredentialUser } from '../../models/user';
 import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from '@angular/fire/auth';
-import { doc, Firestore, getDoc, setDoc } from '@angular/fire/firestore';
+import { collection, doc, Firestore, getDoc, getDocs, query, setDoc, updateDoc, where } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +34,7 @@ export class FirebaseUserApiService implements UserAPI {
     const firebaseUser: User = {
       id: userCredentials.uid,
       username: newUser.username,
+      originalEmail: newUser.email,
       email: newUser.email,
       createdAt: Date.now(),
       modifiedAt: Date.now()
@@ -49,7 +50,33 @@ export class FirebaseUserApiService implements UserAPI {
   }
 
   async login(email: string, password: string): Promise<User> {
-    const credentials = await signInWithEmailAndPassword(this._auth, email, password);
-    return this.getUser(credentials.user.uid);
+    try {
+      const credentials = await signInWithEmailAndPassword(this._auth, email, password);
+      return this.getUser(credentials.user.uid);
+    } catch {
+      const emailQuery = query(
+        collection(this._firestore, this.COLLECTION_NAME),
+        where('email', '==', email)
+      );
+      const querySnapshot = await getDocs(emailQuery);
+      if (querySnapshot.size < 1) throw new Error("No user with email: " + email);
+
+      const foundUser = querySnapshot.docs.at(0)?.data() as User;
+      await signInWithEmailAndPassword(this._auth, foundUser.originalEmail!, password);
+      return foundUser;
+    }
+  }
+
+  async updateUser(oldUserId: User['id'], newUser: User): Promise<User> {
+    const docRef = doc(this._firestore, `${this.COLLECTION_NAME}/${oldUserId}`);
+    const userDoc = await getDoc(docRef);
+    if (!userDoc.exists()) throw new Error("User Error (404): no such user information for: " + oldUserId);
+
+    await updateDoc(docRef, newUser as any);
+    return newUser;
+  }
+
+  async logOut() {
+    await this._auth.signOut();
   }
 }

@@ -6,4 +6,5 @@ export default interface UserAPI {
   createUser(newUser: CredentialUser): Promise<User>;
   deleteUser(userId: User["id"]): Promise<void>;
   login(email: string, password: string): Promise<User>;
+  updateUser(oldUserId: User['id'], newUser: User): Promise<User>;
 }
