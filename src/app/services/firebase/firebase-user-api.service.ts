@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import UserAPI from '../base-apis/base_user.service';
 import User, { CredentialUser } from '../../models/user';
-import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from '@angular/fire/auth';
+import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updatePassword } from '@angular/fire/auth';
 import { collection, doc, Firestore, getDoc, getDocs, query, setDoc, updateDoc, where } from '@angular/fire/firestore';
 
 @Injectable({
@@ -74,6 +74,12 @@ export class FirebaseUserApiService implements UserAPI {
 
     await updateDoc(docRef, newUser as any);
     return newUser;
+  }
+
+  async changePassword(currentPassword: string, newPassword: string) {
+    if (this._auth.currentUser === null) throw new Error("Current user is 'null'.");
+    const authenticated = await signInWithEmailAndPassword(this._auth, this._auth.currentUser.email!, currentPassword);
+    await updatePassword(authenticated.user, newPassword);
   }
 
   async logOut() {

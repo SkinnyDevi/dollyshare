@@ -4,7 +4,6 @@ import { AppButtonComponent } from "../../../components/app-button/app-button.co
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FirebaseUserApiService } from '../../../services/firebase/firebase-user-api.service';
 import CookieHandler from '../../../services/cookies/cookies.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'view-user-account',
@@ -15,10 +14,10 @@ import { Router } from '@angular/router';
 })
 export class UserAccountComponent {
   accountUpdateForm: FormGroup;
+  showSuccess = false;
 
   private BACKEND_USER_API = inject(FirebaseUserApiService);
   private cookieHandler = inject(CookieHandler);
-  private router = inject(Router);
 
   constructor() {
     this.accountUpdateForm = new FormBuilder().group({
@@ -44,9 +43,16 @@ export class UserAccountComponent {
       // Update user
       const newUser = await this.BACKEND_USER_API.updateUser(currentUser.id, currentUser);
       this.cookieHandler.createLoginCookies(newUser);
+      this.accountUpdateForm.reset();
+      this.showSuccessMessage();
     } catch (e: any) {
       console.log("Couldn't update the user:", e);
     }
+  }
+
+  private showSuccessMessage() {
+    this.showSuccess = true;
+    setTimeout(() => this.showSuccess = false, 3000);
   }
 
   private getFormValue(name: string): string {
