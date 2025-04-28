@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import UserAPI from '../base-apis/base_user.service';
 import User, { CredentialUser } from '../../models/user';
 import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updatePassword } from '@angular/fire/auth';
-import { collection, collectionData, doc, docData, Firestore, getDoc, getDocs, onSnapshot, query, setDoc, updateDoc, where } from '@angular/fire/firestore';
+import { collection, collectionData, doc, docData, Firestore, getDoc, getDocs, query, setDoc, updateDoc, where } from '@angular/fire/firestore';
 import { map, Observable } from 'rxjs';
 
 @Injectable({
@@ -22,7 +22,7 @@ export class FirebaseUserApiService implements UserAPI {
     return userDoc.data() as User;
   }
 
-  getUserRealtime(userId: User['id']): Observable<User> {
+  getUser$(userId: User['id']): Observable<User> {
     const docRef = doc(this._firestore, `${this.COLLECTION_NAME}/${userId}`);
     return docData(docRef, { idField: 'id' }).pipe(
       map(user => {
@@ -38,7 +38,7 @@ export class FirebaseUserApiService implements UserAPI {
     return users;
   }
 
-  getUsersRealtime(userIdList: User['id'][]): Observable<User[]> {
+  getUsers$(userIdList: User['id'][]): Observable<User[]> {
     const usersQuery = query(
       collection(this._firestore, this.COLLECTION_NAME),
       where('__name__', 'in', userIdList.length > 0 ? userIdList : [''])

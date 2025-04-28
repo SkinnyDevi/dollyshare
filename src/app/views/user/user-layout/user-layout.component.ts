@@ -28,7 +28,7 @@ export class UserLayoutComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     const localUser = this.cookieHandler.getUserCookies();
     if (localUser === null) return;
-    this.userSubscription = this.BACKEND_USER_API.getUserRealtime(localUser.id).subscribe((user) => {
+    this.userSubscription = this.BACKEND_USER_API.getUser$(localUser.id).subscribe((user) => {
       this.cookieHandler.createLoginCookies(user)
     });
   }

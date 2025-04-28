@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, ViewChild } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppButtonComponent } from "../../components/app-button/app-button.component";
 import { LogoComponent } from "../../components/logo/logo.component";
@@ -10,6 +10,7 @@ import SharedFiles from '../../models/shared_files';
 import getFileExtensionIcon from '../../components/file-extension-helper';
 import JSZip from 'jszip';
 import { FirebaseFileUploadApiService } from '../../services/firebase/firebase-file-upload-api.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-download-file',
@@ -18,12 +19,13 @@ import { FirebaseFileUploadApiService } from '../../services/firebase/firebase-f
   templateUrl: './download-file.component.html',
   styleUrls: ['./download-file.component.css']
 })
-export class DownloadFileComponent implements OnInit {
+export class DownloadFileComponent implements OnInit, OnDestroy {
   uploadedFiles: UploadedFile[] = [];
   property: SharedFiles | undefined;
 
   private readonly route = inject(ActivatedRoute);
   private readonly BACKEND_FILE_UPLOAD_API = inject(FirebaseFileUploadApiService);
+  private uploadedFilesSubcription: Subscription | null = null;
 
   fileExtensionIcon(file: UploadedFile) {
     return getFileExtensionIcon(file as unknown as File);
@@ -38,10 +40,16 @@ export class DownloadFileComponent implements OnInit {
 
     if (idParam) {
       this.property = await BACKEND_SHARE_FILES_API.getUpload(idParam);
-      this.uploadedFiles = await this.BACKEND_FILE_UPLOAD_API.getFilesFrom(this.property.files)
+      this.uploadedFilesSubcription = this.BACKEND_FILE_UPLOAD_API.getFilesFrom$(this.property.files).subscribe((uploadedFiles) => {
+        this.uploadedFiles = uploadedFiles;
+      })
     } else {
       console.error("No se encontró el id en la URL");
     }
+  }
+
+  ngOnDestroy(): void {
+    this.uploadedFilesSubcription?.unsubscribe();
   }
 
   getExpiryDate(arg0: number) {
