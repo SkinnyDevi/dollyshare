@@ -2,7 +2,8 @@ import { inject, Injectable } from '@angular/core';
 import UserAPI from '../base-apis/base_user.service';
 import User, { CredentialUser } from '../../models/user';
 import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updatePassword } from '@angular/fire/auth';
-import { collection, doc, Firestore, getDoc, getDocs, query, setDoc, updateDoc, where } from '@angular/fire/firestore';
+import { collection, collectionData, doc, docData, Firestore, getDoc, getDocs, onSnapshot, query, setDoc, updateDoc, where } from '@angular/fire/firestore';
+import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -21,10 +22,46 @@ export class FirebaseUserApiService implements UserAPI {
     return userDoc.data() as User;
   }
 
+  getUserRealtime(userId: User['id']): Observable<User> {
+    const docRef = doc(this._firestore, `${this.COLLECTION_NAME}/${userId}`);
+    console.log(docRef);
+    return docData(docRef, { idField: 'id' }).pipe(
+      map(user => {
+        if (!user) new Error("User Error (404): no such user information for: " + userId)
+        return user as User;
+      })
+    );
+    return new Observable<User>(observer => {
+      const unsubscribe = onSnapshot(docRef, (snapshot) => {
+        if (!snapshot.exists()) {
+          observer.error(new Error("User Error (404): no such user information for: " + userId));
+          return;
+        }
+        observer.next({ id: snapshot.id, ...snapshot.data() } as User);
+      }, (error) => observer.error(error));
+      return () => unsubscribe();
+    });
+  }
+
   async getUsers(userIdList: User['id'][]): Promise<User[]> {
     const users: User[] = [];
     for (let id of userIdList) users.push(await this.getUser(id));
     return users;
+  }
+
+  getUsersRealtime(userIdList: User['id'][]): Observable<User[]> {
+    const usersQuery = query(
+      collection(this._firestore, this.COLLECTION_NAME),
+      where('__name__', 'in', userIdList.length > 0 ? userIdList : [''])
+    );
+    return collectionData(usersQuery, { idField: 'id' }).pipe(
+      map(users => {
+        if (users.length === 0 && userIdList.length > 0) {
+          throw new Error("User Error (404): no users found for the provided IDs");
+        }
+        return users as User[];
+      })
+    );
   }
 
   async createUser(newUser: CredentialUser): Promise<User> {

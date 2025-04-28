@@ -42,7 +42,6 @@ export class UserAccountComponent {
 
       // Update user
       const newUser = await this.BACKEND_USER_API.updateUser(currentUser.id, currentUser);
-      this.cookieHandler.createLoginCookies(newUser);
       this.accountUpdateForm.reset();
       this.showSuccessMessage();
     } catch (e: any) {
