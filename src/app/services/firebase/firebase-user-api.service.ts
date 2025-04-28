@@ -24,23 +24,12 @@ export class FirebaseUserApiService implements UserAPI {
 
   getUserRealtime(userId: User['id']): Observable<User> {
     const docRef = doc(this._firestore, `${this.COLLECTION_NAME}/${userId}`);
-    console.log(docRef);
     return docData(docRef, { idField: 'id' }).pipe(
       map(user => {
         if (!user) new Error("User Error (404): no such user information for: " + userId)
         return user as User;
       })
     );
-    return new Observable<User>(observer => {
-      const unsubscribe = onSnapshot(docRef, (snapshot) => {
-        if (!snapshot.exists()) {
-          observer.error(new Error("User Error (404): no such user information for: " + userId));
-          return;
-        }
-        observer.next({ id: snapshot.id, ...snapshot.data() } as User);
-      }, (error) => observer.error(error));
-      return () => unsubscribe();
-    });
   }
 
   async getUsers(userIdList: User['id'][]): Promise<User[]> {

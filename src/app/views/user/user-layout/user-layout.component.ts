@@ -14,7 +14,6 @@ import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'view-user-layout',
-  standalone: true,
   imports: [LogoComponent, UserTabsComponent, UserActiveLinksComponent, UserAccountComponent, UserChangePasswordComponent, ManageActiveLinkComponent, LoginValidatorHookComponent],
   templateUrl: './user-layout.component.html',
   styleUrl: './user-layout.component.css',
@@ -25,23 +24,17 @@ export class UserLayoutComponent implements OnInit, OnDestroy {
   private readonly cookieHandler = inject(CookieHandler);
   private readonly BACKEND_USER_API = inject(FirebaseUserApiService);
   private userSubscription: Subscription | null = null;
-  private tester: Subscription | null = null;
 
   ngOnInit(): void {
     const localUser = this.cookieHandler.getUserCookies();
     if (localUser === null) return;
     this.userSubscription = this.BACKEND_USER_API.getUserRealtime(localUser.id).subscribe((user) => {
       this.cookieHandler.createLoginCookies(user)
-      console.log("changed", user)
-    });
-    this.tester = this.BACKEND_USER_API.getUsersRealtime([localUser.id]).subscribe((users) => {
-      console.log("users change", users);
     });
   }
 
   ngOnDestroy(): void {
     this.userSubscription?.unsubscribe();
-    this.tester?.unsubscribe();
   }
 
   getRoute(): string {
