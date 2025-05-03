@@ -14,6 +14,7 @@ import { FirebaseUserApiService } from '../../../services/firebase/firebase-user
 export class UserChangePasswordComponent {
   changePasswordForm: FormGroup;
   showSuccess = false;
+  showError = false;
 
   private readonly BACKEND_USER_API = inject(FirebaseUserApiService);
 
@@ -39,7 +40,8 @@ export class UserChangePasswordComponent {
       this.changePasswordForm.reset();
       this.showSuccessMessage();
     } catch (e: any) {
-      if (e.message.includes("auth/invalid-credentials")) {
+      if (e.message.includes("auth/invalid-credential")) {
+        this.showErrorMessage();
         console.warn("Wrong current password");
       }
     }
@@ -47,6 +49,11 @@ export class UserChangePasswordComponent {
 
   private getFormValue(name: string): string {
     return this.changePasswordForm.get(name)!.value;
+  }
+
+  private showErrorMessage() {
+    this.showError = true;
+    setTimeout(() => this.showError = false, 3000);
   }
 
   private showSuccessMessage() {
