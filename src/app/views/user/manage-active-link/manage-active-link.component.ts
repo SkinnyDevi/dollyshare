@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router, RouterLink } from '@angular/router';
 import { IconButtonComponent } from "../../../components/app-button/icon-button/icon-button.component";
 import { ContactListBoxComponent } from "../../../components/contact-list-box/contact-list-box.component";
 import { AppButtonComponent } from "../../../components/app-button/app-button.component";
-import { filter, map } from 'rxjs';
 import { BACKEND_SHARE_FILES_API, BACKEND_SHARE_TEXT_API } from '../../../app.component';
 import SharedText from '../../../models/shared_text';
 import SharedFiles from '../../../models/shared_files';
@@ -22,11 +21,10 @@ export class ManageActiveLinkComponent implements OnInit {
   readonly LINK_ID: string;
   readonly UPLOAD_TYPE: "files" | "text" | null = null;
 
-  private readonly cookieHandler: CookieHandler;
+  private readonly cookieHandler = inject(CookieHandler);
 
-  constructor(private router: Router, private route: ActivatedRoute, private cookieService: CookieService) {
+  constructor(private router: Router, private route: ActivatedRoute) {
     this.LINK_ID = this.route.snapshot.paramMap.get('link_id')!;
-    this.cookieHandler = new CookieHandler(cookieService);
 
     const windowPathname = window.location.pathname;
     if (windowPathname.includes("files") || windowPathname.includes('text')) {

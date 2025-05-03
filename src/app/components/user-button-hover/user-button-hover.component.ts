@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import CookieHandler from '../../services/cookies/cookies.service';
@@ -14,11 +14,7 @@ import CookieHandler from '../../services/cookies/cookies.service';
 export class UserButtonHoverComponent {
   @Output() closeCallback = new EventEmitter<null>();
 
-  private readonly cookieHandler: CookieHandler;
-
-  constructor(private cookieService: CookieService) {
-    this.cookieHandler = new CookieHandler(cookieService);
-  }
+  private readonly cookieHandler = inject(CookieHandler);
 
   closeOptions() {
     this.closeCallback.emit(null);

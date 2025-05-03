@@ -1,7 +1,7 @@
 import { v4 as uuid } from 'uuid';
 import axios from 'axios';
 import JSON_API_URL from './json_server_endpoint';
-import User from '../../models/user';
+import User, { CredentialUser } from '../../models/user';
 import UserAPI from '../base-apis/base_user.service';
 
 export default class JsonUserAPI implements UserAPI {
@@ -12,7 +12,6 @@ export default class JsonUserAPI implements UserAPI {
     return {
       username: rawUser.data.username,
       email: rawUser.data.email,
-      password: 'null',
       id: userId
     }
   }
@@ -25,11 +24,11 @@ export default class JsonUserAPI implements UserAPI {
     return users;
   }
 
-  async createUser(newUser: User): Promise<User> {
+  async createUser(newUser: CredentialUser): Promise<User> {
     const userExists = await this.checkExistingEmail(newUser.email);
     if (userExists) throw new Error("User already exists.");
 
-    const finalUser: User = {
+    const finalUser: CredentialUser = {
       username: newUser.username,
       password: newUser.password,
       email: newUser.email,
@@ -50,13 +49,12 @@ export default class JsonUserAPI implements UserAPI {
     baseUrl += `?email=${email}`
     const response = await axios.get(baseUrl);
     if (response.status !== 200 || response.data.length < 1) throw new Error("No login found for " + email);
-    const retrievedUser: User = response.data[0];
+    const retrievedUser: CredentialUser = response.data[0];
     if (password !== retrievedUser.password) throw new Error("Incorrect password");
 
     return {
       username: retrievedUser.username,
       email: retrievedUser.email,
-      password: 'null',
       id: retrievedUser.id
     }
   }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { LogoComponent } from '../../components/logo/logo.component';
 import { RouteButtonComponent } from "../../components/app-button/route-button/route-button.component";
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -29,14 +29,14 @@ export class ShareTextComponent {
 
   textUploadForm: FormGroup;
 
-  private readonly cookieHandler: CookieHandler;
+  private readonly router = inject(Router);
+  private readonly cookieHandler = inject(CookieHandler);
 
   constructor(private router: Router, private cookieService: CookieService, private shareTextApi: FirebaseShareTextApiService) {
     this.textUploadForm = new FormBuilder().group({
       title: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(this.TITLE_MAXLEN)]],
       body: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(this.BODY_MAXLEN)]]
     });
-    this.cookieHandler = new CookieHandler(cookieService);
   }
 
   async onSubmit() {

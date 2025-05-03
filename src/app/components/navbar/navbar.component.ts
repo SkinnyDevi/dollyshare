@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import NavbarVariant from './navbar-variant';
 import { LoginButtonComponent } from "../app-button/login-button/login-button.component";
 import { ActivatedRoute, NavigationEnd, Router, RouterLink } from '@angular/router';
@@ -19,14 +19,13 @@ import { UserButtonHoverComponent } from "../user-button-hover/user-button-hover
 })
 export class NavbarComponent {
   private readonly DEFAULT_VARIANT = NavbarVariant.GUEST;
-  private readonly cookieHandler: CookieHandler;
+  private readonly cookieHandler = inject(CookieHandler);
 
   @Input() variant: NavbarVariant = this.DEFAULT_VARIANT;
 
   displayOptions = false;
 
-  constructor(private router: Router, private route: ActivatedRoute, private cookieService: CookieService) {
-    this.cookieHandler = new CookieHandler(cookieService);
+  constructor(private router: Router, private route: ActivatedRoute) {
     this.router.events
       .pipe(
         filter(event => event instanceof NavigationEnd),

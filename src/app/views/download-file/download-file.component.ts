@@ -1,14 +1,17 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppButtonComponent } from "../../components/app-button/app-button.component";
 import { LogoComponent } from "../../components/logo/logo.component";
 import { RouteButtonComponent } from "../../components/app-button/route-button/route-button.component";
 import formatFileSize from '../../components/fileSizeFormatter';
 import UploadedFile from '../../models/uploaded_file';
-import { BACKEND_FILE_UPLOAD_API, BACKEND_SHARE_FILES_API } from '../../app.component';
+import { BACKEND_SHARE_FILES_API } from '../../app.component';
 import SharedFiles from '../../models/shared_files';
 import getFileExtensionIcon from '../../components/file-extension-helper';
 import JSZip from 'jszip';
+import { FirebaseFileUploadApiService } from '../../services/firebase/firebase-file-upload-api.service';
+import { Subscription } from 'rxjs';
+
 @Component({
   selector: 'app-download-file',
   standalone: true,
@@ -16,11 +19,13 @@ import JSZip from 'jszip';
   templateUrl: './download-file.component.html',
   styleUrls: ['./download-file.component.css']
 })
-export class DownloadFileComponent implements OnInit {
-
-  constructor(private route: ActivatedRoute) { }
+export class DownloadFileComponent implements OnInit, OnDestroy {
   uploadedFiles: UploadedFile[] = [];
   property: SharedFiles | undefined;
+
+  private readonly route = inject(ActivatedRoute);
+  private readonly BACKEND_FILE_UPLOAD_API = inject(FirebaseFileUploadApiService);
+  private uploadedFilesSubcription: Subscription | null = null;
 
   fileExtensionIcon(file: UploadedFile) {
     return getFileExtensionIcon(file as unknown as File);
@@ -35,12 +40,16 @@ export class DownloadFileComponent implements OnInit {
 
     if (idParam) {
       this.property = await BACKEND_SHARE_FILES_API.getUpload(idParam);
-      for (let file of this.property.files) {
-        this.uploadedFiles.push(await BACKEND_FILE_UPLOAD_API.getFileFrom(file));
-      }
+      this.uploadedFilesSubcription = this.BACKEND_FILE_UPLOAD_API.getFilesFrom$(this.property.files).subscribe((uploadedFiles) => {
+        this.uploadedFiles = uploadedFiles;
+      })
     } else {
       console.error("No se encontró el id en la URL");
     }
+  }
+
+  ngOnDestroy(): void {
+    this.uploadedFilesSubcription?.unsubscribe();
   }
 
   getExpiryDate(arg0: number) {
@@ -51,9 +60,9 @@ export class DownloadFileComponent implements OnInit {
 
     return `${daysLeft} days (${new Date(arg0).toLocaleDateString()})`;
   }
-  
+
   private convertToFile(uploadedFile: UploadedFile): File {
-    const base64= uploadedFile.content.split(',')[1];
+    const base64 = uploadedFile.content.split(',')[1];
     const binaryContent = atob(base64);
     const byteArray = new Uint8Array(binaryContent.length);
     for (let i = 0; i < binaryContent.length; i++) {

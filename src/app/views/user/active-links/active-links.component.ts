@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActiveLinkEntryComponent } from "../../../components/active-link-entry/active-link-entry.component";
 import { AppButtonComponent } from "../../../components/app-button/app-button.component";
 import { CookieService } from 'ngx-cookie-service';
 import CookieHandler from '../../../services/cookies/cookies.service';
 import User from '../../../models/user';
-import { BACKEND_FILE_UPLOAD_API, BACKEND_SHARE_FILES_API, BACKEND_SHARE_TEXT_API } from '../../../app.component';
+import { BACKEND_SHARE_FILES_API, BACKEND_SHARE_TEXT_API } from '../../../app.component';
+import { FirebaseFileUploadApiService } from '../../../services/firebase/firebase-file-upload-api.service';
 
 interface UploadLink {
   id: string;
@@ -20,13 +21,13 @@ interface UploadLink {
   providers: [CookieService]
 })
 export class UserActiveLinksComponent implements OnInit {
-  private readonly cookieHandler: CookieHandler;
+  private readonly cookieHandler = inject(CookieHandler);
+  private readonly BACKEND_FILE_UPLOAD_API = inject(FirebaseFileUploadApiService);
   private readonly loggedInUser: User;
 
   userActiveLinks: UploadLink[] = [];
 
-  constructor(private cookieService: CookieService) {
-    this.cookieHandler = new CookieHandler(cookieService);
+  constructor() {
     this.loggedInUser = this.cookieHandler.getUserCookies()!;
   }
 
@@ -68,7 +69,7 @@ export class UserActiveLinksComponent implements OnInit {
     const sharedFile = await BACKEND_SHARE_FILES_API.getUpload(uploadId);
     for (let file of sharedFile.files) {
       try {
-        await BACKEND_FILE_UPLOAD_API.deleteFileById(file);
+        await this.BACKEND_FILE_UPLOAD_API.deleteFileById(file);
       } catch (e) {
         console.error("Could not delete file", file, "associated with", sharedFile.id);
       }
