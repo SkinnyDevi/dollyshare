@@ -1,4 +1,4 @@
-form {
+.account-update-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -6,11 +6,18 @@ form {
   padding: 0 50px;
 }
 
-.save-button {
-  margin-top: 20px;
+.user-field-updater {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+}
+
+.user-update-field {
+  flex: 1;
+}
+
+.user-confirm-update-btn {
+  transform: translateY(5px);
 }
 
 .change-success {
