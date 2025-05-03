@@ -29,7 +29,6 @@ export class ShareTextComponent {
 
   textUploadForm: FormGroup;
 
-  private readonly router = inject(Router);
   private readonly cookieHandler = inject(CookieHandler);
 
   constructor(private router: Router, private cookieService: CookieService, private shareTextApi: FirebaseShareTextApiService) {
