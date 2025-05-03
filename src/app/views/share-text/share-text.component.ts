@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { LogoComponent } from '../../components/logo/logo.component';
 import { RouteButtonComponent } from "../../components/app-button/route-button/route-button.component";
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { BACKEND_SHARE_TEXT_API } from '../../app.component';
+
+import { FirebaseShareTextApiService } from '../../services/firebase/firebase-share-text-api.service';
 import { Router } from '@angular/router';
 import { AppButtonComponent } from "../../components/app-button/app-button.component";
 import { CookieService } from 'ngx-cookie-service';
@@ -30,7 +31,7 @@ export class ShareTextComponent {
 
   private readonly cookieHandler: CookieHandler;
 
-  constructor(private router: Router, private cookieService: CookieService) {
+  constructor(private router: Router, private cookieService: CookieService, private shareTextApi: FirebaseShareTextApiService) {
     this.textUploadForm = new FormBuilder().group({
       title: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(this.TITLE_MAXLEN)]],
       body: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(this.BODY_MAXLEN)]]
@@ -40,12 +41,12 @@ export class ShareTextComponent {
 
   async onSubmit() {
     try {
-      const upload = await BACKEND_SHARE_TEXT_API.createUpload(
-        this.getValueFromForm('title'),
-        this.getValueFromForm('body'),
-        this.getUserIfLoggedIn()
+      const upload = await this.shareTextApi.createUpload(
+        this.getValueFromForm('title') as string,
+        this.getValueFromForm('body') as string,
+        //this.getUserIfLoggedIn() || null, descomentar para ver el usuario cuando este tambien implementado
       );
-
+      console.log("Upload created", upload);
       await this.router.navigate(['/finish', upload.id], {
         queryParams: { uploadType: 'text' }
       });
