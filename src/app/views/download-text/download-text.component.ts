@@ -29,6 +29,7 @@ export class DownloadTextComponent {
     const idParam = this.route.snapshot.paramMap.get('link_id');
     if (idParam) {
       this.shareTextApi.getDocFromId(idParam).subscribe(data => this.property = data)
+      
     }else{
       console.error("This link is not avaisable");
     }

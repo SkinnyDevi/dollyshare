@@ -45,11 +45,14 @@ export class FirebaseShareTextApiService implements ShareTextAPI {
 
   getDocFromId(uploadId: SharedText['id']): Observable<SharedText>{
     const docRef = this.getDocRefFromId(uploadId);
-    const document = docData(docRef, { idField: 'id' }); 
-    if (!document) {
-      throw new Error("No such document in the collection!");
-    } 
-    return document as Observable<SharedText>;
+    return docData(docRef, { idField: 'id' }).pipe(
+      map((text : any)  => {
+        if (!text) throw new Error("Document not found") 
+        text.title = decodeURIComponent(escape(atob(text.title)));
+        text.body = decodeURIComponent(escape(atob(text.body)));
+        return text as SharedText; 
+      })
+    );
   }
 
   getUploadsFromUser(user: User): Promise<SharedText[]> {
