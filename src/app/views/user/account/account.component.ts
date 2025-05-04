@@ -77,4 +77,12 @@ export class UserAccountComponent {
     this.showSuccess = true;
     setTimeout(() => this.showSuccess = false, 3000);
   }
+
+  isTouched(form: FormGroup, name: string) {
+    return form.get(name)?.touched!
+  }
+
+  isInvalid(form: FormGroup, name: string) {
+    return form.get(name)?.invalid || false
+  }
 }
