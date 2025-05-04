@@ -2,16 +2,14 @@ import { inject, Injectable } from '@angular/core';
 import ShareTextAPI from '../base-apis/base_share_text.service';
 import SharedText from '../../models/shared_text';
 import { v4 as uuid } from 'uuid';
-import { collection, doc, docData, Firestore, getDoc, getDocs, setDoc, updateDoc, where } from '@angular/fire/firestore';
-import { addDoc, deleteDoc, DocumentReference, Primitive } from 'firebase/firestore';
-import { map,Observable } from 'rxjs';
+import { collection, collectionData, deleteDoc, doc, docData, Firestore, getDoc, getDocs, query, setDoc, updateDoc, where } from '@angular/fire/firestore';
+import { map, Observable } from 'rxjs';
 import User from '../../models/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirebaseShareTextApiService implements ShareTextAPI {
-
   private _firestore = inject(Firestore);
   private COLLECTION_NAME = "text_uploads";
   public readonly SHARED_TEXT_LIFETIME_DAYS = 5;
@@ -29,7 +27,7 @@ export class FirebaseShareTextApiService implements ShareTextAPI {
       expires: expiryDate.getTime()
     };
 
-    const docRef = doc(this._firestore,`${this.COLLECTION_NAME}/${upload.id}`);
+    const docRef = doc(this._firestore, `${this.COLLECTION_NAME}/${upload.id}`);
     await setDoc(docRef, upload);
     return upload;
   }
@@ -38,33 +36,51 @@ export class FirebaseShareTextApiService implements ShareTextAPI {
     const docRef = this.getDocRefFromId(uploadId);
     try {
       await deleteDoc(docRef);
-    }catch (e) {
+    } catch (e) {
       console.error("Error deleting document: ", e);
     }
   }
 
-  getDocFromId(uploadId: SharedText['id']): Observable<SharedText>{
+  async getUploadsFromUser(user: User): Promise<SharedText[]> {
+    const userQuery = query(
+      collection(this._firestore, this.COLLECTION_NAME),
+      where('owner', '==', user.id)
+    );
+    const filteredDocs = await getDocs(userQuery);
+    return filteredDocs.docs.map(f => f.data() as SharedText);
+  }
+
+  getUploadsFromUser$(user: User): Observable<SharedText[]> {
+    const userQuery = query(
+      collection(this._firestore, this.COLLECTION_NAME),
+      where('owner', '==', user.id)
+    );
+    return collectionData(userQuery, { idField: 'id' }) as Observable<SharedText[]>;
+  }
+
+  async getUploadById(uploadId: SharedText['id']): Promise<SharedText> {
+    const docRef = this.getDocRefFromId(uploadId);
+    const fileData = await getDoc(docRef);
+
+    if (!fileData.exists()) throw new Error("Text upload Error (404): no such text upload for: " + uploadId);
+    return fileData.data() as SharedText;
+  }
+
+  getUploadById$(uploadId: SharedText['id']): Observable<SharedText> {
     const docRef = this.getDocRefFromId(uploadId);
     return docData(docRef, { idField: 'id' }).pipe(
-      map((text : any)  => {
-        if (!text) throw new Error("Document not found") 
+      map((text: any) => {
+        if (!text) throw new Error("Document not found")
         text.title = decodeURIComponent(escape(atob(text.title)));
         text.body = decodeURIComponent(escape(atob(text.body)));
-        return text as SharedText; 
+        return text as SharedText;
       })
     );
   }
 
-  getUploadsFromUser(user: User): Promise<SharedText[]> {
-    throw new Error('Method not implemented.');
-  }
-
-  getUploadById(uploadId: SharedText['id']): Promise<SharedText> {
-    throw new Error('Method not implemented.');
-  }
-
-  deleteUpload(sharedText: SharedText): Promise<void> {
-    throw new Error('Method not implemented.');
+  async deleteUpload(sharedText: SharedText): Promise<void> {
+    const docRef = this.getDocRefFromId(sharedText.id);
+    await deleteDoc(docRef);
   }
 
   async shareUploadWith(user: User, upload: SharedText): Promise<SharedText> {
@@ -81,7 +97,7 @@ export class FirebaseShareTextApiService implements ShareTextAPI {
     return upload;
   }
 
-  private getDocRefFromId(id: string): DocumentReference {
+  private getDocRefFromId(id: string) {
     return doc(this._firestore, `${this.COLLECTION_NAME}/${id}`);
   }
 }
