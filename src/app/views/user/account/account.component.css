@@ -43,3 +43,14 @@
 ::ng-deep .common-input-field {
   margin-bottom: 5px !important;
 }
+
+@media only screen and (max-width: 575px) {
+  .user-field-updater {
+    flex-direction: column;
+    margin-bottom: 30px;
+  }
+
+  .user-update-field {
+    margin-bottom: 10px;
+  }
+}

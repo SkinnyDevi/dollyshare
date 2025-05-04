@@ -32,7 +32,7 @@ export class ShareFileComponent {
   uploadedFiles: File[] = [];
   screenIsPhone = false;
 
-  readonly MAX_TOTAL_SIZE = 2e+6;
+  readonly MAX_TOTAL_SIZE = 2e+9;
 
   private readonly router = inject(Router);
   private readonly sd = inject(ScreenDetectorService)
