@@ -128,7 +128,18 @@ main {
 }
 
 .file-details {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   margin-right: 30px;
+}
+
+.file-details::ng-deep .fill-black {
+  width: 20px;
+}
+
+.file-details::ng-deep .icon-padding {
+  padding: 0.3rem 0.8rem;
 }
 
 .file-details>p {
@@ -139,4 +150,24 @@ main {
   .file-details {
     margin-right: 10px;
   }
+}
+
+.total-file-size {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.total-file-size>p {
+  margin: 5px 0;
+}
+
+.total-file-size>p:first-child {
+  opacity: 0.45;
+  color: white !important;
+}
+
+.total-file-size>p:last-child {
+  color: red;
 }

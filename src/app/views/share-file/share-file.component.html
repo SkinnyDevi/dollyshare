@@ -17,6 +17,7 @@
               </div>
               <div class="file-details">
                 <p>{{formatUploadedFileSize(file.size)}}</p>
+                <app-icon-button icon="close" (click)="removeEntry(file)"></app-icon-button>
               </div>
             </li>
             <hr>
@@ -30,12 +31,18 @@
           <div class="clear-button-container">
             <app-button (click)="clearFileList()">Clear files</app-button>
           </div>
+          <div class="total-file-size">
+            <p>Total file size: {{ formatUploadedFileSize(totalFileSize()) }}</p>
+            @if (!fileSizeValidator()) {
+              <p>Total file size exceeds {{ formatUploadedFileSize(this.MAX_TOTAL_SIZE) }}</p>
+            }
+          </div>
         }
       </div>
     </div>
     <div class="file-options-buttons">
       <app-route-button routerLink="/">Go Back</app-route-button>
-      <app-button type="submit" [disabled]="fileValidator()" (click)="submitFiles()">Create URL</app-button>
+      <app-button type="submit" [disabled]="!allowCreateUrl()" (click)="submitFiles()">Create URL</app-button>
     </div>
 	</div>
 </main>
