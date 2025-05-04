@@ -4,7 +4,7 @@ import { RouteButtonComponent } from "../../components/app-button/route-button/r
 import { AppButtonComponent } from "../../components/app-button/app-button.component";
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import SharedText from '../../models/shared_text';
-import { BACKEND_SHARE_TEXT_API } from '../../app.component';
+import { FirebaseShareTextApiService } from '../../services/firebase/firebase-share-text-api.service';
 
 
 
@@ -20,16 +20,18 @@ export class DownloadTextComponent {
   readonly url: string;
   property: SharedText | undefined;
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private shareTextApi: FirebaseShareTextApiService) {
+
     this.url = this.route.snapshot.paramMap.get('link_id') || 'This link is not available';
   }
 
   async ngOnInit(): Promise<void> {
     const idParam = this.route.snapshot.paramMap.get('link_id');
     if (idParam) {
-      this.property = await BACKEND_SHARE_TEXT_API.getUploadById(idParam);
-    } else {
-      console.error("'This link is not avaisable'");
+      this.shareTextApi.getDocFromId(idParam).subscribe(data => this.property = data)
+      
+    }else{
+      console.error("This link is not avaisable");
     }
   }
 

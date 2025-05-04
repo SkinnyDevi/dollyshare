@@ -1,6 +1,7 @@
 export default interface User {
   username: string;
   email: string;
+  originalEmail?: string;
   id: string;
   createdAt?: number;
   modifiedAt?: number;

@@ -1,4 +1,4 @@
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -7,7 +7,6 @@ import { RouterLink } from '@angular/router';
   imports: [RouterLink],
   templateUrl: './logo.component.html',
   styleUrl: './logo.component.css',
-  encapsulation: ViewEncapsulation.None
 })
 export class LogoComponent {
   @Input() width = 200;

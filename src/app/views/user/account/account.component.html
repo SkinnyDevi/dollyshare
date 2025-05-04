@@ -1,7 +1,12 @@
-<form>
-  <app-common-input-field type="email" label="Email" placeholder="Email"></app-common-input-field>
-  <app-common-input-field label="Username" placeholder="Username"></app-common-input-field>
+<form [formGroup]="accountUpdateForm" (submit)="onSubmit()">
+  <app-common-input-field formControlName="email" type="email" label="Email" placeholder="Email"></app-common-input-field>
+  <app-common-input-field formControlName="username" label="Username" placeholder="Username"></app-common-input-field>
   <div class="save-button">
-    <app-button type="submit">Save Changes</app-button>
+    <app-button type="submit" [disabled]="accountUpdateForm.invalid && !showSuccess">Save Changes</app-button>
   </div>
+  @if(showSuccess) {
+    <div class="change-success">
+      <p>Successfully changed information.</p>
+    </div>
+  }
 </form>

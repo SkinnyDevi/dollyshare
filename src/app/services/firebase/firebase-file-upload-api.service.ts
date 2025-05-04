@@ -1,7 +1,8 @@
 import { inject, Injectable } from '@angular/core';
 import FileUploadAPI, { getFileType, processFiles } from '../base-apis/base_file_upload.service';
 import UploadedFile from '../../models/uploaded_file';
-import { collection, deleteDoc, doc, Firestore, getDoc, getDocs, query, setDoc, where } from '@angular/fire/firestore';
+import { collection, collectionData, deleteDoc, doc, docData, Firestore, getDoc, getDocs, query, setDoc, where } from '@angular/fire/firestore';
+import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -33,11 +34,29 @@ export class FirebaseFileUploadApiService implements FileUploadAPI {
     return fileData.data() as UploadedFile;
   }
 
+  getFileFrom$(id: UploadedFile['id']): Observable<UploadedFile> {
+    const docRef = this.getDocRefFromId(id);
+    return docData(docRef, { idField: 'id' }).pipe(
+      map(file => {
+        if (!file) throw new Error("File Storage Error (404): no such file for: " + id);
+        return file as UploadedFile;
+      })
+    );
+  }
+
   async getFilesFrom(ids: UploadedFile['id'][]): Promise<UploadedFile[]> {
     const dbCollection = collection(this._firestore, this.COLLECTION_NAME);
     const fileQuery = query(dbCollection, where('__name__', 'in', ids));
     const querySnapshot = await getDocs(fileQuery);
     return querySnapshot.docs.map(f => f.data() as UploadedFile);
+  }
+
+  getFilesFrom$(ids: UploadedFile['id'][]): Observable<UploadedFile[]> {
+    const fileQuery = query(
+      collection(this._firestore, this.COLLECTION_NAME),
+      where('__name__', 'in', ids)
+    );
+    return collectionData(fileQuery) as Observable<UploadedFile[]>;
   }
 
   async deleteFile(file: UploadedFile): Promise<void> {
