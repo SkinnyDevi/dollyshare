@@ -4,7 +4,6 @@ import { RouteButtonComponent } from "../../components/app-button/route-button/r
 import { AppButtonComponent } from "../../components/app-button/app-button.component";
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { BACKEND_SHARE_FILES_API } from '../../app.component';
 import formatFileSize from '../../components/fileSizeFormatter';
 import User from '../../models/user';
 import { CookieService } from 'ngx-cookie-service';
@@ -12,6 +11,7 @@ import CookieHandler from '../../services/cookies/cookies.service';
 import { ScreenDetectorService } from '../../services/screenDetector/screenDetector.service';
 import getFileExtensionIcon from '../../components/file-extension-helper';
 import { FirebaseFileUploadApiService } from '../../services/firebase/firebase-file-upload-api.service';
+import {FirebaseShareFilesApiService} from '../../services/firebase/firebase-share-files-api.service';
 
 @Component({
   selector: 'view-share-file',
@@ -34,6 +34,8 @@ export class ShareFileComponent {
   private readonly sd = inject(ScreenDetectorService)
   private readonly cookieHandler = inject(CookieHandler);
   private readonly BACKEND_FILE_UPLOAD_API = inject(FirebaseFileUploadApiService);
+  private readonly BACKEND_SHARE_FILES_API = inject(FirebaseShareFilesApiService);
+
 
   constructor() {
     this.screenIsPhone = this.sd.isPhoneScreen();
@@ -72,7 +74,7 @@ export class ShareFileComponent {
     try {
       const uploaded = await this.BACKEND_FILE_UPLOAD_API.uploadFiles(this.uploadedFiles);
 
-      const sharedFilesEntry = await BACKEND_SHARE_FILES_API.createUpload(uploaded, this.getUserIfLoggedIn());
+      const sharedFilesEntry = await this.BACKEND_SHARE_FILES_API.createUpload(uploaded, this.getUserIfLoggedIn());
       await this.router.navigate(['/finish', sharedFilesEntry.id], {
         queryParams: { uploadType: 'files' }
       });
