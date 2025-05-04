@@ -3,12 +3,12 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { IconButtonComponent } from "../../../components/app-button/icon-button/icon-button.component";
 import { ContactListBoxComponent } from "../../../components/contact-list-box/contact-list-box.component";
 import { AppButtonComponent } from "../../../components/app-button/app-button.component";
-import { BACKEND_SHARE_FILES_API } from '../../../app.component';
 import SharedText from '../../../models/shared_text';
 import SharedFiles from '../../../models/shared_files';
 import CookieHandler from '../../../services/cookies/cookies.service';
 import { CookieService } from 'ngx-cookie-service';
 import { FirebaseShareTextApiService } from '../../../services/firebase/firebase-share-text-api.service';
+import {FirebaseShareFilesApiService} from '../../../services/firebase/firebase-share-files-api.service';
 
 @Component({
   selector: 'view-user-manage-active-link',
@@ -24,6 +24,7 @@ export class ManageActiveLinkComponent implements OnInit {
 
   private readonly cookieHandler = inject(CookieHandler);
   private readonly BACKEND_SHARE_TEXT_API = inject(FirebaseShareTextApiService);
+  private readonly BACKEND_SHARE_FILES_API = inject(FirebaseShareFilesApiService);
   private readonly router = inject(Router);
 
   constructor(private route: ActivatedRoute) {
@@ -41,7 +42,7 @@ export class ManageActiveLinkComponent implements OnInit {
 
     if (this.UPLOAD_TYPE === "files") {
       try {
-        upload = await BACKEND_SHARE_FILES_API.getUpload(this.LINK_ID);
+        upload = await this.BACKEND_SHARE_FILES_API.getUpload(this.LINK_ID);
       } catch (e: any) {
         if (e.status === 404) {
           await this.router.navigate(['/user/active-links']);

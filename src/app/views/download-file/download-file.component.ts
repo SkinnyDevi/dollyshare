@@ -5,12 +5,12 @@ import { LogoComponent } from "../../components/logo/logo.component";
 import { RouteButtonComponent } from "../../components/app-button/route-button/route-button.component";
 import formatFileSize from '../../components/fileSizeFormatter';
 import UploadedFile from '../../models/uploaded_file';
-import { BACKEND_SHARE_FILES_API } from '../../app.component';
 import SharedFiles from '../../models/shared_files';
 import getFileExtensionIcon from '../../components/file-extension-helper';
 import JSZip from 'jszip';
 import { FirebaseFileUploadApiService } from '../../services/firebase/firebase-file-upload-api.service';
 import { Subscription } from 'rxjs';
+import {FirebaseShareFilesApiService} from '../../services/firebase/firebase-share-files-api.service';
 
 @Component({
   selector: 'app-download-file',
@@ -25,6 +25,7 @@ export class DownloadFileComponent implements OnInit, OnDestroy {
 
   private readonly route = inject(ActivatedRoute);
   private readonly BACKEND_FILE_UPLOAD_API = inject(FirebaseFileUploadApiService);
+  private readonly BACKEND_SHARE_FILES_API = inject(FirebaseShareFilesApiService);
   private uploadedFilesSubcription: Subscription | null = null;
 
   fileExtensionIcon(file: UploadedFile) {
@@ -39,7 +40,7 @@ export class DownloadFileComponent implements OnInit, OnDestroy {
     const idParam = this.route.snapshot.paramMap.get('link_id');
 
     if (idParam) {
-      this.property = await BACKEND_SHARE_FILES_API.getUpload(idParam);
+      this.property = await this.BACKEND_SHARE_FILES_API.getUpload(idParam);
       this.uploadedFilesSubcription = this.BACKEND_FILE_UPLOAD_API.getFilesFrom$(this.property.files).subscribe((uploadedFiles) => {
         this.uploadedFiles = uploadedFiles;
       })

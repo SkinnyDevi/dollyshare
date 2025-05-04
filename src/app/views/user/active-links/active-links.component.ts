@@ -4,10 +4,10 @@ import { AppButtonComponent } from "../../../components/app-button/app-button.co
 import { CookieService } from 'ngx-cookie-service';
 import CookieHandler from '../../../services/cookies/cookies.service';
 import User from '../../../models/user';
-import { BACKEND_SHARE_FILES_API } from '../../../app.component';
 import { FirebaseFileUploadApiService } from '../../../services/firebase/firebase-file-upload-api.service';
 import { FirebaseShareTextApiService } from '../../../services/firebase/firebase-share-text-api.service';
 import { Subscription } from 'rxjs';
+import {FirebaseShareFilesApiService} from '../../../services/firebase/firebase-share-files-api.service';
 
 interface UploadLink {
   id: string;
@@ -26,8 +26,10 @@ export class UserActiveLinksComponent implements OnInit, OnDestroy {
   private readonly cookieHandler = inject(CookieHandler);
   private readonly BACKEND_FILE_UPLOAD_API = inject(FirebaseFileUploadApiService);
   private readonly BACKEND_SHARE_TEXT_API = inject(FirebaseShareTextApiService);
+  private readonly BACKEND_SHARE_FILES_API = inject(FirebaseShareFilesApiService);
   private readonly loggedInUser: User;
   private textUploadsSubscription: Subscription | null = null;
+  private fileUploadsSubscription: Subscription | null = null;
 
   userActiveLinks: UploadLink[] = [];
 
@@ -36,12 +38,17 @@ export class UserActiveLinksComponent implements OnInit, OnDestroy {
   }
 
   async ngOnInit(): Promise<void> {
-    const fileUploads = await BACKEND_SHARE_FILES_API.getUploadsFromUser(this.loggedInUser);
-    for (let upload of fileUploads)
-      this.userActiveLinks.push({
-        id: "files/" + upload.id,
-        isPrivate: upload.sharedWith.length > 0
-      });
+    this.fileUploadsSubscription = this.BACKEND_SHARE_FILES_API.getUploadsFromUser$(this.loggedInUser).subscribe((fileUploads) => {
+      const filteredActiveLinks = this.userActiveLinks.filter((al) => al.id.includes('text/'));
+      const newLinks = fileUploads
+        .map(upload => ({
+          id: `files/${upload.id}`,
+          isPrivate: upload.sharedWith.length > 0
+        }));
+
+      filteredActiveLinks.push(...newLinks);
+      this.userActiveLinks = filteredActiveLinks;
+    });
 
     this.textUploadsSubscription = this.BACKEND_SHARE_TEXT_API.getUploadsFromUser$(this.loggedInUser).subscribe((textUploads) => {
       const filteredActiveLinks = this.userActiveLinks.filter((al) => al.id.includes('files/'));
@@ -58,6 +65,7 @@ export class UserActiveLinksComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.textUploadsSubscription?.unsubscribe();
+    this.fileUploadsSubscription?.unsubscribe();
   }
 
   async deleteAllUploads() {
@@ -78,14 +86,10 @@ export class UserActiveLinksComponent implements OnInit, OnDestroy {
     if (uploadType === "files") await this.deleteSharedFiles(uploadId);
     else if (uploadType === "text") await this.deleteSharedText(uploadId);
     else console.error("Unknown upload type:", uploadType);
-
-    // Remove when realtime deleteSharedFiles works
-    // const entryIndex = this.userActiveLinks.indexOf(entry);
-    // if (entryIndex > -1) this.userActiveLinks.splice(entryIndex, 1);
   }
 
   async deleteSharedFiles(uploadId: string) {
-    const sharedFile = await BACKEND_SHARE_FILES_API.getUpload(uploadId);
+    const sharedFile = await this.BACKEND_SHARE_FILES_API.getUpload(uploadId);
     for (let file of sharedFile.files) {
       try {
         await this.BACKEND_FILE_UPLOAD_API.deleteFileById(file);
@@ -94,7 +98,7 @@ export class UserActiveLinksComponent implements OnInit, OnDestroy {
       }
     }
 
-    await BACKEND_SHARE_FILES_API.deleteUpload(sharedFile);
+    await this.BACKEND_SHARE_FILES_API.deleteUpload(sharedFile);
   }
 
   async deleteSharedText(uploadId: string) {

@@ -2,9 +2,21 @@ import {inject, Injectable} from '@angular/core';
 import ShareFilesAPI from '../base-apis/base_share_files.service';
 import UploadedFile from '../../models/uploaded_file';
 import SharedFiles from '../../models/shared_files';
-import {collection, deleteDoc, doc, Firestore, getDoc, getDocs, query, setDoc, where} from '@angular/fire/firestore';
+import {
+  collection, collectionData,
+  deleteDoc,
+  doc,
+  docData,
+  Firestore,
+  getDoc,
+  getDocs,
+  query,
+  setDoc,
+  where
+} from '@angular/fire/firestore';
 import User from '../../models/user';
 import {v4 as uuid} from 'uuid';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +24,7 @@ import {v4 as uuid} from 'uuid';
 export class FirebaseShareFilesApiService implements ShareFilesAPI {
   public readonly SHARED_FILES_LIFETIME_DAYS: number = 5;
   private _firestore = inject(Firestore);
-  private COLLECTION_NAME = "file_storage";
+  private COLLECTION_NAME = "file_uploads";
 
   async getUpload(uploadId: SharedFiles['id']): Promise<SharedFiles> {
     const docRef = doc(this._firestore, `${this.COLLECTION_NAME}/${uploadId}`);
@@ -22,11 +34,22 @@ export class FirebaseShareFilesApiService implements ShareFilesAPI {
     return userDoc.data() as SharedFiles;
   }
 
+  getUpload$(uploadId: SharedFiles['id']): Observable<SharedFiles> {
+    const docRef = doc(this._firestore, `${this.COLLECTION_NAME}/${uploadId}`);
+    return docData(docRef) as Observable<SharedFiles>;
+  }
+
   async getUploadsFromUser(user: User): Promise<SharedFiles[]> {
     const dbCollection = collection(this._firestore, this.COLLECTION_NAME);
     const fileQuery = query(dbCollection, where('owner', '==', user.id));
     const firebaseData = await getDocs(fileQuery);
     return firebaseData.docs.map(f => f.data() as SharedFiles);
+  }
+
+  getUploadsFromUser$(user: User): Observable<SharedFiles[]> {
+    const dbCollection = collection(this._firestore, this.COLLECTION_NAME);
+    const fileQuery = query(dbCollection, where('owner', '==', user.id));
+    return collectionData(fileQuery) as Observable<SharedFiles[]>;
   }
 
   async createUpload(files: UploadedFile[], owner: User | null = null, shareWith: User[] = []): Promise<SharedFiles> {
