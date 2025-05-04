@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { LogoComponent } from '../../components/logo/logo.component';
 import { RouteButtonComponent } from "../../components/app-button/route-button/route-button.component";
 import { ActivatedRoute, Router } from '@angular/router';
-import { BACKEND_SHARE_FILES_API, BACKEND_SHARE_TEXT_API } from '../../app.component';
+import { BACKEND_SHARE_FILES_API } from '../../app.component';
 import SharedFiles from '../../models/shared_files';
 import SharedText from '../../models/shared_text';
 import formatFileSize from '../../components/fileSizeFormatter';
+import { FirebaseShareTextApiService } from '../../services/firebase/firebase-share-text-api.service';
 
 type UploadType = "files" | "text";
 
@@ -25,7 +26,10 @@ export class FinishCreationComponent implements OnInit {
   uploadedFile: SharedFiles | null = null;
   uploadedText: SharedText | null = null;
 
-  constructor(private route: ActivatedRoute, private router: Router) {
+  private readonly BACKEND_SHARE_TEXT_API = inject(FirebaseShareTextApiService);
+  private readonly router = inject(Router)
+
+  constructor(private route: ActivatedRoute) {
     this.LINK_ID = this.route.snapshot.paramMap.get('link_id')!;
     this.uploadType = this.route.snapshot.queryParamMap.get("uploadType")! as UploadType;
 
@@ -46,7 +50,7 @@ export class FinishCreationComponent implements OnInit {
       }
     } else if (this.uploadType === "text") {
       try {
-        const upload = await BACKEND_SHARE_TEXT_API.getUploadById(this.LINK_ID);
+        const upload = await this.BACKEND_SHARE_TEXT_API.getUploadById(this.LINK_ID);
         this.uploadedText = upload;
       } catch (e: any) {
         if (e.status === 404) await this.router.navigate(['/']);
@@ -73,7 +77,7 @@ export class FinishCreationComponent implements OnInit {
   }
 
   getExpiryDate(timestamp: number, type: UploadType) {
-    const length = type === "files" ? BACKEND_SHARE_FILES_API.SHARED_FILES_LIFETIME_DAYS : BACKEND_SHARE_TEXT_API.SHARED_TEXT_LIFETIME_DAYS;
+    const length = type === "files" ? BACKEND_SHARE_FILES_API.SHARED_FILES_LIFETIME_DAYS : this.BACKEND_SHARE_TEXT_API.SHARED_TEXT_LIFETIME_DAYS;
     return `${length} days (${new Date(timestamp).toLocaleDateString()})`;
   }
 

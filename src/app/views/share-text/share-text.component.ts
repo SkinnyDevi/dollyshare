@@ -43,9 +43,8 @@ export class ShareTextComponent {
       const upload = await this.shareTextApi.createUpload(
         this.getValueFromForm('title') as string,
         this.getValueFromForm('body') as string,
-        //this.getUserIfLoggedIn() || null, descomentar para ver el usuario cuando este tambien implementado
+        this.getUserIfLoggedIn() || null
       );
-      console.log("Upload created", upload);
       await this.router.navigate(['/finish', upload.id], {
         queryParams: { uploadType: 'text' }
       });

@@ -1,12 +1,42 @@
-<form [formGroup]="accountUpdateForm" (submit)="onSubmit()">
-  <app-common-input-field formControlName="email" type="email" label="Email" placeholder="Email"></app-common-input-field>
-  <app-common-input-field formControlName="username" label="Username" placeholder="Username"></app-common-input-field>
-  <div class="save-button">
-    <app-button type="submit" [disabled]="accountUpdateForm.invalid && !showSuccess">Save Changes</app-button>
-  </div>
+<div class="account-update-container">
+  <form [formGroup]="changeEmailForm" (submit)="onEmailSubmit()" class="user-field-updater">
+    <div class="user-update-field">
+      <app-common-input-field
+        formControlName="email"
+        type="email"
+        label="Email"
+        placeholder="johndoe@gmail.com"
+        [hasError]="isTouched(changeEmailForm, 'email') && isInvalid(changeEmailForm, 'email')"
+        (focusin)="changeEmailForm.get('email')?.markAsTouched()"
+      ></app-common-input-field>
+      @if(isTouched(changeEmailForm, 'email') && isInvalid(changeEmailForm, 'email')) {
+        <p class="validation-label">Invalid email format</p>
+      }
+    </div>
+    <div class="user-confirm-update-btn" [class.user-confirm-update-btn-error]="isTouched(changeEmailForm, 'email') && isInvalid(changeEmailForm, 'email')">
+      <app-button type="submit" [disabled]="changeEmailForm.invalid">Update</app-button>
+    </div>
+  </form>
+  <form [formGroup]="changeUsernameForm" (submit)="onUsernameSubmit()" class="user-field-updater">
+    <div class="user-update-field">
+      <app-common-input-field
+        formControlName="username"
+        label="Username"
+        placeholder="john_doe"
+        [hasError]="isTouched(changeUsernameForm, 'username') && isInvalid(changeUsernameForm, 'username')"
+        (focusin)="changeUsernameForm.get('username')?.markAsTouched()"
+      ></app-common-input-field>
+      @if(isTouched(changeUsernameForm, 'username') && isInvalid(changeUsernameForm, 'username')) {
+        <p class="validation-label">*This field is required</p>
+      }
+    </div>
+    <div class="user-confirm-update-btn" [class.user-confirm-update-btn-error]="isTouched(changeUsernameForm, 'username') && isInvalid(changeUsernameForm, 'username')">
+      <app-button type="submit" [disabled]="changeUsernameForm.invalid">Update</app-button>
+    </div>
+  </form>
   @if(showSuccess) {
     <div class="change-success">
       <p>Successfully changed information.</p>
     </div>
   }
-</form>
+</div>

@@ -13,21 +13,24 @@ import CookieHandler from '../../../services/cookies/cookies.service';
   styleUrl: './account.component.css'
 })
 export class UserAccountComponent {
-  accountUpdateForm: FormGroup;
+  changeEmailForm: FormGroup;
+  changeUsernameForm: FormGroup;
   showSuccess = false;
 
   private BACKEND_USER_API = inject(FirebaseUserApiService);
   private cookieHandler = inject(CookieHandler);
 
   constructor() {
-    this.accountUpdateForm = new FormBuilder().group({
-      email: ['', [Validators.required, Validators.email]],
-      username: ['', Validators.required]
+    this.changeEmailForm = new FormBuilder().group({
+      email: ['', [Validators.required, Validators.email]]
+    })
+    this.changeUsernameForm = new FormBuilder().group({
+      username: ['', [Validators.required]]
     })
   }
 
-  async onSubmit() {
-    if (this.accountUpdateForm.invalid) return;
+  async onEmailSubmit() {
+    if (this.changeEmailForm.invalid) return;
 
     try {
       let currentUser = this.cookieHandler.getUserCookies();
@@ -36,13 +39,34 @@ export class UserAccountComponent {
         return;
       }
 
-      currentUser.username = this.getFormValue('username');
-      currentUser.email = this.getFormValue('email');
+      currentUser.email = this.changeEmailForm.get('email')?.value;
       currentUser.modifiedAt = Date.now();
 
       // Update user
-      const newUser = await this.BACKEND_USER_API.updateUser(currentUser.id, currentUser);
-      this.accountUpdateForm.reset();
+      await this.BACKEND_USER_API.updateUser(currentUser.id, currentUser);
+      this.changeEmailForm.reset();
+      this.showSuccessMessage();
+    } catch (e: any) {
+      console.log("Couldn't update the user:", e);
+    }
+  }
+
+  async onUsernameSubmit() {
+    if (this.changeUsernameForm.invalid) return;
+
+    try {
+      let currentUser = this.cookieHandler.getUserCookies();
+      if (currentUser === null) {
+        console.error("Couldn't update user: user is 'null'");
+        return;
+      }
+
+      currentUser.username = this.changeUsernameForm.get('username')?.value;
+      currentUser.modifiedAt = Date.now();
+
+      // Update user
+      await this.BACKEND_USER_API.updateUser(currentUser.id, currentUser);
+      this.changeUsernameForm.reset();
       this.showSuccessMessage();
     } catch (e: any) {
       console.log("Couldn't update the user:", e);
@@ -54,7 +78,11 @@ export class UserAccountComponent {
     setTimeout(() => this.showSuccess = false, 3000);
   }
 
-  private getFormValue(name: string): string {
-    return this.accountUpdateForm.get(name)?.value;
+  isTouched(form: FormGroup, name: string) {
+    return form.get(name)?.touched!
+  }
+
+  isInvalid(form: FormGroup, name: string) {
+    return form.get(name)?.invalid || false
   }
 }

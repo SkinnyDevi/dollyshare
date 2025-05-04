@@ -1,4 +1,4 @@
-form {
+.account-update-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -6,11 +6,22 @@ form {
   padding: 0 50px;
 }
 
-.save-button {
-  margin-top: 20px;
+.user-field-updater {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+}
+
+.user-update-field {
+  flex: 1;
+}
+
+.user-confirm-update-btn {
+  transform: translateY(10px);
+}
+
+.user-confirm-update-btn-error {
+  transform: translateY(0px) !important;
 }
 
 .change-success {
@@ -19,4 +30,27 @@ form {
   align-content: center;
   text-align: center;
   color: green;
+}
+
+.validation-label {
+  font-size: 12px;
+  margin-top: 0;
+  margin-bottom: 0;
+  text-align: right;
+  color: red;
+}
+
+::ng-deep .common-input-field {
+  margin-bottom: 5px !important;
+}
+
+@media only screen and (max-width: 575px) {
+  .user-field-updater {
+    flex-direction: column;
+    margin-bottom: 30px;
+  }
+
+  .user-update-field {
+    margin-bottom: 10px;
+  }
 }

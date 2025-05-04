@@ -12,6 +12,7 @@ import { ScreenDetectorService } from '../../services/screenDetector/screenDetec
 import getFileExtensionIcon from '../../components/file-extension-helper';
 import { FirebaseFileUploadApiService } from '../../services/firebase/firebase-file-upload-api.service';
 import {FirebaseShareFilesApiService} from '../../services/firebase/firebase-share-files-api.service';
+import { IconButtonComponent } from "../../components/app-button/icon-button/icon-button.component";
 
 @Component({
   selector: 'view-share-file',
@@ -20,7 +21,8 @@ import {FirebaseShareFilesApiService} from '../../services/firebase/firebase-sha
     LogoComponent,
     RouteButtonComponent,
     AppButtonComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    IconButtonComponent
   ],
   templateUrl: './share-file.component.html',
   styleUrl: './share-file.component.css',
@@ -29,6 +31,8 @@ import {FirebaseShareFilesApiService} from '../../services/firebase/firebase-sha
 export class ShareFileComponent {
   uploadedFiles: File[] = [];
   screenIsPhone = false;
+
+  readonly MAX_TOTAL_SIZE = 2e+9;
 
   private readonly router = inject(Router);
   private readonly sd = inject(ScreenDetectorService)
@@ -48,8 +52,22 @@ export class ShareFileComponent {
     return getFileExtensionIcon(file);
   }
 
-  fileValidator() {
-    return !(this.uploadedFiles.length > 0);
+  totalFileSize() {
+    if (this.uploadedFiles.length < 1) return 0;
+
+    return this.uploadedFiles.map(f => f.size).reduce((a, b) => a + b);
+  }
+
+  removeEntry(file: File) {
+    this.uploadedFiles = this.uploadedFiles.filter(f => f != file);
+  }
+
+  allowCreateUrl() {
+    return this.fileSizeValidator() && this.uploadedFiles.length > 0;
+  }
+
+  fileSizeValidator() {
+    return this.totalFileSize() < this.MAX_TOTAL_SIZE;
   }
 
   openFilePicker() {
