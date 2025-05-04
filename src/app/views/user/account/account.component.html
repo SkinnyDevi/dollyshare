@@ -27,7 +27,7 @@
         (focusin)="changeUsernameForm.get('username')?.markAsTouched()"
       ></app-common-input-field>
       @if(isTouched(changeUsernameForm, 'username') && isInvalid(changeUsernameForm, 'username')) {
-        <p class="validation-label">field required</p>
+        <p class="validation-label">*This field is required</p>
       }
     </div>
     <div class="user-confirm-update-btn" [class.user-confirm-update-btn-error]="isTouched(changeUsernameForm, 'username') && isInvalid(changeUsernameForm, 'username')">

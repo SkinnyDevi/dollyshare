@@ -60,4 +60,16 @@ export class UserChangePasswordComponent {
     this.showSuccess = true;
     setTimeout(() => this.showSuccess = false, 3000);
   }
+
+  isTouched(name: string) {
+    return this.changePasswordForm.get(name)?.touched!
+  }
+
+  isInvalid(name: string) {
+    return this.changePasswordForm.get(name)?.invalid || false
+  }
+
+  getValueFromForm(name: string) {
+    return this.changePasswordForm.get(name)?.value;
+  }
 }
