@@ -51,6 +51,8 @@ Todos los diseños los puede encontrar en el enlace a [Figma haciendo click aqui
 - Compartir texto: [codigo de la pagina Share Text](./src/app/views/share-text/)
 - Compartir archivos: [codigo de la pagina Share Files](./src/app/views/share-file/)
 - Enlace generado: [codigo de la pagina Finish Creation](./src/app/views/finish-creation/)
+- Descarga de archivo: [codigo de la pagina de Download Files](./src/app/views/download-file/)
+- Descarga de texto: [codigo de la pagina de Download Text](./src/app/views/download-text/)
 - Login: [codigo de la página Login](./src/app/views/login/)
 - Registro: [codigo de la página Register](./src/app/views/register)
 - Registro exitoso: [codigo de la página Register Successful](./src/app/views/register-successful)
@@ -75,8 +77,9 @@ Para probar el proyecto localmente:
 2. Instale NodeJS
 3. Clone este repositorio
 4. Dentro de la carpeta clonada, ejecute `npm install`
-5. Para abrir la base de datos, use `npm run server`
 6. Para abrir la web en el navegador, use `npm start`
+
+Todo el backend esta almacenado en la base de datos de Firebase Firestore a tiempo real.
 
 ## Capturas de la web
 
@@ -86,6 +89,8 @@ Todas las capturas han sido sacadas desde un navegador, siendo esta la version f
 ![share files view](./documents/screenshots/share%20files%20view.png)
 ![share text view](./documents/screenshots/share%20text%20view.png)
 ![finish creation view](./documents/screenshots/finish%20creation%20view.png)
+![download files view](./documents/screenshots/download%20files.png)
+![download text view](./documents/screenshots/download%20text.png)
 ![register view](./documents/screenshots/register%20view.png)
 ![register successful view](./documents/screenshots/register%20successful.png)
 ![login view](./documents/screenshots/login%20view.png)
