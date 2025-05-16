@@ -8,6 +8,7 @@
 		"watch": "ng build --watch --configuration development",
 		"test": "ng test",
 		"lint": "ng lint",
+		"ionic-android": "ionic cap sync android && ionic cap open android",
 		"ionic-ios": "ionic cap sync ios && ionic cap open ios"
 	},
 	"private": true,
@@ -21,6 +22,7 @@
 		"@angular/platform-browser": "^19.0.0",
 		"@angular/platform-browser-dynamic": "^19.0.0",
 		"@angular/router": "^19.0.0",
+		"@capacitor/android": "^7.2.0",
 		"@capacitor/app": "7.0.1",
 		"@capacitor/core": "7.2.0",
 		"@capacitor/haptics": "7.0.1",

@@ -25,7 +25,7 @@ export class NavbarComponent {
 	@Input() variant: NavbarVariant = this.DEFAULT_VARIANT;
 
 	displayOptions = false;
-	isIos: boolean;
+	isNativePhone: boolean;
 
 	constructor(private router: Router, private route: ActivatedRoute, private platform: Platform) {
 		this.router.events
@@ -37,7 +37,7 @@ export class NavbarComponent {
 				this.variant = variant || this.getNavbarVariant();
 				this.displayOptions = false;
 			});
-		this.isIos = this.platform.is('ios');
+		this.isNativePhone = this.platform.is('ios') || this.platform.is("android");
 	}
 
 	getNavbarVariant() {

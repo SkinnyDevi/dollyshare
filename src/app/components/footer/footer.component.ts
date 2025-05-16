@@ -9,9 +9,9 @@ import { Platform } from '@ionic/angular/common';
 	styleUrl: './footer.component.css'
 })
 export class FooterComponent {
-	isIos: boolean;
+	isNativePhone: boolean;
 
 	constructor(private platform: Platform) {
-		this.isIos = this.platform.is('ios');
+		this.isNativePhone = this.platform.is('ios') || this.platform.is("android");
 	}
 }
