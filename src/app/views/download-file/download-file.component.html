@@ -1,46 +1,44 @@
 <main>
-	<ion-content [scrollY]="true">
-		<div class="download-files-container">
-			<app-logo [width]="120" [useReturnToHome]="true"></app-logo>
-			<h1>Components of the sheep</h1>
-			<div class="download-files-box">
-				@if (this.uploadedFiles.length > 0){
-				<div class="download-files-tittle-box">
-					<h2>The sheep is composed by {{this.property?.files?.length}} items and the weight of the unit is
-						{{formatFileSize(this.property!.size)}}
-						<br>Expires in {{getExpiryDate(this.property!.expires)}}
-					</h2>
-				</div>
-				<div class="download-files-body">
-					<ul class="file-list">
-						@for(file of this.uploadedFiles;track file.name){
-						<li>
-							<div class="file-properties">
-								<img
-									src="https://raw.githubusercontent.com/SkinnyDevi/dollyshare/refs/heads/master/src/assets/img/{{fileExtensionIcon(file)}}.png"
-									alt="{{fileExtensionIcon(file)}} icon" width="40" height="auto">
-								<p>{{file.name}}</p>
-							</div>
-							<div class="file-size">
-								<p>{{formatFileSize(file.size)}}</p>
-							</div>
-						</li>
-						<hr>
-						}
-					</ul>
-				</div>
-				} @else {
-				<div class="download-files-tittle-box">
-					<p class="empty-message">No files are vinculated or the link has expired</p>
-				</div>
-				}
+	<ion-content [scrollY]="true" class="download-files-container">
+		<app-logo [width]="120" [useReturnToHome]="true"></app-logo>
+		<h1>Components of the sheep</h1>
+		<div class="download-files-box">
+			@if (this.uploadedFiles.length > 0){
+			<div class="download-files-tittle-box">
+				<h2>The sheep is composed by {{this.property?.files?.length}} items and the weight of the unit is
+					{{formatFileSize(this.property!.size)}}
+					<br>Expires in {{getExpiryDate(this.property!.expires)}}
+				</h2>
 			</div>
-			<div class="dowload-files-buttom-container">
-				<app-route-button routerLink="/">Go home</app-route-button>
-				@if (this.uploadedFiles.length > 0){
-				<app-button size="small" (click)="createZipFromUploadedFiles()">Download all</app-button>
-				}
+			<div class="download-files-body">
+				<ul class="file-list">
+					@for(file of this.uploadedFiles;track file.name){
+					<li>
+						<div class="file-properties">
+							<img
+								src="https://raw.githubusercontent.com/SkinnyDevi/dollyshare/refs/heads/master/src/assets/img/{{fileExtensionIcon(file)}}.png"
+								alt="{{fileExtensionIcon(file)}} icon" width="40" height="auto">
+							<p>{{file.name}}</p>
+						</div>
+						<div class="file-size">
+							<p>{{formatFileSize(file.size)}}</p>
+						</div>
+					</li>
+					<hr>
+					}
+				</ul>
 			</div>
+			} @else {
+			<div class="download-files-tittle-box">
+				<p class="empty-message">No files are vinculated or the link has expired</p>
+			</div>
+			}
+		</div>
+		<div class="dowload-files-buttom-container">
+			<app-route-button routerLink="/">Go home</app-route-button>
+			@if (this.uploadedFiles.length > 0){
+			<app-button size="small" (click)="createZipFromUploadedFiles()">Download all</app-button>
+			}
 		</div>
 	</ion-content>
 </main>
