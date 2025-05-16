@@ -47,3 +47,22 @@ Thumbs.db
 .firebase
 *-debug.log
 .runtimeconfig.json
+
+# Web Build
+www/
+
+# iOS
+ios/App/build
+ios/App/Pods
+ios/App/output
+ios/App/GoogleService-Info.plist
+ios/App/App/public
+ios/DerivedData
+ios/xcuserdata
+
+# Cordova plugins for Capacitor
+capacitor-cordova-ios-plugins
+
+# Generated Config files
+App/App/capacitor.config.json
+App/App/config.xml

@@ -8,41 +8,44 @@ import { RouteButtonComponent } from '../app-button/route-button/route-button.co
 import { CookieService } from 'ngx-cookie-service';
 import CookieHandler from '../../services/cookies/cookies.service';
 import { UserButtonHoverComponent } from "../user-button-hover/user-button-hover.component";
+import { Platform } from '@ionic/angular/common';
 
 @Component({
-  selector: 'app-navbar',
-  standalone: true,
-  imports: [RouterLink, RouteButtonComponent, LoginButtonComponent, IconButtonComponent, UserButtonHoverComponent],
-  templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css',
-  providers: [CookieService]
+	selector: 'app-navbar',
+	standalone: true,
+	imports: [RouterLink, RouteButtonComponent, LoginButtonComponent, IconButtonComponent, UserButtonHoverComponent],
+	templateUrl: './navbar.component.html',
+	styleUrl: './navbar.component.css',
+	providers: [CookieService]
 })
 export class NavbarComponent {
-  private readonly DEFAULT_VARIANT = NavbarVariant.GUEST;
-  private readonly cookieHandler = inject(CookieHandler);
+	private readonly DEFAULT_VARIANT = NavbarVariant.GUEST;
+	private readonly cookieHandler = inject(CookieHandler);
 
-  @Input() variant: NavbarVariant = this.DEFAULT_VARIANT;
+	@Input() variant: NavbarVariant = this.DEFAULT_VARIANT;
 
-  displayOptions = false;
+	displayOptions = false;
+	isIos: boolean;
 
-  constructor(private router: Router, private route: ActivatedRoute) {
-    this.router.events
-      .pipe(
-        filter(event => event instanceof NavigationEnd),
-        map(() => this.route.firstChild?.snapshot.data['navbarVariant'])
-      )
-      .subscribe(variant => {
-        this.variant = variant || this.getNavbarVariant();
-        this.displayOptions = false;
-      });
-  }
+	constructor(private router: Router, private route: ActivatedRoute, private platform: Platform) {
+		this.router.events
+			.pipe(
+				filter(event => event instanceof NavigationEnd),
+				map(() => this.route.firstChild?.snapshot.data['navbarVariant'])
+			)
+			.subscribe(variant => {
+				this.variant = variant || this.getNavbarVariant();
+				this.displayOptions = false;
+			});
+		this.isIos = this.platform.is('ios');
+	}
 
-  getNavbarVariant() {
-    if (this.cookieHandler.userCookiesExist()) return NavbarVariant.USER;
-    return NavbarVariant.GUEST;
-  }
+	getNavbarVariant() {
+		if (this.cookieHandler.userCookiesExist()) return NavbarVariant.USER;
+		return NavbarVariant.GUEST;
+	}
 
-  toggleOptions() {
-    this.displayOptions = !this.displayOptions;
-  }
+	toggleOptions() {
+		this.displayOptions = !this.displayOptions;
+	}
 }
