@@ -40,6 +40,9 @@
 						@if (!fileSizeValidator()) {
 						<p>Total file size exceeds {{ formatUploadedFileSize(this.MAX_TOTAL_SIZE) }}</p>
 						}
+						@if (fileListHasIndividualFileExceedingLimit()) {
+						<p>An uploaded file exceeds {{ formatUploadedFileSize(this.MAX_FILE_SIZE) }}</p>
+						}
 					</div>
 					}
 				</div>

@@ -34,7 +34,8 @@ export class ShareFileComponent {
 	uploadedFiles: File[] = [];
 	screenIsPhone = false;
 
-	readonly MAX_TOTAL_SIZE = 2e+9;
+	readonly MAX_FILE_SIZE = 150000;
+	readonly MAX_TOTAL_SIZE = 2e+9; // 2 GB
 
 	private readonly router = inject(Router);
 	private readonly sd = inject(ScreenDetectorService)
@@ -64,8 +65,15 @@ export class ShareFileComponent {
 		this.uploadedFiles = this.uploadedFiles.filter(f => f != file);
 	}
 
+	fileListHasIndividualFileExceedingLimit() {
+		for (let file of this.uploadedFiles)
+			if (file.size > this.MAX_FILE_SIZE) return true;
+
+		return false;
+	}
+
 	allowCreateUrl() {
-		return this.fileSizeValidator() && this.uploadedFiles.length > 0;
+		return this.fileSizeValidator() && this.uploadedFiles.length > 0 && !this.fileListHasIndividualFileExceedingLimit();
 	}
 
 	fileSizeValidator() {
