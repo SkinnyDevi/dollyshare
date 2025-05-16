@@ -3,18 +3,18 @@ import { IconSelectorComponent } from "../icons/icon-selector/icon-selector.comp
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-active-link-entry',
-  standalone: true,
-  imports: [RouterLink, IconSelectorComponent],
-  templateUrl: './active-link-entry.component.html',
-  styleUrl: './active-link-entry.component.css'
+	selector: 'app-active-link-entry',
+	standalone: true,
+	imports: [RouterLink, IconSelectorComponent],
+	templateUrl: './active-link-entry.component.html',
+	styleUrl: './active-link-entry.component.css'
 })
 export class ActiveLinkEntryComponent {
-  @Input() isPrivate = false;
-  @Input() linkId = "";
-  @Output() deleteCallback = new EventEmitter<string>();
+	@Input() isPrivate = false;
+	@Input() linkId = "";
+	@Output() deleteCallback = new EventEmitter<string>();
 
-  onDelete() {
-    this.deleteCallback.emit(this.linkId);
-  }
+	onDelete() {
+		this.deleteCallback.emit(this.linkId);
+	}
 }

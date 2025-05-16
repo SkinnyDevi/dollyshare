@@ -20,13 +20,13 @@
 
 @media only screen and (max-width: 600px) {
 	.login-input {
-		transform: scale(0.85);
+		transform: scale(0.80);
 	}
 }
 
 @media only screen and (max-width: 400px) {
 	.login-input {
-		transform: scale(0.75);
+		transform: scale(0.70);
 	}
 }
 

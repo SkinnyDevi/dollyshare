@@ -1,62 +1,61 @@
 :host {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .user-tabs {
-  width: 70%;
-  height: 100px;
-  max-width: 800px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #394750;
-  margin: 10px 0;
-  border-radius: 10px;
-  flex-wrap: wrap;
-  gap: 15px;
-  padding: 0 15px;
+	width: 70%;
+	height: 100px;
+	max-width: 800px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: #394750;
+	margin: 10px 0;
+	border-radius: 10px;
+	flex-wrap: wrap;
+	gap: 15px;
+	padding: 0 15px;
 }
 
 button {
-  /* margin: 0 10px; */
-  /* padding: 1.5rem 1.75rem; */
-  height: 65px;
-  max-width: 200px;
-  border-radius: 8px;
-  border: 2px solid var(--secondary-beige);
-  color: white;
-  background: var(--main-blue-variant);
-  font-weight: bold;
-  font-size: 16px;
-  flex: 1 1 10%;
+	height: 65px;
+	max-width: 200px;
+	border-radius: 8px;
+	border: 2px solid var(--secondary-beige);
+	color: white;
+	background: var(--main-blue-variant);
+	font-weight: bold;
+	font-size: 16px;
+	flex: 1 1 10%;
 }
 
 button:hover,
 .selected-view {
-  color: #232323;
-  background: var(--secondary-beige);
-  cursor: pointer;
+	color: #232323;
+	background: var(--secondary-beige);
+	cursor: pointer;
 }
 
 .selected-view {
-  cursor: auto !important;
+	cursor: auto !important;
 }
 
 @media only screen and (max-width: 725px) {
-  .user-tabs {
-    height: 150px;
-  }
+	.user-tabs {
+		height: 150px;
+	}
 }
 
 @media only screen and (max-width: 550px) {
-  .user-tabs {
-    padding: 15px;
-  }
+	.user-tabs {
+		padding: 15px;
+		height: 200px;
+	}
 
-  button {
-    flex: 1 1 40%;
-  }
+	button {
+		flex: 1 1 40%;
+	}
 }

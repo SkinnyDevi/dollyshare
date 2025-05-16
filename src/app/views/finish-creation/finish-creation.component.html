@@ -1,19 +1,22 @@
 <main>
-  <div class="finish-container">
-    <h1>Thank you for using<br> DollyShare</h1>
-    <app-logo [width]="150" [useReturnToHome]="true"></app-logo>
-    <div class="link-box">
-      <p class="link-info">Your link:</p>
-      <a class="link-redirect" [href]="getRedirectLink()">{{getResultingLink()}}</a>
-      @if (uploadedFile !== null) {
-        <p class="file-info">{{getItemString()}}, {{formatTotalFileSize(uploadedFile.size)}} in total - Expires in {{getExpiryDate(uploadedFile.expires, "files")}}</p>
-      }
-      @if (uploadedText !== null) {
-      <p class="file-info">Expires in {{getExpiryDate(uploadedText.expires, "text")}}</p>
-      }
-    </div>
-    <div class="new-upload-buttons">
-      <app-route-button size="small" routerLink="/">New Upload</app-route-button>
-    </div>
-  </div>
+	<ion-content [scrollY]="true">
+		<div class="finish-container">
+			<h1>Thank you for using<br> DollyShare</h1>
+			<app-logo [width]="150" [useReturnToHome]="true"></app-logo>
+			<div class="link-box">
+				<p class="link-info">Your link:</p>
+				<a class="link-redirect" [href]="getRedirectLink()">{{getResultingLink()}}</a>
+				@if (uploadedFile !== null) {
+				<p class="file-info">{{getItemString()}}, {{formatTotalFileSize(uploadedFile.size)}} in total - Expires in
+					{{getExpiryDate(uploadedFile.expires, "files")}}</p>
+				}
+				@if (uploadedText !== null) {
+				<p class="file-info">Expires in {{getExpiryDate(uploadedText.expires, "text")}}</p>
+				}
+			</div>
+			<div class="new-upload-buttons">
+				<app-route-button size="small" routerLink="/">New Upload</app-route-button>
+			</div>
+		</div>
+	</ion-content>
 </main>

@@ -8,11 +8,11 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 
 export const appConfig: ApplicationConfig = {
-  providers: [
-    provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes),
-    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
-    provideAuth(() => getAuth()),
-    provideFirestore(() => getFirestore())
-  ]
+	providers: [
+		provideZoneChangeDetection({ eventCoalescing: true }),
+		provideRouter(routes),
+		provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+		provideAuth(() => getAuth()),
+		provideFirestore(() => getFirestore())
+	]
 };

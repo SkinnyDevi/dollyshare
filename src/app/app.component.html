@@ -1,5 +1,11 @@
-<app-navbar></app-navbar>
-<div class="app-container">
-	<router-outlet></router-outlet>
-	<app-footer></app-footer>
-</div>
+<ion-app>
+	<ion-header>
+		<app-navbar></app-navbar>
+	</ion-header>
+	<ion-content [scrollY]="true">
+		<ion-router-outlet [animated]="false"></ion-router-outlet>
+	</ion-content>
+	<ion-footer>
+		<app-footer></app-footer>
+	</ion-footer>
+</ion-app>

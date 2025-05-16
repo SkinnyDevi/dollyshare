@@ -1,32 +1,37 @@
+:host {
+	z-index: 1000;
+	position: relative;
+}
+
 .app-navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  min-height: 75px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	min-height: 75px;
 }
 
 .app-navbar>a {
-  font-size: 24px;
-  color: white;
-  text-decoration: none;
-  opacity: 40%;
-  font-weight: bold;
-  margin-left: 20px;
+	font-size: 24px;
+	color: white;
+	text-decoration: none;
+	opacity: 40%;
+	font-weight: bold;
+	margin-left: 20px;
 }
 
 .guest-buttons,
 .user-buttons {
-  margin-right: 10px;
+	margin-right: 10px;
 }
 
 @media only screen and (max-width: 400px) {
-  .guest-buttons {
-    margin-right: 0;
-    transform: scale(0.9);
-  }
+	.guest-buttons {
+		margin-right: 0;
+		transform: scale(0.9);
+	}
 
-  .app-navbar>a {
-    margin-left: 10px;
-    font-size: 18px;
-  }
+	.app-navbar>a {
+		margin-left: 10px;
+		font-size: 18px;
+	}
 }

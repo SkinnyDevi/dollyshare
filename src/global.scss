@@ -1,0 +1,154 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+/* Core CSS required for Ionic components to work properly */
+@import "@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+
+/* Optional CSS utils that can be commented out */
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+/**
+ * Ionic Dark Mode
+ * -----------------------------------------------------
+ * For more info, please see:
+ * https://ionicframework.com/docs/theming/dark-mode
+ */
+
+/* @import "@ionic/angular/css/palettes/dark.always.css"; */
+/* @import "@ionic/angular/css/palettes/dark.class.css"; */
+@import '@ionic/angular/css/palettes/dark.system.css';
+
+/** Custom Ionic modifications **/
+
+ion-content::part(background) {
+	background: var(--main-dark-blue);
+}
+
+ion-header,
+ion-footer {
+    --box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+// ion-router-outlet {
+//   inset: auto !important; /* Reset inset to default */
+//   position: relative !important; /* Change to relative to stay in normal flow */
+//   contain: none !important; /* Disable containment */
+//   z-index: auto !important; /* Reset z-index */
+// 	width: 100%;
+// 	height: 100%;
+// }
+
+/** Custom Ionic modifications **/
+
+:root {
+	--main-dark-blue: #283238;
+	--main-blue-variant: #394750;
+	--main-dark-blue-hover: #4b5e6a;
+	--secondary-beige: #D8C299;
+	--secondary-light-beige: #F8E4BE;
+	--accent-blue: #8DA9C4;
+	--accent-light-blue: #A3DFF2;
+	--container-bg: #50626D;
+}
+
+html,
+body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background: var(--main-dark-blue);
+	color: white;
+	font-family: 'Inter', sans-serif !important;
+	display: flex;
+	flex-direction: column;
+	min-height: 100%;
+}
+
+input,
+textarea,
+form,
+h1,
+h2,
+h3,
+h4 {
+	font-family: 'Inter', sans-serif !important;
+}
+
+a {
+	color: var(--accent-light-blue);
+}
+
+a:hover {
+	color: var(--accent-blue);
+}
+
+.bg-beige {
+	background: var(--secondary-beige);
+}
+
+.bg-main-dark-blue {
+	background: var(--main-dark-blue);
+}
+
+svg {
+	width: 30px;
+	height: auto;
+}
+
+svg.fill-black>path {
+	stroke: #232323;
+}
+
+svg.fill-semi-transparent>path {
+	stroke: rgba(0, 0, 0, 0.5);
+}
+
+svg.fill-beige>path {
+	stroke: var(--secondary-beige);
+}
+
+svg.fill-light-beige>path {
+	stroke: var(--secondary-light-beige);
+}
+
+::-webkit-scrollbar {
+	width: 8px;
+}
+
+::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+	background: rgba(0, 0, 0, 0.5);
+	border-radius: 4px;
+}
+
+* {
+	scrollbar-width: auto;
+	scrollbar-color: rgba(0, 0, 0, 0.5) transparent;
+}

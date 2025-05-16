@@ -1,48 +1,53 @@
 <main>
-	<div class="share-file-container" [class.share-file-container-start]="this.uploadedFiles.length > 1 && screenIsPhone">
-		<app-logo [width]="120" [useReturnToHome]="true"></app-logo>
-		<h1>What will you share today?</h1>
-    <div class="share-file-box">
-      <input id="file-drop-input" type="file" (change)="onFilePicked($event)" multiple style="display: none;" />
-      <button class="drop-here-zone" type="button" (click)="openFilePicker()">
-        Click to upload your files
-      </button>
-      <div class="file-box">
-        <ul class="file-list">
-          @for(file of this.uploadedFiles; track file.name) {
-            <li>
-              <div class="file-properties">
-                <img src="https://raw.githubusercontent.com/SkinnyDevi/dollyshare/refs/heads/master/src/assets/img/{{fileExtensionIcon(file)}}.png" alt="{{fileExtensionIcon(file)}} icon" width="40" height="auto">
-                <p>{{file.name}}</p>
-              </div>
-              <div class="file-details">
-                <p>{{formatUploadedFileSize(file.size)}}</p>
-                <app-icon-button icon="close" (click)="removeEntry(file)"></app-icon-button>
-              </div>
-            </li>
-            <hr>
-          } @empty {
-            <li class="empty-filebox-placeholder">
-              <p>Your files will appear here</p>
-            </li>
-          }
-        </ul>
-        @if(this.uploadedFiles.length > 0) {
-          <div class="clear-button-container">
-            <app-button (click)="clearFileList()">Clear files</app-button>
-          </div>
-          <div class="total-file-size">
-            <p>Total file size: {{ formatUploadedFileSize(totalFileSize()) }}</p>
-            @if (!fileSizeValidator()) {
-              <p>Total file size exceeds {{ formatUploadedFileSize(this.MAX_TOTAL_SIZE) }}</p>
-            }
-          </div>
-        }
-      </div>
-    </div>
-    <div class="file-options-buttons">
-      <app-route-button routerLink="/">Go Back</app-route-button>
-      <app-button type="submit" [disabled]="!allowCreateUrl()" (click)="submitFiles()">Create URL</app-button>
-    </div>
-	</div>
+	<ion-content [scrollY]="true">
+		<div class="share-file-container"
+			[class.share-file-container-start]="this.uploadedFiles.length > 1 && screenIsPhone">
+			<app-logo [width]="120" [useReturnToHome]="true"></app-logo>
+			<h1>What will you share today?</h1>
+			<div class="share-file-box">
+				<input id="file-drop-input" type="file" (change)="onFilePicked($event)" multiple style="display: none;" />
+				<button class="drop-here-zone" type="button" (click)="openFilePicker()">
+					Click to upload your files
+				</button>
+				<div class="file-box">
+					<ul class="file-list">
+						@for(file of this.uploadedFiles; track file.name) {
+						<li>
+							<div class="file-properties">
+								<img
+									src="https://raw.githubusercontent.com/SkinnyDevi/dollyshare/refs/heads/master/src/assets/img/{{fileExtensionIcon(file)}}.png"
+									alt="{{fileExtensionIcon(file)}} icon" width="40" height="auto">
+								<p>{{file.name}}</p>
+							</div>
+							<div class="file-details">
+								<p>{{formatUploadedFileSize(file.size)}}</p>
+								<app-icon-button icon="close" (click)="removeEntry(file)"></app-icon-button>
+							</div>
+						</li>
+						<hr>
+						} @empty {
+						<li class="empty-filebox-placeholder">
+							<p>Your files will appear here</p>
+						</li>
+						}
+					</ul>
+					@if(this.uploadedFiles.length > 0) {
+					<div class="clear-button-container">
+						<app-button (click)="clearFileList()">Clear files</app-button>
+					</div>
+					<div class="total-file-size">
+						<p>Total file size: {{ formatUploadedFileSize(totalFileSize()) }}</p>
+						@if (!fileSizeValidator()) {
+						<p>Total file size exceeds {{ formatUploadedFileSize(this.MAX_TOTAL_SIZE) }}</p>
+						}
+					</div>
+					}
+				</div>
+			</div>
+			<div class="file-options-buttons">
+				<app-route-button routerLink="/">Go Back</app-route-button>
+				<app-button type="submit" [disabled]="!allowCreateUrl()" (click)="submitFiles()">Create URL</app-button>
+			</div>
+		</div>
+	</ion-content>
 </main>

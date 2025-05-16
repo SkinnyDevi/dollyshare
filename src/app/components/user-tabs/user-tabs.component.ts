@@ -7,27 +7,28 @@ import { FirebaseUserApiService } from '../../services/firebase/firebase-user-ap
 export type SelectedViewButton = "account" | "password" | "links";
 
 @Component({
-  selector: 'app-user-tabs',
-  standalone: true,
-  imports: [RouterLink],
-  templateUrl: './user-tabs.component.html',
-  styleUrl: './user-tabs.component.css',
-  providers: [CookieService]
+	selector: 'app-user-tabs',
+	standalone: true,
+	imports: [RouterLink],
+	templateUrl: './user-tabs.component.html',
+	styleUrl: './user-tabs.component.css',
+	providers: [CookieService]
 })
 export class UserTabsComponent {
-  @Input() selectedButton: SelectedViewButton = "account";
+	@Input() selectedButton: SelectedViewButton = "account";
 
-  private readonly BACKEND_USER_API = inject(FirebaseUserApiService);
-  private readonly router = inject(Router)
-  private readonly cookieHandler = inject(CookieHandler);
+	private readonly BACKEND_USER_API = inject(FirebaseUserApiService);
+	private readonly router = inject(Router)
+	private readonly cookieHandler = inject(CookieHandler);
 
-  async logOut() {
-    await this.BACKEND_USER_API.logOut();
-    await this.cookieHandler.deleteLoginCookies();
-    await this.router.navigate(['/']);
-  }
+	async logOut() {
+		await this.BACKEND_USER_API.logOut();
+		await this.cookieHandler.deleteLoginCookies();
+		await this.router.navigate(['/']);
+		window.location.reload();
+	}
 
-  getSelected(view: SelectedViewButton) {
-    return this.selectedButton === view ? "selected-view" : "";
-  }
+	getSelected(view: SelectedViewButton) {
+		return this.selectedButton === view ? "selected-view" : "";
+	}
 }

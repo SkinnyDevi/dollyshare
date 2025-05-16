@@ -1,13 +1,13 @@
 <li class="active-link-entry" [id]="'active-link-'+linkId">
-  <icon-selector [type]="isPrivate ? 'folder-lock' : 'folder'" color="light-beige"></icon-selector>
-  <a [href]="'/download/'+linkId">/{{ linkId }}</a>
-  <div class="active-link-options">
-    <button type="button" class="shared-users-button" [routerLink]="'/user/manage-link/'+linkId">
-      <icon-selector type="user" color="semi-transparent"></icon-selector>
-    </button>
-    <button type="button" (click)="onDelete()">
-      <icon-selector type="trash" color="semi-transparent"></icon-selector>
-    </button>
-  </div>
+	<icon-selector [type]="isPrivate ? 'folder-lock' : 'folder'" color="light-beige"></icon-selector>
+	<a [routerLink]="'/download/'+linkId">/{{ linkId }}</a>
+	<div class="active-link-options">
+		<button type="button" class="shared-users-button" [routerLink]="'/user/manage-link/'+linkId">
+			<icon-selector type="user" color="semi-transparent"></icon-selector>
+		</button>
+		<button type="button" (click)="onDelete()">
+			<icon-selector type="trash" color="semi-transparent"></icon-selector>
+		</button>
+	</div>
 </li>
 <hr />

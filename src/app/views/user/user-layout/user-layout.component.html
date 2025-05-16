@@ -1,23 +1,26 @@
-<main>
-  <login-validator-hook></login-validator-hook>
-  <app-logo [width]="120" [useReturnToHome]="true"></app-logo>
-  <h3>Welcome, {{getUsername()}}</h3>
-  <app-user-tabs [selectedButton]="getSelectedButton()"></app-user-tabs>
-  <div class="user-view-content">
-    @switch(getRoute()) {
-      @case('account') {
-        <view-user-account></view-user-account>
-      }
-      @case('change-password') {
-        <view-user-change-password></view-user-change-password>
-      }
-      @case('active-links') {
-        <view-user-active-links></view-user-active-links>
-      }
-    }
-    @if(getRoute().includes('manage-link')) {
-      <view-user-manage-active-link></view-user-manage-active-link>
-    }
-  </div>
+<ion-content [scrollY]="true">
+	<main>
+		<login-validator-hook></login-validator-hook>
+		<app-logo [width]="120" [useReturnToHome]="true"></app-logo>
+		<h3>Welcome, {{getUsername()}}</h3>
+		<app-user-tabs [selectedButton]="getSelectedButton()"></app-user-tabs>
+		<div class="user-view-content">
+			@switch(getRoute()) {
+			@case('account') {
+			<view-user-account></view-user-account>
+			}
+			@case('change-password') {
+			<view-user-change-password></view-user-change-password>
+			}
+			@case('active-links') {
+			<view-user-active-links></view-user-active-links>
+			}
+			}
+			@if(getRoute().includes('manage-link')) {
+			<view-user-manage-active-link></view-user-manage-active-link>
+			}
+		</div>
 
-</main>
+	</main>
+
+</ion-content>
