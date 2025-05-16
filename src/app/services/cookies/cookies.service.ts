@@ -1,6 +1,7 @@
-import { CookieService } from "ngx-cookie-service";
-import User from "../../models/user";
 import { inject, Injectable } from "@angular/core";
+import { CookieService } from "ngx-cookie-service";
+import { CapacitorCookies } from "@capacitor/core";
+import User from "../../models/user";
 
 enum CookieTagNames {
 	LOGGED_IN_USER = "logged-user"
