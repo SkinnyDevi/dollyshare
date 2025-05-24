@@ -1,4 +1,4 @@
-<h1>Active Links</h1>
+<h1>Favourites Links</h1>
 <div class="active-links-container">
   <ul>
     @for(link of userActiveLinks; track link.id) {
@@ -8,9 +8,9 @@
         (deleteCallback)="onEntryDelete($event)"
       ></app-active-link-entry>
     } @empty {
-      <p style="text-align: center;">You dont have any active links yet.</p>
+      <p style="text-align: center;">You dont have any favourites links yet.</p>
     }
   </ul>
 
-  <app-button (click)="deleteAllUploads()">Delete All Active Links</app-button>
+  <app-button (click)="deleteAllUploads()">Delete All Favourites Links</app-button>
 </div>
