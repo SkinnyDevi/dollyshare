@@ -78,6 +78,9 @@ Para probar el proyecto localmente:
 3. Clone este repositorio
 4. Dentro de la carpeta clonada, ejecute `npm install`
 6. Para abrir la web en el navegador, use `npm start`
+7. Para compilar a nativo usar respectivamente:
+- `npm run ionic-ios`
+- `npm run ionic-android`
 
 Todo el backend esta almacenado en la base de datos de Firebase Firestore a tiempo real.
 
