@@ -1,4 +1,5 @@
 import type { CapacitorConfig } from '@capacitor/cli';
+import { KeyboardResize, KeyboardStyle } from '@capacitor/keyboard';
 
 const config: CapacitorConfig = {
 	appId: 'es.ulpgc.dollyshare',
@@ -8,6 +9,12 @@ const config: CapacitorConfig = {
 		hostname: "localhost"
 	},
 	plugins: {
+		Filesystem: {},
+		Share: {},
+		Keyboard: {
+			resize: KeyboardResize.Body,
+			style: KeyboardStyle.Dark
+		},
 		CapacitorCookies: {
 			enabled: true
 		},

@@ -46,6 +46,7 @@ export class LoginComponent {
 			this.cookieHandler.createLoginCookies(user);
 			await this.router.navigate(['/user/account'])
 		} catch (error) {
+			alert(error)
 			this.errorMessage = 'Account not found, incorrect email or password';
 		}
 	}

@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { NavbarComponent } from "./components/navbar/navbar.component";
 import { FooterComponent } from "./components/footer/footer.component";
 import { Firestore } from '@angular/fire/firestore';
-import { IonApp, IonRouterOutlet, IonHeader, IonFooter, IonContent } from '@ionic/angular/standalone';
+import { IonApp, IonRouterOutlet, IonHeader, IonFooter, IonContent, Platform } from '@ionic/angular/standalone';
 
 @Component({
 	selector: 'app-root',
@@ -21,6 +21,17 @@ import { IonApp, IonRouterOutlet, IonHeader, IonFooter, IonContent } from '@ioni
 })
 export class AppComponent {
 	private firestore = inject(Firestore);
+	private readonly platform = inject(Platform);
 
-	title = 'dollyshare';
+	title = 'Dollyshare';
+
+	ngOnInit() {
+		this.platform.keyboardDidShow.subscribe((ev) => {
+			(document.querySelector("#ion-root")! as HTMLIonAppElement).style.height = `calc(100dvh - ${ev.keyboardHeight}px)`;
+		});
+
+		this.platform.keyboardDidHide.subscribe(() => {
+			(document.querySelector("#ion-root")! as HTMLIonAppElement).style.height = "auto";
+		});
+	}
 }

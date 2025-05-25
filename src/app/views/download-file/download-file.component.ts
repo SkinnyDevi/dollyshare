@@ -1,6 +1,8 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IonContent } from "@ionic/angular/standalone";
+import { IonContent, Platform } from "@ionic/angular/standalone";
+import { Filesystem, Directory } from '@capacitor/filesystem';
+import { Share } from '@capacitor/share';
 import { AppButtonComponent } from "../../components/app-button/app-button.component";
 import { LogoComponent } from "../../components/logo/logo.component";
 import { RouteButtonComponent } from "../../components/app-button/route-button/route-button.component";
@@ -27,6 +29,7 @@ export class DownloadFileComponent implements OnInit, OnDestroy {
 	private readonly route = inject(ActivatedRoute);
 	private readonly BACKEND_FILE_UPLOAD_API = inject(FirebaseFileUploadApiService);
 	private readonly BACKEND_SHARE_FILES_API = inject(FirebaseShareFilesApiService);
+	private readonly platform = inject(Platform);
 	private uploadedFilesSubcription: Subscription | null = null;
 
 	fileExtensionIcon(file: UploadedFile) {
@@ -98,6 +101,12 @@ export class DownloadFileComponent implements OnInit, OnDestroy {
 	}
 
 	private downloadFile(blob: Blob, fileName: string): void {
+		const isNative = this.platform.is("android") || this.platform.is("ios");
+		if (isNative) {
+			this.downloadFileNative(blob, fileName);
+			return;
+		}
+
 		const url = window.URL.createObjectURL(blob);
 		const link = document.createElement('a');
 		link.href = url;
@@ -107,6 +116,42 @@ export class DownloadFileComponent implements OnInit, OnDestroy {
 		document.body.removeChild(link);
 		window.URL.revokeObjectURL(url);
 	}
+
+	private async downloadFileNative(blob: Blob, fileName: string): Promise<void> {
+		try {
+			// Convert blob to base64 for Filesystem API
+			const base64 = await this.blobToBase64(blob);
+
+			// Write the file to the device's cache directory
+			const file = await Filesystem.writeFile({
+				path: fileName,
+				data: base64,
+				directory: Directory.Cache,
+			});
+
+			// Share the file to trigger download or open in another app
+			await Share.share({
+				title: fileName,
+				url: file.uri,
+				dialogTitle: 'Download ZIP',
+			});
+		} catch (error) {
+			console.error('Error downloading file:', error);
+			alert('Failed to download the file');
+		}
+	}
+
+	// Helper method to convert Blob to base64
+	private blobToBase64(blob: Blob): Promise<string> {
+		return new Promise((resolve, reject) => {
+			const reader = new FileReader();
+			reader.onloadend = () => {
+				const result = reader.result as string;
+				// Remove the data URL prefix (e.g., "data:application/zip;base64,")
+				resolve(result.split(',')[1]);
+			};
+			reader.onerror = reject;
+			reader.readAsDataURL(blob);
+		});
+	}
 }
-
-
